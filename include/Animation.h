@@ -7,13 +7,14 @@
  * Full text of license available in license.txt file, in main folder
  */
 #pragma once
+
+#include "SDL.h"
+#include "GraphicsObject.h"
 /* * * * * * * * * * * * * * * *
 @处理多张静态图片连续显示
 @
 @
 * * * * * * * * * * * * * * * */
-#include "SDL.h"
-#include "GraphicsObject.h"
 class Animation {
 private:
 	TkGraphicsObject m_Primitive;

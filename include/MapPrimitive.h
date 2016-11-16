@@ -8,6 +8,14 @@
  */
 #pragma once
 #include "graphicsobject.h"
+/* 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
 class TkMapPrimitive :public TkGraphicsObject{
 public:
 	TkMapPrimitive(void);

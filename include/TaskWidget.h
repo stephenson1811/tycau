@@ -8,6 +8,14 @@
  */
 #pragma once
 #include "graphicsobject.h"
+/* 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
 class TkTaskWidget{
 public:
 	TkTaskWidget(void);

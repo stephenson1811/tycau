@@ -8,8 +8,6 @@
  */
 #pragma once
 #include "config.h"
-#include "Event.h"
-#include "GraphicsObject.h"
 #include "Scene.h"
 /* * * * * * * * * * * * * * * *
 @
@@ -35,18 +33,18 @@ class GameRes{
  * 
  * 
  */
-class Game:public TkEvent{		//主游戏类
+class Game{
 public:
-	Game();								//构造函数
-	~Game();							//析构函数
-	bool loadGame();					//载入游戏：起始画面
-	bool startGame();					//开始游戏
-	void InitVideo();					//初始化参数
-	bool endGame();				        //游戏结束画面
-	void InitAudio();					//初始化音效
+	Game();
+	~Game();
+	bool loadGame();					//load game, the initial view
+	bool startGame();					//start game
+	void InitVideo();					//init view
+	bool endGame();				        //end game
+	void InitAudio();					//init audio
 	
 private:
-	SDL_Surface* m_Display;				//屏幕DstDvc
+	SDL_Surface* m_Display;				//destination screen device
 	TkScene* m_Scene;
 };
 
