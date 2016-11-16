@@ -21,7 +21,7 @@
  * 
  */
 class TkScene{
-protected:
+public:
     enum Type{
         InHouse = 1,
     };
@@ -31,7 +31,7 @@ public:
     void draw(SDL_Surface*);
     void init();
 private:
-    TkBackGround* m_Bkgrd;            // back-ground picytur
+    TkBackGround* m_Bkgrd;           // back-ground picyture
     TkTaskWidget* m_Task;            // personnel task widget 
     TkStatusWidget* m_Status;        // personnel status
 };

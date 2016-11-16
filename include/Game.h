@@ -9,12 +9,7 @@
 #pragma once
 #include "config.h"
 #include "Scene.h"
-/* * * * * * * * * * * * * * * *
-@
-@
-@
-* * * * * * * * * * * * * * * */
-
+#include "tkthread.h"
 /* 
  * 
  * 
@@ -35,6 +30,7 @@ public:
 private:
     SDL_Surface* m_Display;                //destination screen device
     TkScene* m_Scene;
+    TkThread* m_Thread;
     int WIDTH;    // for screen
     int HEIGHT;    
     int BPP;

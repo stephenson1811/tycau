@@ -31,6 +31,6 @@ void TkMap::initMap(){
 void TkMap::draw(/*CDC*pDC*/){
     for (std::vector<TkMapPrimitive*>::iterator it = m_Tiles.begin();
         it != m_Tiles.end();it++){
-            (*it)->draw();
+            //(*it)->draw();
     }
 }

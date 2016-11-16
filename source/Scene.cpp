@@ -27,13 +27,13 @@ TkScene::~TkScene(){
     deleteWidget(m_Task);
     deleteWidget(m_Status);
 }
-void TkScene::draw(SDL_Surface*){
-    m_Bkgrd->draw();
+void TkScene::draw(SDL_Surface* dst){
+    m_Bkgrd->draw(dst);
 }
 void TkScene::init(){
     m_Bkgrd = new TkBackGround();
     // load back-ground picture
-    m_Bkgrd->load(std::string("graphics\\bk.png"));
+    m_Bkgrd->load(std::string("assets\\graphics\\load.bmp"));
     m_Task = new TkTaskWidget ;            // personnel task widget 
     m_Status = new TkStatusWidget ;        // personnel status
 }

@@ -16,31 +16,44 @@ Game::Game(){
     BPP = 32;
 }
 Game::~Game(){
-    Mix_CloseAudio();        
+    SDL_FreeSurface(m_Display);
+    //Mix_CloseAudio();        
     SDL_Quit();
 }
 bool Game::loadGame(){
-    InitVideo();            //初始化参数
-    InitAudio();            //初始化音效
+    InitVideo();            //init view
+    InitAudio();            //init audio effective
+    //
+    m_Scene = new TkScene(TkScene::InHouse);
+    m_Scene->init();
     // start a mouse/key listening thread
+    m_Thread = new TkThread;
+    //m_Thread->start();
+    //m_Thread->run();
     return true;
 }
 bool Game::endGame(){// end game 
-     return true;
+    //m_Thread->stop();
+    return true;
 }
 bool Game::startGame(){//start game
+    while(1){
+        m_Scene->draw(m_Display);
+    }
+
     return true;
 }
 void Game::InitVideo(){//init game view
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-        return ;
+        return;
     }
     if((m_Display = SDL_SetVideoMode(
         WIDTH, HEIGHT, BPP,SDL_HWSURFACE | SDL_DOUBLEBUF)) == NULL) {
-            return ;
+            return;
     }
-    //隐藏光标
+    // hide cursor
     SDL_ShowCursor(0);
+    // set window caption
     SDL_WM_SetCaption("太阁立志传", 0);
 }
 void Game::InitAudio(){//init audio

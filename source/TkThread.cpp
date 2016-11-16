@@ -18,7 +18,7 @@ int eventLoop(void *data){
     //m_Event = new TkEvent();
     while(1){ //main SDL events loop
         SDL_Event ev;
-        int ret = SDL_WaitEvent(&ev);
+        int ret = SDL_PollEvent(&ev);
         //m_Event->dispatch(ev);
         //
         //if (ret == 0 || (ev.type==SDL_QUIT) ||

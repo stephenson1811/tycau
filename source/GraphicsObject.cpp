@@ -10,16 +10,10 @@
 
 
 TkGraphicsObject::TkGraphicsObject(void){
-    m_Rect.h = 0;
-    m_Rect.w = 0;
-    m_Rect.x = 0;
-    m_Rect.y = 0;
+    init();
 }
 TkGraphicsObject::TkGraphicsObject(std::string& name){
-    m_Rect.h = 0;
-    m_Rect.w = 0;
-    m_Rect.x = 0;
-    m_Rect.y = 0;
+    init();
     m_Name = name;
     //SDL_Flip(m_Display);
     //SDL_Delay(1000);        //ÍË³öÊ±ÑÓ
@@ -29,8 +23,14 @@ TkGraphicsObject::TkGraphicsObject(std::string& name){
     //g_gui->SetFont( "arial.ttf", ARIAL, 26, TTF_STYLE_NORMAL );
     //atexit( SDL_Quit );
 }
+void TkGraphicsObject::init(){
+    m_Rect.h = 0;
+    m_Rect.w = 0;
+    m_Rect.x = 0;
+    m_Rect.y = 0;
+    m_SrcDvc = NULL;
+}
 TkGraphicsObject::~TkGraphicsObject(void){
-    //SDL_FreeSurface(m_DstDvc);
     SDL_FreeSurface(m_SrcDvc);
 }
 void TkGraphicsObject::load(std::string& name){
@@ -48,16 +48,9 @@ void TkGraphicsObject::load(std::string& name){
     m_SrcDvc = SDL_DisplayFormat(Surf_Temp);
     SDL_FreeSurface(Surf_Temp);
 }
-
 //------------------------------------------------------------------------------
-void TkGraphicsObject::draw(){
-    //if (!m_Image.IsNull()){
-        //m_Image.BitBlt(pDC->m_hDC, m_x, m_y, SRCCOPY);
-        //m_Image.StretchBlt(pDC->m_hDC, m_x, m_y, m_width, m_height,
-        //    100, 150, 100, 150, SRCCOPY );
-        //m_Image.Draw(pDC->m_hDC, m_x, m_y);
-    //}
-    if(m_DstDvc == NULL || m_SrcDvc == NULL) {
+void TkGraphicsObject::draw(SDL_Surface* dst){
+    if(dst == NULL || m_SrcDvc == NULL) {
         return ;
     }
 
@@ -71,10 +64,10 @@ void TkGraphicsObject::draw(){
     SrcR.w = m_SrcDvc->w;
     SrcR.h = m_SrcDvc->h;
 
-    SDL_BlitSurface(m_SrcDvc, &SrcR, m_DstDvc, &DstR);
+    SDL_BlitSurface(m_SrcDvc, &SrcR, dst, &DstR);
 }
-void TkGraphicsObject::draw(SDL_Surface* Surf_Src) {
-    if(m_DstDvc == NULL || Surf_Src == NULL) {
+void TkGraphicsObject::draw(SDL_Surface* src,SDL_Surface* dst) {
+    if(dst == NULL || src == NULL) {
         return ;
     }
 
@@ -85,19 +78,19 @@ void TkGraphicsObject::draw(SDL_Surface* Surf_Src) {
     SDL_Rect SrcR;
     SrcR.x = m_Rect.x;
     SrcR.y = m_Rect.y;
-    SrcR.w = Surf_Src->w;
-    SrcR.h = Surf_Src->h;
+    SrcR.w = src->w;
+    SrcR.h = src->h;
 
-    SDL_BlitSurface(Surf_Src, &SrcR, m_DstDvc, &DstR);
+    SDL_BlitSurface(src, &SrcR, dst, &DstR);
 }
 
 //------------------------------------------------------------------------------
-bool TkGraphicsObject::transparent(SDL_Surface* Surf_Dest, int R, int G, int B) {
-    if(Surf_Dest == NULL) {
+bool TkGraphicsObject::transparent(SDL_Surface* dst, int R, int G, int B) {
+    if(dst == NULL) {
         return false;
     }
 
-    SDL_SetColorKey(Surf_Dest, SDL_SRCCOLORKEY | SDL_RLEACCEL, SDL_MapRGB(Surf_Dest->format, R, G, B));
+    SDL_SetColorKey(dst, SDL_SRCCOLORKEY | SDL_RLEACCEL, SDL_MapRGB(dst->format, R, G, B));
 
     return true;
 }

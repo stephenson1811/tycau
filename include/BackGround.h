@@ -9,8 +9,8 @@
 #pragma once
 #include "GraphicsObject.h"
 /* 
- * 
- * 
+ * it shows a single picture back-ground.
+ * usually the width and height is equal to the picture's.
  * 
  * 
  * 

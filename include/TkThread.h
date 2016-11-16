@@ -16,9 +16,6 @@
 @
 @
 * * * * * * * * * * * * * * * */
-int potty = 0;
-int gotta_go;
-
 class TkThread{
 public:
     TkThread();
