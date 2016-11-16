@@ -1,6 +1,12 @@
-
-#ifndef _CEVENT_H_
-#define _CEVENT_H_
+/*
+ * This file is a part of Tycau
+ *
+ * Authors: listed in file AUTHORS in main folder
+ *
+ * License: GNU General Public License v2.0 or later
+ * Full text of license available in license.txt file, in main folder
+ */
+#pragma once
 
 #include "SDL.h"
 
@@ -19,7 +25,3 @@ public:
 	void OnLButtonUp(int mX, int mY);
 	void OnRButtonDown(int mX, int mY);
 };
-
-
-
-#endif

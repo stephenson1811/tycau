@@ -1,8 +1,12 @@
-
-// Animation Class
-
-#ifndef _CANIMATION_H_
-#define _CANIMATION_H_
+/*
+ * This file is a part of Tycau
+ *
+ * Authors: listed in file AUTHORS in main folder
+ *
+ * License: GNU General Public License v2.0 or later
+ * Full text of license available in license.txt file, in main folder
+ */
+#pragma once
 /* * * * * * * * * * * * * * * *
 @处理多张静态图片连续显示
 @
@@ -25,4 +29,3 @@ public:
 	int GetCurrentFrame();
 };
 
-#endif

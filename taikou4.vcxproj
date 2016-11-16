@@ -102,24 +102,24 @@
     <ClInclude Include="include\Sound.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Animation.cpp" />
-    <ClCompile Include="src\BackGround.cpp" />
-    <ClCompile Include="src\Event.cpp" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Game.cpp" />
-    <ClCompile Include="src\Button.cpp" />
-    <ClCompile Include="src\CheckBox.cpp" />
-    <ClCompile Include="src\Label.cpp" />
-    <ClCompile Include="src\DialogBox.cpp" />
-    <ClCompile Include="src\Scene.cpp" />
-    <ClCompile Include="src\Sound.cpp" />
-    <ClCompile Include="src\GraphicsObject.cpp" />
-    <ClCompile Include="src\Map.cpp" />
-    <ClCompile Include="src\MapPrimitive.cpp" />
-    <ClCompile Include="src\RolesItem.cpp" />
-    <ClCompile Include="src\StatusWidget.cpp" />
-    <ClCompile Include="src\TaskWidget.cpp" />
-    <ClCompile Include="src\TkThread.cpp" />
+    <ClCompile Include="source\Animation.cpp" />
+    <ClCompile Include="source\BackGround.cpp" />
+    <ClCompile Include="source\Button.cpp" />
+    <ClCompile Include="source\CheckBox.cpp" />
+    <ClCompile Include="source\DialogBox.cpp" />
+    <ClCompile Include="source\Event.cpp" />
+    <ClCompile Include="source\Game.cpp" />
+    <ClCompile Include="source\GraphicsObject.cpp" />
+    <ClCompile Include="source\Label.cpp" />
+    <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\Map.cpp" />
+    <ClCompile Include="source\MapPrimitive.cpp" />
+    <ClCompile Include="source\RolesItem.cpp" />
+    <ClCompile Include="source\Scene.cpp" />
+    <ClCompile Include="source\Sound.cpp" />
+    <ClCompile Include="source\StatusWidget.cpp" />
+    <ClCompile Include="source\TaskWidget.cpp" />
+    <ClCompile Include="source\TkThread.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
