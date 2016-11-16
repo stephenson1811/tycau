@@ -18,9 +18,9 @@
  */
 class TkTaskWidget{
 public:
-	TkTaskWidget(void);
-	~TkTaskWidget(void);
+    TkTaskWidget(void);
+    ~TkTaskWidget(void);
 private:
-	TkGraphicsObject m_Image;
+    TkGraphicsObject m_Image;
 };
 

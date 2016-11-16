@@ -19,9 +19,9 @@
 class TkRolesItem
 {
 public:
-	TkRolesItem(void);
-	~TkRolesItem(void);
+    TkRolesItem(void);
+    ~TkRolesItem(void);
 private:
-	TkGraphicsObject m_Image;
+    TkGraphicsObject m_Image;
 };
 

@@ -22,18 +22,18 @@
  */
 class TkScene{
 protected:
-	enum Type{
-		InHouse = 1,
-	};
+    enum Type{
+        InHouse = 1,
+    };
 public:
-	TkScene(TkScene::Type);
-	~TkScene();
-	void draw(SDL_Surface*);
-	void init();
+    TkScene(TkScene::Type);
+    ~TkScene();
+    void draw(SDL_Surface*);
+    void init();
 private:
-	TkBackGround* m_Bkgrd;			// back-ground picytur
-	TkTaskWidget* m_Task;		    // personnel task widget 
-	TkStatusWidget* m_Status;		// personnel status
+    TkBackGround* m_Bkgrd;            // back-ground picytur
+    TkTaskWidget* m_Task;            // personnel task widget 
+    TkStatusWidget* m_Status;        // personnel status
 };
 /* 
  * the background composed by many pictures.

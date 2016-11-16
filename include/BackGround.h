@@ -18,7 +18,7 @@
  */
 class TkBackGround:public TkGraphicsObject{
 public:
-	TkBackGround(void);
-	~TkBackGround(void);
+    TkBackGround(void);
+    ~TkBackGround(void);
 };
 

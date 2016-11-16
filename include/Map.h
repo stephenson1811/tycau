@@ -20,11 +20,11 @@
 class TkMap 
 {
 public:
-	TkMap(void);
-	~TkMap(void);
-	void initMap();
-	void draw();
+    TkMap(void);
+    ~TkMap(void);
+    void initMap();
+    void draw();
 private:
-	std::vector<TkMapPrimitive*> m_Tiles;
+    std::vector<TkMapPrimitive*> m_Tiles;
 };
 

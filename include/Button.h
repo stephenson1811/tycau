@@ -18,16 +18,16 @@
  * 
  */
 class TkButton : public TkGraphicsObject {
-	enum BUTTONSTATE{
-		BUTTONDOWN,
-		BUTTONUP
-	};
+    enum BUTTONSTATE{
+        BUTTONDOWN,
+        BUTTONUP
+    };
 public:
     TkButton();
     ~TkButton();
 
     void pressed();
-	void clicked();
+    void clicked();
     void keyPressed();
 };
 

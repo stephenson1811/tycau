@@ -18,10 +18,10 @@
  */
 class SoundManager{
 public:
-	SoundManager();
-	~SoundManager();
-	int init(); 
-	int play(std::string&);
+    SoundManager();
+    ~SoundManager();
+    int init(); 
+    int play(std::string&);
 private:
-	void MusicEffect(int type);			//play music effect
+    void MusicEffect(int type);            //play music effect
 };

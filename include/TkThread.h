@@ -21,17 +21,17 @@ int gotta_go;
 
 class TkThread{
 public:
-	TkThread();
-	~TkThread();
-	void run() ;
-	void start();
-	void stop();
+    TkThread();
+    ~TkThread();
+    void run() ;
+    void start();
+    void stop();
 private:
-	void kill();
+    void kill();
 protected:
-	SDL_mutex *m_Lock;
-	int m_ThrID;   // 线程号
-	SDL_Thread* m_Thread;
+    SDL_mutex *m_Lock;
+    int m_ThrID;   // 线程号
+    SDL_Thread* m_Thread;
     TkEvent * m_Event;
 };
 

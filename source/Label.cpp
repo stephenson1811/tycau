@@ -24,7 +24,7 @@ TkLabel::TkLabel(){
 * * * * * * * * * * * * * * * */
 
 void TkLabel::setPicture(std::string& name){
-	load(name);
+    load(name);
 }
 /* * * * * * * * * * * * * * * *
 @ Name: setText
@@ -33,6 +33,6 @@ void TkLabel::setPicture(std::string& name){
 @ Return: N/A
 * * * * * * * * * * * * * * * */
 void TkLabel::setText(std::string& name){
-	m_Text = name;
+    m_Text = name;
 
 }

@@ -14,17 +14,7 @@
 @
 @
 * * * * * * * * * * * * * * * */
-const int WIDTH = 800;	//屏幕宽度
-const int HEIGHT = 600;	//屏幕高度
-const int BPP = 32;		//像素深度
 
-
-
-class GameRes{
-    // 加载图片动画资源
-    // 
-    // 
-};
 /* 
  * 
  * 
@@ -35,16 +25,18 @@ class GameRes{
  */
 class Game{
 public:
-	Game();
-	~Game();
-	bool loadGame();					//load game, the initial view
-	bool startGame();					//start game
-	void InitVideo();					//init view
-	bool endGame();				        //end game
-	void InitAudio();					//init audio
-	
+    Game();
+    ~Game();
+    bool loadGame();                    //load game, the initial view
+    bool startGame();                    //start game
+    void InitVideo();                    //init view
+    bool endGame();                        //end game
+    void InitAudio();                    //init audio
 private:
-	SDL_Surface* m_Display;				//destination screen device
-	TkScene* m_Scene;
+    SDL_Surface* m_Display;                //destination screen device
+    TkScene* m_Scene;
+    int WIDTH;    // for screen
+    int HEIGHT;    
+    int BPP;
 };
 

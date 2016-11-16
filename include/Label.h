@@ -20,8 +20,8 @@
 class TkLabel : public TkGraphicsObject{
 public:
     TkLabel();
-	void setPicture(std::string&);
-	void setText(std::string&);
+    void setPicture(std::string&);
+    void setText(std::string&);
 protected:
     std::string m_Text;
 };

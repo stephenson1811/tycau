@@ -18,9 +18,9 @@
  */
 class TkStatusWidget {
 public:
-	TkStatusWidget(void);
-	~TkStatusWidget(void);
+    TkStatusWidget(void);
+    ~TkStatusWidget(void);
 private:
-	TkGraphicsObject* m_Image;
+    TkGraphicsObject* m_Image;
 };
 

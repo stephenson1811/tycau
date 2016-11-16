@@ -17,16 +17,16 @@
 * * * * * * * * * * * * * * * */
 class Animation {
 private:
-	TkGraphicsObject m_Primitive;
-	int	    m_CurrentFrame; // 静态图片的当前分段号
-    int     m_FrameRate;    //Milliseconds
+    TkGraphicsObject m_Primitive;
+    int    m_CurrentFrame; // 静态图片的当前分段号
+    int    m_FrameRate;    //Milliseconds
 public:
-    int	    m_MaxFrames; // 一幅静态图片有几个分段
-	bool	m_Oscillate; // 
+    int    m_MaxFrames; // 一幅静态图片有几个分段
+    bool   m_Oscillate; // 
 public:
-	Animation(int MaxFrame = 0);
+    Animation(int MaxFrame = 0);
 public:
-	void play();
-	int GetCurrentFrame();
+    void play();
+    int GetCurrentFrame();
 };
 

@@ -16,9 +16,9 @@
  * 
  */
 int main(int argc, char* argv[]){
-	Game therGame;
-	therGame.loadGame();
-	therGame.startGame();
-	therGame.endGame();
-	return 0;
+    Game therGame;
+    therGame.loadGame();
+    therGame.startGame();
+    therGame.endGame();
+    return 0;
 }
