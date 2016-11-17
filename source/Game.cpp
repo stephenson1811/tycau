@@ -48,7 +48,7 @@ bool Game::startGame(){// start a mouse/key listening thread
     SDL_Event e;
     while(1){ //main SDL events loop
         SDL_WaitEvent(&e);
-        m_Scene->pushEvent(&e);
+        m_Scene->dispatch(&e);
         SDL_Delay(1000);
     }
 

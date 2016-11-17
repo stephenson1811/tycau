@@ -32,13 +32,12 @@ public:
     void run();
     void run(SDL_Surface*);
     void init(SDL_Surface*d = 0);
-    void pushEvent(SDL_Event*);
+    int dispatch(SDL_Event*);
 private:
     TkBackGround* m_Bkgrd;           // back-ground picyture
     TkTaskWidget* m_Task;            // personnel task widget 
     TkStatusWidget* m_Status;        // personnel status
     SDL_Surface* m_DstDvc;           // destination device surface.
-    TkEvent* m_Event;
 };
 /* 
  * the background composed by many pictures.

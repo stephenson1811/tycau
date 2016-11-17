@@ -24,7 +24,6 @@ TkScene::~TkScene(){
     deleteWidget(m_Bkgrd) ;
     deleteWidget(m_Task);
     deleteWidget(m_Status);
-    delete m_Event;
 }
 void TkScene::run(SDL_Surface* dst){
     m_Bkgrd->draw(dst);
@@ -36,8 +35,7 @@ void TkScene::run(){
     // music and other audio effect.
 }
 void TkScene::init(SDL_Surface*d){
-    // create a msg dispatcher/processor
-    m_Event = new TkEvent;
+    
     m_DstDvc = d;
 
     m_Bkgrd = new TkBackGround();
@@ -46,8 +44,48 @@ void TkScene::init(SDL_Surface*d){
     m_Task = new TkTaskWidget ;            // personnel task widget 
     m_Status = new TkStatusWidget ;        // personnel status
 }
-void TkScene::pushEvent(SDL_Event*e){
-    m_Event->dispatch(e);
+// a msg dispatcher/processor
+int TkScene::dispatch(SDL_Event*e){
+    switch(e->type) {
+        case SDL_ACTIVEEVENT: {
+            switch(e->active.state) {
+                case SDL_APPACTIVE:    {
+                    break;
+                }
+            }
+            break;
+        }
+
+        case SDL_KEYDOWN: {
+            break;
+        }
+        case SDL_MOUSEMOTION: {
+            break;
+        }
+        case SDL_MOUSEBUTTONDOWN: {
+            switch(e->button.button) {
+                case SDL_BUTTON_LEFT: {
+                    break;
+                }
+            }
+            break;
+        }
+        case SDL_MOUSEBUTTONUP:    {
+            switch(e->button.button) {
+                case SDL_BUTTON_LEFT: {
+                    break;
+                }
+            }
+            break;
+        }
+        case SDL_QUIT: {
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+    return 0;
 }
 TkScene* TkSceneFactory::getScene(TkScene::Type type,SDL_Surface* d){
     TkScene* scene = NULL;

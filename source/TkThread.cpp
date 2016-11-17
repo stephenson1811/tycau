@@ -17,8 +17,6 @@ int eventLoop(void *s){
     TkScene* scene = (TkScene*)s;
     while(1){
         scene->run();
-
-        //m_Event->dispatch(ev);
         //
         //if (ret == 0 || (ev.type==SDL_QUIT) ||
         //    (ev.type == SDL_KEYDOWN && ev.key.keysym.sym==SDLK_F4 && (ev.key.keysym.mod & KMOD_ALT))){

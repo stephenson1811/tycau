@@ -10,10 +10,8 @@
 
 
 
-
 TkCheckBox::TkCheckBox(){
 }
-
 
 
 
