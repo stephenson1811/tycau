@@ -28,12 +28,14 @@ public:
 public:
     TkScene(TkScene::Type);
     ~TkScene();
+    void draw();
     void draw(SDL_Surface*);
-    void init();
+    void init(SDL_Surface*d = 0);
 private:
     TkBackGround* m_Bkgrd;           // back-ground picyture
     TkTaskWidget* m_Task;            // personnel task widget 
     TkStatusWidget* m_Status;        // personnel status
+    SDL_Surface* m_DstDvc;
 };
 /* 
  * the background composed by many pictures.

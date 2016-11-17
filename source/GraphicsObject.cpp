@@ -15,8 +15,7 @@ TkGraphicsObject::TkGraphicsObject(void){
 TkGraphicsObject::TkGraphicsObject(std::string& name){
     init();
     m_Name = name;
-    //SDL_Flip(m_Display);
-    //SDL_Delay(1000);        //退出时延
+    
     //SDL_ShowCursor(1);        //允许光标
     //SDLGUI* g_gui;            //显示得分界面
     //g_gui=new SDLGUI(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_BPP,WHITE);
@@ -74,6 +73,8 @@ void TkGraphicsObject::draw(SDL_Surface* src,SDL_Surface* dst) {
     SDL_Rect DstR;
     DstR.x = m_Rect.x;
     DstR.y = m_Rect.y;
+    DstR.w = src->w;
+    DstR.h = src->h;
 
     SDL_Rect SrcR;
     SrcR.x = m_Rect.x;

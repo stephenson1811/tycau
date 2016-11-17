@@ -10,15 +10,14 @@
 
 
 TkThread::TkThread(){
-    m_Event = NULL;
 }
 TkThread::~TkThread(){
 }
-int eventLoop(void *data){
-    //m_Event = new TkEvent();
-    while(1){ //main SDL events loop
-        SDL_Event ev;
-        int ret = SDL_PollEvent(&ev);
+int eventLoop(void *scene){
+    TkScene* s = (TkScene*)scene;
+    while(1){ 
+        s->draw();
+
         //m_Event->dispatch(ev);
         //
         //if (ret == 0 || (ev.type==SDL_QUIT) ||
@@ -82,10 +81,8 @@ int eventLoop(void *data){
 
     return 0;
 }
-void TkThread::start(){
-    /* 创建同步锁 */
-    m_Lock = SDL_CreateMutex();
-    m_Thread = SDL_CreateThread(eventLoop, m_Lock);
+void TkThread::start(TkScene* s){
+    m_Thread = SDL_CreateThread(eventLoop, s);
     if (m_Thread == NULL){
         SDL_GetError();
     }
@@ -95,8 +92,8 @@ void TkThread::stop(){
 }
 
 void TkThread::run(){
-    int status = 0;
-    SDL_WaitThread(m_Thread, &status);
+    //int status = 0;
+    //SDL_WaitThread(m_Thread, &status);
 }
 void TkThread::kill(){
     SDL_KillThread(m_Thread);

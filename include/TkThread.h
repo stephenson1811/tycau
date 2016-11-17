@@ -10,10 +10,10 @@
 
 #include "SDL_thread.h"
 #include "SDL_mutex.h"
-#include "Event.h"
+#include "scene.h"
 /* * * * * * * * * * * * * * * *
 @
-@
+@ use for show game view 
 @
 * * * * * * * * * * * * * * * */
 class TkThread{
@@ -21,15 +21,14 @@ public:
     TkThread();
     ~TkThread();
     void run() ;
-    void start();
+    void start(TkScene*);
     void stop();
 private:
     void kill();
 protected:
     SDL_mutex *m_Lock;
-    int m_ThrID;   // Ïß³ÌºÅ
+    int m_ThrID;   // thread id
     SDL_Thread* m_Thread;
-    TkEvent * m_Event;
 };
 
 

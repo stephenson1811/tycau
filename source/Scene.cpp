@@ -29,13 +29,19 @@ TkScene::~TkScene(){
 }
 void TkScene::draw(SDL_Surface* dst){
     m_Bkgrd->draw(dst);
+    SDL_Flip(dst);
 }
-void TkScene::init(){
+void TkScene::draw(){
+    m_Bkgrd->draw(m_DstDvc);
+    SDL_Flip(m_DstDvc);
+}
+void TkScene::init(SDL_Surface*d){
     m_Bkgrd = new TkBackGround();
     // load back-ground picture
     m_Bkgrd->load(std::string("assets\\graphics\\load.bmp"));
     m_Task = new TkTaskWidget ;            // personnel task widget 
     m_Status = new TkStatusWidget ;        // personnel status
+    m_DstDvc = d;
 }
 
 

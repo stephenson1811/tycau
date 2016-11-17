@@ -25,11 +25,10 @@ bool Game::loadGame(){
     InitAudio();            //init audio effective
     //
     m_Scene = new TkScene(TkScene::InHouse);
-    m_Scene->init();
+    m_Scene->init(m_Display);
     // start a mouse/key listening thread
     m_Thread = new TkThread;
-    //m_Thread->start();
-    //m_Thread->run();
+    m_Thread->start(m_Scene);
     return true;
 }
 bool Game::endGame(){// end game 
@@ -37,8 +36,10 @@ bool Game::endGame(){// end game
     return true;
 }
 bool Game::startGame(){//start game
-    while(1){
-        m_Scene->draw(m_Display);
+    SDL_Event ev;
+    while(1){ //main SDL events loop
+        SDL_WaitEvent(&ev);
+        SDL_Delay(1000);
     }
 
     return true;
@@ -52,9 +53,9 @@ void Game::InitVideo(){//init game view
             return;
     }
     // hide cursor
-    SDL_ShowCursor(0);
+    SDL_ShowCursor(1);
     // set window caption
-    SDL_WM_SetCaption("Ì«¸óÁ¢Ö¾´«", 0);
+    SDL_WM_SetCaption("taikou", 0);
 }
 void Game::InitAudio(){//init audio
 }
