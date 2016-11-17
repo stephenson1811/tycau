@@ -27,6 +27,7 @@ public:
     void InitVideo();                    //init view
     bool endGame();                        //end game
     void InitAudio();                    //init audio
+    void change(TkScene::Type); // player in another place, scene must be changed.
 private:
     SDL_Surface* m_Display;                //destination screen device
     TkSceneFactory* m_SceneMaker;

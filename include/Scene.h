@@ -31,7 +31,6 @@ public:
     ~TkScene();
     void run();
     void run(SDL_Surface*);
-    void change(Type); // player in another place, scene must be changed.
     void init(SDL_Surface*d = 0);
     void pushEvent(SDL_Event*);
 private:

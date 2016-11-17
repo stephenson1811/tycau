@@ -13,10 +13,10 @@ TkThread::TkThread(){
 }
 TkThread::~TkThread(){
 }
-int eventLoop(void *scene){
-    TkScene* s = (TkScene*)scene;
+int eventLoop(void *s){
+    TkScene* scene = (TkScene*)s;
     while(1){
-        s->run();
+        scene->run();
 
         //m_Event->dispatch(ev);
         //

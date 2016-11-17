@@ -14,6 +14,8 @@ Game::Game(){
     WIDTH = 800;
     HEIGHT = 600;
     BPP = 32;
+    m_SceneMaker = NULL;
+    m_Scene = NULL;
 }
 Game::~Game(){
     SDL_FreeSurface(m_Display);
@@ -33,6 +35,10 @@ bool Game::loadGame(){
     m_Thread->start(m_Scene);
 
     return true;
+}
+void Game::change(TkScene::Type type){
+    delete m_Scene;
+    m_Scene = m_SceneMaker->getScene( type, m_Display);
 }
 bool Game::endGame(){// end game 
     m_Thread->stop();

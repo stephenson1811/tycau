@@ -35,8 +35,6 @@ void TkScene::run(){
     SDL_Flip(m_DstDvc);
     // music and other audio effect.
 }
-void TkScene::change(Type){
-}
 void TkScene::init(SDL_Surface*d){
     // create a msg dispatcher/processor
     m_Event = new TkEvent;
@@ -62,5 +60,7 @@ TkScene* TkSceneFactory::getScene(TkScene::Type type,SDL_Surface* d){
     return scene;
 }
 
-TkSceneFactory::TkSceneFactory(){}
-TkSceneFactory::~TkSceneFactory(){}
+TkSceneFactory::TkSceneFactory(){
+}
+TkSceneFactory::~TkSceneFactory(){
+}
