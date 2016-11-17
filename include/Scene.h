@@ -35,7 +35,7 @@ private:
     TkBackGround* m_Bkgrd;           // back-ground picyture
     TkTaskWidget* m_Task;            // personnel task widget 
     TkStatusWidget* m_Status;        // personnel status
-    SDL_Surface* m_DstDvc;
+    SDL_Surface* m_DstDvc;           // destination device surface.
 };
 /* 
  * the background composed by many pictures.
