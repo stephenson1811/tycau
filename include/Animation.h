@@ -11,17 +11,17 @@
 #include "SDL.h"
 #include "GraphicsObject.h"
 /* * * * * * * * * * * * * * * *
-@处理多张静态图片连续显示
+@ process many static image from one picture.
 @
 @
 * * * * * * * * * * * * * * * */
 class Animation {
 private:
     TkGraphicsObject m_Primitive;
-    int    m_CurrentFrame; // 静态图片的当前分段号
+    int    m_CurrentFrame; // current id
     int    m_FrameRate;    //Milliseconds
 public:
-    int    m_MaxFrames; // 一幅静态图片有几个分段
+    int    m_MaxFrames; // a pic is composed from many pieces
     bool   m_Oscillate; // 
 public:
     Animation(int MaxFrame = 0);

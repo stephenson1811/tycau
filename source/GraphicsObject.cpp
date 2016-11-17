@@ -16,8 +16,7 @@ TkGraphicsObject::TkGraphicsObject(std::string& name){
     init();
     m_Name = name;
     
-    //SDL_ShowCursor(1);        //允许光标
-    //SDLGUI* g_gui;            //显示得分界面
+    //SDLGUI* g_gui;           
     //g_gui=new SDLGUI(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_BPP,WHITE);
     //g_gui->SetFont( "arial.ttf", ARIAL, 26, TTF_STYLE_NORMAL );
     //atexit( SDL_Quit );
