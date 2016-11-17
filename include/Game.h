@@ -10,7 +10,6 @@
 #include "config.h"
 #include "Scene.h"
 #include "tkthread.h"
-#include "event.h"
 /* 
  * 
  * 
@@ -30,9 +29,9 @@ public:
     void InitAudio();                    //init audio
 private:
     SDL_Surface* m_Display;                //destination screen device
+    TkSceneFactory* m_SceneMaker;
     TkScene* m_Scene;
     TkThread* m_Thread;
-    TkEvent* m_Event;
     int WIDTH;    // for screen
     int HEIGHT;    
     int BPP;

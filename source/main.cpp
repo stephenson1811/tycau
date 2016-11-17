@@ -15,7 +15,6 @@
  * 
  * 
  */
- 
 int main(int argc, char* argv[]){
     Game therGame;
     if (therGame.loadGame()){

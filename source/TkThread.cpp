@@ -15,8 +15,8 @@ TkThread::~TkThread(){
 }
 int eventLoop(void *scene){
     TkScene* s = (TkScene*)scene;
-    while(1){ 
-        s->draw();
+    while(1){
+        s->run();
 
         //m_Event->dispatch(ev);
         //

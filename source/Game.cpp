@@ -20,17 +20,14 @@ Game::~Game(){
     //Mix_CloseAudio();   
     delete m_Scene;
     delete m_Thread;
-    delete m_Event;
     SDL_Quit();
 }
 bool Game::loadGame(){
     InitVideo();            //init view
     InitAudio();            //init audio effective
     //
-    m_Scene = new TkScene(TkScene::InHouse);
-    m_Scene->init(m_Display);
-    // create a msg dispatcher/processor
-    m_Event = new TkEvent;
+    m_SceneMaker = new TkSceneFactory;
+    m_Scene = m_SceneMaker->getScene(TkScene::InHouse,m_Display);
     //show game view thread
     m_Thread = new TkThread;
     m_Thread->start(m_Scene);
@@ -38,14 +35,14 @@ bool Game::loadGame(){
     return true;
 }
 bool Game::endGame(){// end game 
-    //m_Thread->stop();
+    m_Thread->stop();
     return true;
 }
 bool Game::startGame(){// start a mouse/key listening thread
-    SDL_Event ev;
+    SDL_Event e;
     while(1){ //main SDL events loop
-        SDL_WaitEvent(&ev);
-        m_Event->dispatch(&ev);
+        SDL_WaitEvent(&e);
+        m_Scene->pushEvent(&e);
         SDL_Delay(1000);
     }
 

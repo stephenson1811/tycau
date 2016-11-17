@@ -8,6 +8,7 @@
  */
 #pragma once
 #include "config.h"
+#include "event.h"
 #include "GraphicsObject.h"
 #include "BackGround.h"
 #include "StatusWidget.h"
@@ -28,14 +29,17 @@ public:
 public:
     TkScene(TkScene::Type);
     ~TkScene();
-    void draw();
-    void draw(SDL_Surface*);
+    void run();
+    void run(SDL_Surface*);
+    void change(Type); // player in another place, scene must be changed.
     void init(SDL_Surface*d = 0);
+    void pushEvent(SDL_Event*);
 private:
     TkBackGround* m_Bkgrd;           // back-ground picyture
     TkTaskWidget* m_Task;            // personnel task widget 
     TkStatusWidget* m_Status;        // personnel status
     SDL_Surface* m_DstDvc;           // destination device surface.
+    TkEvent* m_Event;
 };
 /* 
  * the background composed by many pictures.
@@ -66,4 +70,11 @@ class TkOpeningScene{
  * 
  */
 class TkSelectScene{
+};
+class TkSceneFactory{
+public:
+    TkSceneFactory();
+    ~TkSceneFactory();
+    TkScene* getScene(TkScene::Type,SDL_Surface*);
+private:
 };

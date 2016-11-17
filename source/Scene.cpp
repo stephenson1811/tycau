@@ -15,8 +15,6 @@
     w = NULL;\
     }\
 }
-
-
 TkScene::TkScene(TkScene::Type /*type*/){
     m_Bkgrd=NULL;
     m_Task=NULL;
@@ -26,22 +24,43 @@ TkScene::~TkScene(){
     deleteWidget(m_Bkgrd) ;
     deleteWidget(m_Task);
     deleteWidget(m_Status);
+    delete m_Event;
 }
-void TkScene::draw(SDL_Surface* dst){
+void TkScene::run(SDL_Surface* dst){
     m_Bkgrd->draw(dst);
     SDL_Flip(dst);
 }
-void TkScene::draw(){
+void TkScene::run(){
     m_Bkgrd->draw(m_DstDvc);
     SDL_Flip(m_DstDvc);
+    // music and other audio effect.
+}
+void TkScene::change(Type){
 }
 void TkScene::init(SDL_Surface*d){
+    // create a msg dispatcher/processor
+    m_Event = new TkEvent;
+    m_DstDvc = d;
+
     m_Bkgrd = new TkBackGround();
     // load back-ground picture
     m_Bkgrd->load(std::string("assets\\graphics\\load.bmp"));
     m_Task = new TkTaskWidget ;            // personnel task widget 
     m_Status = new TkStatusWidget ;        // personnel status
-    m_DstDvc = d;
+}
+void TkScene::pushEvent(SDL_Event*e){
+    m_Event->dispatch(e);
+}
+TkScene* TkSceneFactory::getScene(TkScene::Type type,SDL_Surface* d){
+    TkScene* scene = NULL;
+    switch(type){
+    case 1:
+        scene = new TkScene(type);
+        break;
+    }
+    scene->init(d);
+    return scene;
 }
 
-
+TkSceneFactory::TkSceneFactory(){}
+TkSceneFactory::~TkSceneFactory(){}
