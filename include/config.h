@@ -34,8 +34,8 @@
  */
 namespace Gui{
     enum Type{
-        TypeMap = 1,    // 很多图元无缝连接，要知道图元大小
-        TypeBkGrd = 2,  // 单张图片填充整个客户端
-        TypeItem = 3,   // 单张图片，不需知道图元大小
+        TypeMap = 1,    // composed by many primitives
+        TypeBkGrd = 2,  // back-ground filled with single pic
+        TypeItem = 3,   // single pic, such as a person portrait 
     };
 };

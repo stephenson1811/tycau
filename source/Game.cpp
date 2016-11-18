@@ -37,7 +37,9 @@ bool Game::loadGame(){
     return true;
 }
 void Game::change(TkScene::Type type){
-    delete m_Scene;
+    if (m_Scene){
+        delete m_Scene;
+    }
     m_Scene = m_SceneMaker->getScene( type, m_Display);
 }
 bool Game::endGame(){// end game 
