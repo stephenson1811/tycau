@@ -89,6 +89,7 @@
     <ClInclude Include="include\GraphicsObject.h" />
     <ClInclude Include="include\Map.h" />
     <ClInclude Include="include\MapPrimitive.h" />
+    <ClInclude Include="include\public.h" />
     <ClInclude Include="include\RolesItem.h" />
     <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\StatusWidget.h" />

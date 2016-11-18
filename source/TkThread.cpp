@@ -8,15 +8,15 @@
  */
 #include "tkthread.h"
 
-
 TkThread::TkThread(){
 }
 TkThread::~TkThread(){
 }
-int eventLoop(void *s){
-    TkScene* scene = (TkScene*)s;
+int eventLoop(void *temp){
     while(1){
-        scene->run();
+        Game* game = (Game*)temp ;
+        game ->runGame();
+        //TkSceneFactory::getScene( globleSceneType )->run();
         //
         //if (ret == 0 || (ev.type==SDL_QUIT) ||
         //    (ev.type == SDL_KEYDOWN && ev.key.keysym.sym==SDLK_F4 && (ev.key.keysym.mod & KMOD_ALT))){
@@ -70,16 +70,12 @@ int eventLoop(void *s){
         //}
         //{
         //    //boost::unique_lock<boost::mutex> lock(eventsM);
-        //    SDL_mutex *lock = (SDL_mutex *)data;
-        //    SDL_mutexP(lock);
-        //    events.push(ev);
-        //    SDL_mutexV(lock);
         //}
     }
 
     return 0;
 }
-void TkThread::start(TkScene* s){
+void TkThread::start(Game* s){
     m_Thread = SDL_CreateThread(eventLoop, s);
     if (m_Thread == NULL){
         SDL_GetError();

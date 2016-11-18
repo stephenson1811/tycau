@@ -14,49 +14,39 @@ Game::Game(){
     WIDTH = 800;
     HEIGHT = 600;
     BPP = 32;
-    m_SceneMaker = NULL;
     m_Scene = NULL;
 }
 Game::~Game(){
     SDL_FreeSurface(m_Display);
     //Mix_CloseAudio();   
     delete m_Scene;
-    delete m_Thread;
     SDL_Quit();
 }
 bool Game::loadGame(){
-    InitVideo();            //init view
-    InitAudio();            //init audio effective
+    initVideo();            //init view
+    initAudio();            //init audio effective
     //
-    m_SceneMaker = new TkSceneFactory;
-    m_Scene = m_SceneMaker->getScene(TkScene::InHouse,m_Display);
-    //show game view thread
-    m_Thread = new TkThread;
-    m_Thread->start(m_Scene);
-
+    m_Scene = TkSceneFactory::getScene(TkType::InHouse,m_Display);
     return true;
 }
-void Game::change(TkScene::Type type){
+void  Game::processEvent(SDL_Event*e){
+    m_Scene->dispatch(e);
+    //TkStatusType::Status status = m_Scene->dispatch(&e, &ev);
+    //processEvent(status, &ev);
+    //switch(status){
+    //case TkStatusType::ChangeScene:
+    //    //changeScene(1);
+    //    break;
+    //}
+}
+void Game::changeScene(TkType::Type type){
     if (m_Scene){
         delete m_Scene;
     }
-    m_Scene = m_SceneMaker->getScene( type, m_Display);
+    m_Scene = TkSceneFactory::getScene( type);
 }
-bool Game::endGame(){// end game 
-    m_Thread->stop();
-    return true;
-}
-bool Game::startGame(){// start a mouse/key listening thread
-    SDL_Event e;
-    while(1){ //main SDL events loop
-        SDL_WaitEvent(&e);
-        m_Scene->dispatch(&e);
-        SDL_Delay(1000);
-    }
 
-    return true;
-}
-void Game::InitVideo(){//init game view
+void Game::initVideo(){//init game view
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         return;
     }
@@ -69,6 +59,14 @@ void Game::InitVideo(){//init game view
     // set window caption
     SDL_WM_SetCaption("taikou", 0);
 }
-void Game::InitAudio(){//init audio
+void Game::initAudio(){//init audio
 }
 
+bool Game::endGame(){// end game 
+    return true;
+}
+bool Game::runGame(){
+    // 
+    m_Scene->run();
+    return true;
+}

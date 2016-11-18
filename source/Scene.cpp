@@ -15,28 +15,29 @@
     w = NULL;\
     }\
 }
-TkScene::TkScene(TkScene::Type /*type*/){
+void TkAbstractScene::init(SDL_Surface*d ){ 
+    if (d != NULL){
+        m_DstDvc = d;
+    }
+}
+TkSingleScene::TkSingleScene(){}
+TkSingleScene::TkSingleScene(TkType::Type /*type*/){
     m_Bkgrd=NULL;
     m_Task=NULL;
     m_Status=NULL;
 }
-TkScene::~TkScene(){
+TkSingleScene::~TkSingleScene(){
     deleteWidget(m_Bkgrd) ;
     deleteWidget(m_Task);
     deleteWidget(m_Status);
 }
-void TkScene::run(SDL_Surface* dst){
-    m_Bkgrd->draw(dst);
-    SDL_Flip(dst);
-}
-void TkScene::run(){
+void TkSingleScene::run(){
     m_Bkgrd->draw(m_DstDvc);
     SDL_Flip(m_DstDvc);
     // music and other audio effect.
 }
-void TkScene::init(SDL_Surface*d){
-    
-    m_DstDvc = d;
+void TkSingleScene::init(SDL_Surface*d){
+    TkAbstractScene::init(d);
 
     m_Bkgrd = new TkBackGround();
     // load back-ground picture
@@ -44,8 +45,10 @@ void TkScene::init(SDL_Surface*d){
     m_Task = new TkTaskWidget ;            // personnel task widget 
     m_Status = new TkStatusWidget ;        // personnel status
 }
+void TkSingleScene::which(SDL_Event*){}
+void TkSingleScene::handle(){}
 // a msg dispatcher/processor
-int TkScene::dispatch(SDL_Event*e){
+TkStatusType::Status TkSingleScene::dispatch(SDL_Event*e){
     switch(e->type) {
         case SDL_ACTIVEEVENT: {
             switch(e->active.state) {
@@ -85,20 +88,20 @@ int TkScene::dispatch(SDL_Event*e){
             break;
         }
     }
-    return 0;
+    return TkStatusType::ChangeScene;
 }
-TkScene* TkSceneFactory::getScene(TkScene::Type type,SDL_Surface* d){
-    TkScene* scene = NULL;
+TkAbstractScene* TkSceneFactory::getScene(TkType::Type type,SDL_Surface* d){
+    TkAbstractScene* scene = NULL;
     switch(type){
-    case 1:
-        scene = new TkScene(type);
+    case TkType::InHouse:
+        scene =  new TkSingleScene(type);
         break;
     }
     scene->init(d);
     return scene;
 }
 
-TkSceneFactory::TkSceneFactory(){
-}
-TkSceneFactory::~TkSceneFactory(){
-}
+
+
+
+

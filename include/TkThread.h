@@ -10,7 +10,7 @@
 
 #include "SDL_thread.h"
 #include "SDL_mutex.h"
-#include "scene.h"
+#include "game.h"
 /* * * * * * * * * * * * * * * *
 @
 @ use for show game view 
@@ -21,7 +21,7 @@ public:
     TkThread();
     ~TkThread();
     void run() ;
-    void start(TkScene*);
+    void start(Game *);
     void stop();
 private:
     void kill();
