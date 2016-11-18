@@ -65,6 +65,8 @@ void Game::initAudio(){//init audio
 bool Game::endGame(){// end game 
     return true;
 }
+
+
 bool Game::runGame(){
     // 
     m_Scene->run();
