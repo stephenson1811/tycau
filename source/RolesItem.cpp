@@ -9,11 +9,23 @@
 #include "RolesItem.h"
 
 
-TkRolesItem::TkRolesItem(void)
-{
+TkRolesItem::TkRolesItem(void){
+
+}
+TkRolesItem::~TkRolesItem(void){
+
+}
+TkRolesList::TkRolesList(void){
+
+}
+TkRolesList::~TkRolesList(void){
+
 }
 
 
-TkRolesItem::~TkRolesItem(void)
-{
+void TkRolesList::draw(SDL_Surface* d){
+    std::vector<TkRolesItem*>::iterator it = m_Person.begin();
+    for(;it != m_Person.end();it++){
+        (*it)->draw(d);
+    }
 }

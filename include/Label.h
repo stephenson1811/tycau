@@ -19,7 +19,10 @@
  */
 class TkLabel : public TkGraphicsObject{
 public:
-    TkLabel();
+    TkLabel(void);
+    TkLabel(std::string&);
+    TkLabel(TkRect&,std::string&);
+    ~TkLabel(void);
     void setPicture(std::string&);
     void setText(std::string&);
 protected:

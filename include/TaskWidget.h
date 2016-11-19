@@ -16,11 +16,12 @@
  * 
  * 
  */
-class TkTaskWidget{
+class TkTaskWidget: public TkGraphicsObject{
 public:
     TkTaskWidget(void);
+    TkTaskWidget(std::string&);
+    TkTaskWidget(TkRect&, std::string&);
     ~TkTaskWidget(void);
 private:
-    TkGraphicsObject m_Image;
 };
 

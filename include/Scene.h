@@ -10,10 +10,15 @@
 #include "config.h"
 #include "public.h"
 #include "event.h"
-#include "GraphicsObject.h"
+
 #include "BackGround.h"
 #include "StatusWidget.h"
 #include "TaskWidget.h"
+#include "Label.h"
+#include "Menu.h"
+#include "Button.h"
+#include "RolesItem.h"
+#include "DialogBox.h"
 /* 
  * which state should be set after event came up
  * 
@@ -51,6 +56,7 @@ protected:
     SDL_Surface* m_DstDvc;           // destination device surface.
     int type;
     TkEvent m_Event;
+    TkDialogBox* m_Dialog;  // dialog pictures and words
 };
 /* 
  * for showing only one bkg piture. such as in house, in castle, in battle.
@@ -73,7 +79,11 @@ private:
     TkBackGround* m_Bkgrd;           // back-ground picyture
     TkTaskWidget* m_Task;            // personnel task widget 
     TkStatusWidget* m_Status;        // personnel status
-
+    TkLabel* m_HouseType;  // left bottom label
+    TkMenu* m_Information; // left menu
+    TkMenu* m_Function;    // right menu
+    TkButton* m_OutDoor;   // button, outdoor function
+    TkRolesList* m_Persons;// persons in house, in right part of background
 };
 /* 
  * the background composed by many pictures.
@@ -111,3 +121,10 @@ public:
     static TkAbstractScene* getScene(TkType::Type, SDL_Surface* d = 0);
 private:
 };
+
+#define deleteWidget(w) {\
+    if (w != NULL){\
+    delete w;\
+    w = NULL;\
+    }\
+}

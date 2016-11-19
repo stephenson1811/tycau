@@ -84,14 +84,17 @@
   <ItemGroup>
     <ClInclude Include="include\Animation.h" />
     <ClInclude Include="include\BackGround.h" />
+    <ClInclude Include="include\ComboBox.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\config.h" />
     <ClInclude Include="include\GraphicsObject.h" />
     <ClInclude Include="include\Map.h" />
     <ClInclude Include="include\MapPrimitive.h" />
+    <ClInclude Include="include\Menu.h" />
     <ClInclude Include="include\public.h" />
     <ClInclude Include="include\RolesItem.h" />
     <ClInclude Include="include\Scene.h" />
+    <ClInclude Include="include\ScrollBar.h" />
     <ClInclude Include="include\StatusWidget.h" />
     <ClInclude Include="include\TaskWidget.h" />
     <ClInclude Include="include\TkThread.h" />
@@ -106,6 +109,7 @@
     <ClCompile Include="source\BackGround.cpp" />
     <ClCompile Include="source\Button.cpp" />
     <ClCompile Include="source\CheckBox.cpp" />
+    <ClCompile Include="source\ComboBox.cpp" />
     <ClCompile Include="source\DialogBox.cpp" />
     <ClCompile Include="source\Game.cpp" />
     <ClCompile Include="source\GraphicsObject.cpp" />
@@ -113,8 +117,11 @@
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\Map.cpp" />
     <ClCompile Include="source\MapPrimitive.cpp" />
+    <ClCompile Include="source\Menu.cpp" />
     <ClCompile Include="source\RolesItem.cpp" />
     <ClCompile Include="source\Scene.cpp" />
+    <ClCompile Include="source\ScrollBar.cpp" />
+    <ClCompile Include="source\SingleScene.cpp" />
     <ClCompile Include="source\Sound.cpp" />
     <ClCompile Include="source\StatusWidget.cpp" />
     <ClCompile Include="source\TaskWidget.cpp" />

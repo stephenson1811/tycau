@@ -12,7 +12,8 @@
 TkTaskWidget::TkTaskWidget(void){
 
 }
-
+TkTaskWidget::TkTaskWidget(std::string&){}
+TkTaskWidget::TkTaskWidget(TkRect&, std::string&){}
 
 TkTaskWidget::~TkTaskWidget(void){
 

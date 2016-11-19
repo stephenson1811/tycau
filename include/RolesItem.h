@@ -16,12 +16,28 @@
  * 
  * 
  */
-class TkRolesItem
-{
+class TkRolesItem: public TkGraphicsObject{
 public:
     TkRolesItem(void);
     ~TkRolesItem(void);
 private:
     TkGraphicsObject m_Image;
+};
+
+/* 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+class TkRolesList{
+public:
+    TkRolesList(void);
+    ~TkRolesList(void);
+    void draw(SDL_Surface*);
+private:
+    std::vector<TkRolesItem*> m_Person;
 };
 

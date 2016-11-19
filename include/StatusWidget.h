@@ -9,18 +9,17 @@
 #pragma once
 #include "graphicsobject.h"
 /* 
- * 
+ * task widget in left panel
  * 
  * 
  * 
  * 
  * 
  */
-class TkStatusWidget {
+class TkStatusWidget: public TkGraphicsObject {
 public:
     TkStatusWidget(void);
     ~TkStatusWidget(void);
 private:
-    TkGraphicsObject* m_Image;
 };
 

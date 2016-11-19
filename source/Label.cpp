@@ -14,7 +14,13 @@
 @ Arguments: 
 @ Return:
 * * * * * * * * * * * * * * * */
-TkLabel::TkLabel(){
+TkLabel::TkLabel(void):TkGraphicsObject(){
+}
+TkLabel::TkLabel(std::string& name):TkGraphicsObject(name){
+}
+TkLabel::TkLabel(TkRect& r,std::string& name):TkGraphicsObject(r,name){
+}
+TkLabel::~TkLabel(void){
 }
 /* * * * * * * * * * * * * * * *
 @ Name: setPicture

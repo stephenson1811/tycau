@@ -10,10 +10,8 @@
 
 
 TkStatusWidget::TkStatusWidget(void){
-    m_Image = NULL;
 }
 
 
 TkStatusWidget::~TkStatusWidget(void){
-    delete m_Image;
 }

@@ -16,6 +16,7 @@ int eventLoop(void *temp){
     while(1){
         Game* game = (Game*)temp ;
         game ->runGame();
+        SDL_Delay(1000);
         //TkSceneFactory::getScene( globleSceneType )->run();
         //
         //if (ret == 0 || (ev.type==SDL_QUIT) ||

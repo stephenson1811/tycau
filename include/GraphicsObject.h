@@ -8,6 +8,7 @@
  */
 #pragma once
 #include "config.h"
+#include "public.h"
 /* 
  * 
  * 
@@ -20,20 +21,22 @@ class TkGraphicsObject{
 public:
     TkGraphicsObject(void);
     TkGraphicsObject(std::string&);
-    TkGraphicsObject(SDL_Surface*,std::string&);
+    TkGraphicsObject(TkRect&,std::string&);
     ~TkGraphicsObject(void);
 public:
     void draw(SDL_Surface* src,SDL_Surface* dst);
     void draw(SDL_Surface* dst );
     void load(std::string&);
-    void setCoord(SDL_Rect & r){m_Rect = r;}
+    void setCoord(TkRect& r){m_Rect = r;}
     void setScreen(SDL_Surface*);
+    void setSize(int w, int h){m_Rect.setW(w);m_Rect.setH(h);}
     bool transparent(SDL_Surface* Surf_Dest, int R, int G, int B);
-private:
+protected:
     void init();
+    void init(TkRect&);
 protected:
     std::string m_Name; // picture to shown
-    SDL_Rect m_Rect;    // pic coord and size
+    TkRect m_Rect;    // pic coord and size
     SDL_Surface* m_SrcDvc; // pic convert to sdl surface
 };
 

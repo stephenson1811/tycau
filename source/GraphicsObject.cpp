@@ -9,24 +9,19 @@
 #include "GraphicsObject.h"
 
 
-TkGraphicsObject::TkGraphicsObject(void){
-    init();
+TkGraphicsObject::TkGraphicsObject(void):m_Rect(0,0,0,0),m_SrcDvc(NULL){
 }
-TkGraphicsObject::TkGraphicsObject(std::string& name){
-    init();
-    m_Name = name;
-    
+TkGraphicsObject::TkGraphicsObject(std::string& name):m_Rect(0,0,0,0),m_Name(name),m_SrcDvc(NULL){
     //SDLGUI* g_gui;           
     //g_gui=new SDLGUI(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_BPP,WHITE);
     //g_gui->SetFont( "arial.ttf", ARIAL, 26, TTF_STYLE_NORMAL );
     //atexit( SDL_Quit );
 }
+TkGraphicsObject::TkGraphicsObject(TkRect& r,std::string& name):m_Rect(r),m_Name(name),m_SrcDvc(NULL){
+}
 void TkGraphicsObject::init(){
-    m_Rect.h = 0;
-    m_Rect.w = 0;
-    m_Rect.x = 0;
-    m_Rect.y = 0;
-    m_SrcDvc = NULL;
+}
+void TkGraphicsObject::init(TkRect&){
 }
 TkGraphicsObject::~TkGraphicsObject(void){
     SDL_FreeSurface(m_SrcDvc);
@@ -44,21 +39,25 @@ void TkGraphicsObject::load(std::string& name){
     //    return NULL;
     //}
     m_SrcDvc = SDL_DisplayFormat(Surf_Temp);
+    setSize(m_SrcDvc->w, m_SrcDvc->h);
     SDL_FreeSurface(Surf_Temp);
 }
 //------------------------------------------------------------------------------
 void TkGraphicsObject::draw(SDL_Surface* dst){
-    if(dst == NULL || m_SrcDvc == NULL) {
-        return ;
+    if( m_SrcDvc == NULL) {
+        if ( dst == NULL || m_Name.empty()){
+            return ;
+        }
+        load(m_Name);
     }
 
     SDL_Rect DstR;
-    DstR.x = m_Rect.x;
-    DstR.y = m_Rect.y;
+    DstR.x = m_Rect.getX();
+    DstR.y = m_Rect.getY();
 
     SDL_Rect SrcR;
-    SrcR.x = m_Rect.x;
-    SrcR.y = m_Rect.y;
+    SrcR.x = 0;
+    SrcR.y = 0;
     SrcR.w = m_SrcDvc->w;
     SrcR.h = m_SrcDvc->h;
 
@@ -70,14 +69,14 @@ void TkGraphicsObject::draw(SDL_Surface* src,SDL_Surface* dst) {
     }
 
     SDL_Rect DstR;
-    DstR.x = m_Rect.x;
-    DstR.y = m_Rect.y;
+    DstR.x = m_Rect.getX();
+    DstR.y = m_Rect.getY();
     DstR.w = src->w;
     DstR.h = src->h;
 
     SDL_Rect SrcR;
-    SrcR.x = m_Rect.x;
-    SrcR.y = m_Rect.y;
+    SrcR.x = 0;
+    SrcR.y = 0;
     SrcR.w = src->w;
     SrcR.h = src->h;
 
