@@ -16,9 +16,9 @@
 * * * * * * * * * * * * * * * */
 TkLabel::TkLabel(void):TkGraphicsObject(){
 }
-TkLabel::TkLabel(std::string& name):TkGraphicsObject(name){
+TkLabel::TkLabel(const std::string& name):TkGraphicsObject(name){
 }
-TkLabel::TkLabel(TkRect& r,std::string& name):TkGraphicsObject(r,name){
+TkLabel::TkLabel(const TkRect& r,const std::string& name,bool isText):TkGraphicsObject(r,name,isText){
 }
 TkLabel::~TkLabel(void){
 }
@@ -29,16 +29,16 @@ TkLabel::~TkLabel(void){
 @ Return: N/A
 * * * * * * * * * * * * * * * */
 
-void TkLabel::setPicture(std::string& name){
-    load(name);
-}
+//void TkLabel::setPicture(std::string& name){
+//    load(name);
+//}
 /* * * * * * * * * * * * * * * *
 @ Name: setText
 @ Description: set text which to be shown. 
 @ Arguments: text
 @ Return: N/A
 * * * * * * * * * * * * * * * */
-void TkLabel::setText(std::string& name){
-    m_Text = name;
-
-}
+//void TkLabel::setText(std::string& name){
+//    m_Text = name;
+//
+//}

@@ -10,8 +10,38 @@
 
 
 TkStatusWidget::TkStatusWidget(void){
+    init();
 }
-
-
+//TkStatusWidget::TkStatusWidget(std::string& name){
+//}
+//TkStatusWidget::TkStatusWidget(TkRect& r , std::string& name){
+//    //Parts_A_73-1.bmp
+//}
+void TkStatusWidget::init(){
+    TkRect r(9,9);
+    m_BackGround = new TkLabel(r, std::string("D:\\data\\UI\\Parts_N_108-1.bmp"));
+    TkRect delta2(8,8);
+    m_Portraits = new TkLabel(r+delta2,std::string("D:\\data\\little_portraits\\Face0_113-1.bmp")) ;   // player image
+    TkRect delta3(353,30);
+    m_Weather = new TkLabel(r+delta3,std::string("D:\\data\\UI\\Parts_A_67-1.bmp"));
+    TkRect delta4(352,52);
+    m_HP = new TkLabel(r+delta4,std::string("D:\\data\\UI\\Parts_A_73-1.bmp"));
+    TkRect delta5(9,9);
+    m_ProtagonistName = new TkLabel();   // player name
+    TkRect delta6(9,9);
+    m_Date = new TkLabel();
+    TkRect delta7(9,9);
+    m_Place = new TkLabel();
+    TkRect delta8(9,9);
+    m_Money = new TkLabel();
+    TkRect delta9(9,9);
+    m_Career = new TkLabel();  // 
+}
 TkStatusWidget::~TkStatusWidget(void){
+}
+void TkStatusWidget::draw(SDL_Surface* dst){
+    m_BackGround->draw(dst);
+    m_Portraits->draw(dst);
+    m_Weather->draw(dst);
+    m_HP->draw(dst);
 }

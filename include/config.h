@@ -24,18 +24,3 @@
 #pragma comment(lib,"SDL_ttf.lib")
 #pragma comment(lib,"SDL_mixer.lib")
 //#pragma comment(lib,"SDL_ffmpeg.lib")
-/* 
- * 
- * 
- * 
- * 
- * 
- * 
- */
-namespace Gui{
-    enum Type{
-        TypeMap = 1,    // composed by many primitives
-        TypeBkGrd = 2,  // back-ground filled with single pic
-        TypeItem = 3,   // single pic, such as a person portrait 
-    };
-};

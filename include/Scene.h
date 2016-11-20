@@ -42,12 +42,12 @@ private:
 class TkAbstractScene{
 public:
     TkAbstractScene(){}
-    TkAbstractScene(TkType::Type){}
+    TkAbstractScene(TkType::SceneType){}
     ~TkAbstractScene(){}
 public:
     virtual void run() = 0; // draw image, play music.
     virtual void init(SDL_Surface*d = 0); // initial dest surface and picture name.
-    virtual TkStatusType::Status dispatch(SDL_Event*) = 0;
+    virtual TkGameStatusType::Status dispatch(SDL_Event*) = 0;
     int getType(){return type;}
 protected:
     virtual void which(SDL_Event*) = 0; // which control/picture is selected, pressed or clicked.
@@ -68,13 +68,13 @@ protected:
 class TkSingleScene:public TkAbstractScene{
 public:
     TkSingleScene();
-    TkSingleScene(TkType::Type);
+    TkSingleScene(TkType::SceneType);
     ~TkSingleScene();
     void run();
     void init(SDL_Surface*d = 0);
     void which(SDL_Event*); // which control/picture is selected, pressed or clicked.
     void handle() ; // make a specific TkEvent according to SDL_Event variable;
-    TkStatusType::Status dispatch(SDL_Event*);
+    TkGameStatusType::Status dispatch(SDL_Event*);
 private:
     TkBackGround* m_Bkgrd;           // back-ground picyture
     TkTaskWidget* m_Task;            // personnel task widget 
@@ -118,7 +118,7 @@ class TkSelectScene{
 
 class TkSceneFactory{
 public:
-    static TkAbstractScene* getScene(TkType::Type, SDL_Surface* d = 0);
+    static TkAbstractScene* getScene(TkType::SceneType, SDL_Surface* d = 0);
 private:
 };
 

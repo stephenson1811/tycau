@@ -16,7 +16,7 @@ void TkAbstractScene::init(SDL_Surface*d ){
     }
 }
 
-TkAbstractScene* TkSceneFactory::getScene(TkType::Type type,SDL_Surface* d){
+TkAbstractScene* TkSceneFactory::getScene(TkType::SceneType type,SDL_Surface* d){
     TkAbstractScene* scene = NULL;
     switch(type){
     case TkType::InHouse:

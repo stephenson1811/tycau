@@ -31,15 +31,15 @@ bool Game::loadGame(){
 }
 void  Game::processEvent(SDL_Event*e){
     m_Scene->dispatch(e);
-    //TkStatusType::Status status = m_Scene->dispatch(&e, &ev);
+    //TkGameStatusType::Status status = m_Scene->dispatch(&e, &ev);
     //processEvent(status, &ev);
     //switch(status){
-    //case TkStatusType::ChangeScene:
+    //case TkGameStatusType::ChangeScene:
     //    //changeScene(1);
     //    break;
     //}
 }
-void Game::changeScene(TkType::Type type){
+void Game::changeScene(TkType::SceneType type){
     if (m_Scene){
         delete m_Scene;
     }
@@ -56,6 +56,8 @@ void Game::initVideo(){//init game view
     }
     // hide cursor
     SDL_ShowCursor(1);
+    // load font
+    TTF_Init();
     // set window caption
     SDL_WM_SetCaption("taikou", 0);
 }

@@ -8,6 +8,7 @@
  */
 #pragma once
 #include "graphicsobject.h"
+#include "Label.h"
 /* 
  * task widget in left panel
  * 
@@ -16,10 +17,22 @@
  * 
  * 
  */
-class TkStatusWidget: public TkGraphicsObject {
+class TkStatusWidget {
 public:
     TkStatusWidget(void);
     ~TkStatusWidget(void);
+public:
+    void init();
+    void draw(SDL_Surface*);
 private:
+    TkLabel* m_BackGround;
+    TkLabel* m_Portraits;   // player image
+    TkLabel* m_Weather;
+    TkLabel* m_HP;
+    TkLabel* m_ProtagonistName;   // player name
+    TkLabel* m_Date;
+    TkLabel* m_Place;
+    TkLabel* m_Money;
+    TkLabel* m_Career;  // 
 };
 

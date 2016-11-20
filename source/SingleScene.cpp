@@ -11,7 +11,7 @@
 #include "Sound.h"
 
 TkSingleScene::TkSingleScene(){}
-TkSingleScene::TkSingleScene(TkType::Type /*type*/){
+TkSingleScene::TkSingleScene(TkType::SceneType /*type*/){
     m_Bkgrd=NULL;
     m_Task=NULL;
     m_Status=NULL;
@@ -23,13 +23,13 @@ TkSingleScene::~TkSingleScene(){
 }
 void TkSingleScene::run(){
     m_Bkgrd->draw(m_DstDvc);
-    m_Task->draw(m_DstDvc);
+    //m_Task->draw(m_DstDvc);
     m_Status->draw(m_DstDvc);
     m_HouseType->draw(m_DstDvc);
-    m_Information->draw(m_DstDvc);
+/*    m_Information->draw(m_DstDvc);
     m_Function->draw(m_DstDvc);
     m_OutDoor->draw(m_DstDvc);
-    m_Persons->draw(m_DstDvc);
+    m_Persons->draw(m_DstDvc)*/;
     SDL_Flip(m_DstDvc);
     // music and other audio effect.
 }
@@ -38,8 +38,8 @@ void TkSingleScene::init(SDL_Surface*d){
 
     m_Bkgrd = new TkBackGround(std::string("D:\\data\\background\\Room_3-1.bmp"));
     m_Task = new TkTaskWidget() ;            // personnel task widget 
-    m_Status = new TkStatusWidget ;        // personnel status 
-    m_HouseType = new TkLabel(TkRect(100,200),std::string("D:\\data\\infrastructure\\KyotenBtn_46-1.bmp")) ;  // left bottom label
+    m_Status = new TkStatusWidget() ;        // personnel status 
+    m_HouseType = new TkLabel(TkRect(10,430),std::string("D:\\data\\infrastructure\\KyotenBtn_46-1.bmp")) ;  // left bottom label
     m_Information = new TkMenu ; // left menu
     m_Function = new TkMenu ;    // right menu
     m_OutDoor = new TkButton ;   // button, outdoor function
@@ -57,7 +57,7 @@ void TkSingleScene::handle(){}
 
 
 // a msg dispatcher/processor
-TkStatusType::Status TkSingleScene::dispatch(SDL_Event*e){
+TkGameStatusType::Status TkSingleScene::dispatch(SDL_Event*e){
     switch(e->type) {
         case SDL_ACTIVEEVENT: {
             switch(e->active.state) {
@@ -97,5 +97,5 @@ TkStatusType::Status TkSingleScene::dispatch(SDL_Event*e){
             break;
         }
     }
-    return TkStatusType::ChangeScene;
+    return TkGameStatusType::ChangeScene;
 }

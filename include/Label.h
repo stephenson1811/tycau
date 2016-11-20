@@ -12,7 +12,7 @@
 /* 
  * this class is uses for showing texts or pictures.
  * 
- * if both picture and text append, this pic used as background.
+ * if both picture and text appended, this pic used as background.
  * 
  * 
  * 
@@ -20,11 +20,9 @@
 class TkLabel : public TkGraphicsObject{
 public:
     TkLabel(void);
-    TkLabel(std::string&);
-    TkLabel(TkRect&,std::string&);
+    TkLabel(const std::string&);
+    TkLabel(const TkRect&,const std::string&,bool isText = false);
     ~TkLabel(void);
-    void setPicture(std::string&);
-    void setText(std::string&);
-protected:
-    std::string m_Text;
 };
+
+

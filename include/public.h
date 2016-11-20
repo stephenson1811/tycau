@@ -24,12 +24,28 @@ namespace TkType{
      * 
      * 
      */
-    enum Type{
+    enum SceneType{
         Null = 0,
         InHouse = 1,
     };
+    enum SeasonType{
+        Spring = 1,
+        Summer = 2,
+        Autumn = 3,
+        Winter = 4,
+    };
+    enum TimeType{
+        Morning = 1,
+        Noon = 2,
+        Afternoon = 3,
+        Evening = 4,
+    };
+    enum Health{
+        Heal = 1,
+        Ill = 3,
+    };
 };
-namespace TkStatusType{
+namespace TkGameStatusType{
     /* 
      * which state should be set after event came up
      * 
@@ -44,7 +60,22 @@ namespace TkStatusType{
     };
 
 };
-
+namespace TkStatus{};
+/* 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+namespace TkGui{
+    enum Type{
+        TypeMap = 1,    // composed by many primitives
+        TypeBkGrd = 2,  // back-ground filled with single pic
+        TypeItem = 3,   // single pic, such as a person portrait 
+    };
+};
 class TkRect{
 public:
     TkRect(void){w = 0;h = 0;x = 0;y = 0;}
@@ -61,6 +92,36 @@ public:
         this->y = r.y;
         this->w = r.w;
         this->h = r.h;
+    }
+    const TkRect& operator+=(const TkRect& r){
+        this->x += r.x;
+        this->y += r.y;
+        this->w += r.w;
+        this->h += r.h;  
+        return *this;
+    }
+    const TkRect& operator-=(const TkRect& r){
+        this->x -= r.x;
+        this->y -= r.y;
+        this->w -= r.w;
+        this->h -= r.h;
+        return *this;    
+    }
+    friend TkRect operator+(const TkRect& l, const TkRect& r){
+        TkRect tmp;
+        tmp.x = l.x + r.x;
+        tmp.y = l.y + r.y;
+        tmp.w = l.w + r.w;
+        tmp.h = l.h + r.h;  
+        return tmp;
+    }
+    friend TkRect operator - (const TkRect& l, const TkRect& r){
+        TkRect tmp;
+        tmp.x = l.x - r.x;
+        tmp.y = l.y - r.y;
+        tmp.w = l.w - r.w;
+        tmp.h = l.h - r.h; 
+        return tmp;    
     }
     int getX(){return x;}
     int getY(){return y;}

@@ -30,7 +30,7 @@ public:
 private:
     void initVideo();                    //init view
     void initAudio();                    //init audio
-    void changeScene(TkType::Type); // player in another place, scene must be changed.
+    void changeScene(TkType::SceneType); // player in another place, scene must be changed.
 private:
     SDL_Surface* m_Display;                //destination screen device
     TkAbstractScene* m_Scene;

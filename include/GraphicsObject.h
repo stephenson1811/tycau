@@ -20,17 +20,18 @@
 class TkGraphicsObject{
 public:
     TkGraphicsObject(void);
-    TkGraphicsObject(std::string&);
-    TkGraphicsObject(TkRect&,std::string&);
+    TkGraphicsObject(const std::string&);
+    TkGraphicsObject(const TkRect&,const std::string&,bool isText = false);
     ~TkGraphicsObject(void);
 public:
-    void draw(SDL_Surface* src,SDL_Surface* dst);
     void draw(SDL_Surface* dst );
-    void load(std::string&);
+    void loadText(const std::string&);
+    void load(const std::string&);
     void setCoord(TkRect& r){m_Rect = r;}
-    void setScreen(SDL_Surface*);
+    void setMask(SDL_Color& mask);
+    //void setScreen(SDL_Surface*);
     void setSize(int w, int h){m_Rect.setW(w);m_Rect.setH(h);}
-    bool transparent(SDL_Surface* Surf_Dest, int R, int G, int B);
+    TkRect& getRect(){return m_Rect;}
 protected:
     void init();
     void init(TkRect&);
@@ -38,5 +39,6 @@ protected:
     std::string m_Name; // picture to shown
     TkRect m_Rect;    // pic coord and size
     SDL_Surface* m_SrcDvc; // pic convert to sdl surface
+    SDL_Color m_Mask;
 };
 
