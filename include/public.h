@@ -58,7 +58,24 @@ namespace TkGameStatusType{
         Null = 0,
         ChangeScene = 1,
     };
-
+    /* 
+     * game status
+     * 
+     * 
+     * 
+     * 
+     * 
+     */
+    enum GameStatus
+    {
+        /*CHANGE_SCREEN_RESOLUTION = 1,*/
+        RETURN_TO_MAIN_MENU = 2,
+        STOP_CLIENT = 3,
+        RESTART_GAME,
+        RETURN_TO_MENU_LOAD,
+        FULLSCREEN_TOGGLED,
+        PREPARE_RESTART_CAMPAIGN
+    };
 };
 namespace TkStatus{};
 /* 
