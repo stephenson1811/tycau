@@ -15,6 +15,7 @@ Game::Game(){
     HEIGHT = 600;
     BPP = 32;
     m_Scene = NULL;
+    m_Running = true;
 }
 Game::~Game(){
     SDL_FreeSurface(m_Display);
@@ -29,22 +30,15 @@ bool Game::loadGame(){
     m_Scene = TkSceneFactory::getScene(TkType::InHouse,m_Display);
     return true;
 }
-void Game::pushSDLEvent(int type, int usercode)
-{
-    SDL_Event event;
-    event.type = type;
-    event.user.code = usercode;	// not necessarily used
-    SDL_PushEvent(&event);
-}
+
 void  Game::processEvent(SDL_Event*e){
     TkGameStatusType::Status status;
     switch(e->type){
     case SDL_QUIT:{
-            //handleQuit();
+            m_Running = false;
             break;
         }
-    case SDL_USEREVENT:
-        {
+    case SDL_USEREVENT:{
             switch(e->user.code){
             case TkGameStatusType::RETURN_TO_MAIN_MENU:{
                 }
@@ -63,15 +57,13 @@ void  Game::processEvent(SDL_Event*e){
                 std::cout << "Error: unknown user event. Code " << e->user.code;
             }
         }
-        case SDL_MOUSEBUTTONDOWN:
-            status = m_Scene->dispatch(e);
-            switch(status){
-            case TkGameStatusType::ChangeScene:
-                break;
-            }
-            break;
-        case SDL_MOUSEMOTION:
-            break;
+    case CHANGE_SCENE:
+        changeScene( (TkType::SceneType)(e->user.code));
+    case SDL_MOUSEBUTTONDOWN:
+        status = m_Scene->dispatch(e);
+        break;
+    case SDL_MOUSEMOTION:
+        break;
     }
 
     //m_Scene->dispatch(&e, &ev);

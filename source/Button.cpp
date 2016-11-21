@@ -14,10 +14,13 @@
 @ Arguments:
 @ Return:
 * * * * * * * * * * * * * * * */
-TkButton::TkButton(){
+TkButton::TkButton(void):TkGraphicsObject(){
 }
 
-
+TkButton::TkButton(const std::string& name):TkGraphicsObject(name){
+}
+TkButton::TkButton(const TkRect& r,const std::string& name, bool isText):TkGraphicsObject(r,name,isText){
+}
 /* * * * * * * * * * * * * * * *
 @ Name:
 @ Description:

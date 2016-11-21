@@ -7,6 +7,7 @@
  * Full text of license available in license.txt file, in main folder
  */
 #pragma once
+const int CHANGE_SCENE = SDL_USEREVENT +1;
 /* 
  * it defines public module in this file
  * 

@@ -9,9 +9,10 @@
 #pragma once
 
 #include "GraphicsObject.h"
+#include "Animation.h"
 /* 
- * 
- * 
+ * buttons with variate performance.
+ * such as clicked, pressed, hovered etc..
  * 
  * 
  * 
@@ -23,11 +24,15 @@ class TkButton : public TkGraphicsObject {
         BUTTONUP
     };
 public:
-    TkButton();
-    ~TkButton();
+    TkButton(void);
+    TkButton(const std::string&);
+    TkButton(const TkRect&,const std::string&,bool isText = false);
+    ~TkButton(void);
 
     void pressed();
     void clicked();
     void keyPressed();
+private:
+    std::vector<TkAnimation*> m_Primitives;
 };
 

@@ -8,23 +8,21 @@
  */
 #pragma once
 
-#include "SDL.h"
 #include "GraphicsObject.h"
 /* * * * * * * * * * * * * * * *
-@ process many static image from one picture.
+@ process many static image pieces from one picture.
 @
 @
 * * * * * * * * * * * * * * * */
-class Animation {
+class TkAnimation: public TkGraphicsObject{
 private:
-    TkGraphicsObject m_Primitive;
     int    m_CurrentFrame; // current id
     int    m_FrameRate;    //Milliseconds
 public:
     int    m_MaxFrames; // a pic is composed from many pieces
     bool   m_Oscillate; // 
 public:
-    Animation(int MaxFrame = 0);
+    TkAnimation(int MaxFrame = 0);
 public:
     void play();
     int GetCurrentFrame();

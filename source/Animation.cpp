@@ -13,7 +13,7 @@
 @
 @
 * * * * * * * * * * * * * * * */
-Animation::Animation(int MaxFrame) {
+TkAnimation::TkAnimation(int MaxFrame) {
     m_CurrentFrame    = 0;
     m_MaxFrames       = MaxFrame;
 
@@ -22,7 +22,7 @@ Animation::Animation(int MaxFrame) {
 }
 
 //------------------------------------------------------------------------------
-void Animation::play() {
+void TkAnimation::play() {
     m_CurrentFrame += 1;
 
     if(m_Oscillate) {
@@ -43,7 +43,7 @@ void Animation::play() {
 //------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
-int Animation::GetCurrentFrame() {
+int TkAnimation::GetCurrentFrame() {
     return m_CurrentFrame;
 }
 

@@ -15,7 +15,12 @@ void TkAbstractScene::init(SDL_Surface*d ){
         m_DstDvc = d;
     }
 }
-
+void TkAbstractScene::pushSDLEvent(int type, int usercode){
+    SDL_Event e;
+    e.type = type;
+    e.user.code = usercode;
+    SDL_PushEvent(&e);
+}
 TkAbstractScene* TkSceneFactory::getScene(TkType::SceneType type,SDL_Surface* d){
     TkAbstractScene* scene = NULL;
     switch(type){

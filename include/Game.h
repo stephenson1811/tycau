@@ -31,7 +31,6 @@ private:
     void initVideo();                    //init view
     void initAudio();                    //init audio
     void changeScene(TkType::SceneType); // player in another place, scene must be changed.
-    void pushSDLEvent(int type, int usercode);
 private:
     SDL_Surface* m_Display;                //destination screen device
     TkAbstractScene* m_Scene;

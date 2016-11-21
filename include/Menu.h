@@ -9,6 +9,7 @@
 #pragma once
 
 #include "GraphicsObject.h"
+#include "Button.h"
 /* 
  * this class is uses for showing texts or pictures.
  * 
@@ -24,4 +25,5 @@ public:
     void clicked( );
 protected:
     std::string m_Text;
+    TkButton* m_Button;
 };
