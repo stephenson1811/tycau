@@ -33,6 +33,7 @@ TkButton::~TkButton(){
 void TkButton::clicked(){
 }
  
-void TkButton::keyPressed(){
+void TkButton::hovered(){
     return;
 }
+void TkButton::pressed(){}

@@ -31,7 +31,7 @@ public:
 
     void pressed();
     void clicked();
-    void keyPressed();
+    void hovered();
 private:
     std::vector<TkAnimation*> m_Primitives;
 };

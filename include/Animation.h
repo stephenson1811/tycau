@@ -16,15 +16,16 @@
 * * * * * * * * * * * * * * * */
 class TkAnimation: public TkGraphicsObject{
 private:
-    int    m_CurrentFrame; // current id
+    int    m_CurrentPiece; // current image piece id
     int    m_FrameRate;    //Milliseconds
 public:
-    int    m_MaxFrames; // a pic is composed from many pieces
-    bool   m_Oscillate; // 
+    int    m_TotalPieces; // a pic is composed from many pieces
+    bool   m_Playing; // 
 public:
-    TkAnimation(int MaxFrame = 0);
+    TkAnimation(int TotalPieces = 0);
 public:
     void play();
-    int GetCurrentFrame();
+    int getStatus();
+    void setStatus(int);
 };
 

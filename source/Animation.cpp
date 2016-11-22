@@ -13,37 +13,19 @@
 @
 @
 * * * * * * * * * * * * * * * */
-TkAnimation::TkAnimation(int MaxFrame) {
-    m_CurrentFrame    = 0;
-    m_MaxFrames       = MaxFrame;
-
-    m_FrameRate       = 100; //Milliseconds
-    m_Oscillate       = false;
+TkAnimation::TkAnimation(int TotalPieces) {
 }
 
 //------------------------------------------------------------------------------
 void TkAnimation::play() {
-    m_CurrentFrame += 1;
-
-    if(m_Oscillate) {
-        if(m_CurrentFrame >= m_MaxFrames - 1) {
-                //m_FrameInc = -m_FrameInc;
-        }else{
-            if(m_CurrentFrame <= 0) {
-                //m_FrameInc = -m_FrameInc;
-            }
-        }
-    }else{
-        if(m_CurrentFrame >= m_MaxFrames - 1) {
-            m_CurrentFrame = 0;
-        }
-    }
 }
 
 //------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
-int TkAnimation::GetCurrentFrame() {
-    return m_CurrentFrame;
+int TkAnimation::getStatus() {
+    return m_CurrentPiece;
 }
-
+void TkAnimation::setStatus(int) {
+    return ;
+}
