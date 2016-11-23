@@ -46,6 +46,14 @@ namespace TkType{
         Ill = 3,
     };
 };
+namespace TkGui{
+    enum ControlStatus{
+        Null = 0,
+        pressed = 1,
+        click = 2,
+        hover = 3,
+    };
+};
 namespace TkGameStatusType{
     /* 
      * which state should be set after event came up

@@ -29,11 +29,23 @@ TkButton::TkButton(const TkRect& r,const std::string& name, bool isText):TkGraph
 * * * * * * * * * * * * * * * */
 TkButton::~TkButton(){
 }
-
+void TkButton::setStatus(TkGui::ControlStatus type){
+    for (std::vector<TkAnimation*>::iterator it = m_Primitives.begin();
+        it != m_Primitives.end(); it ++){
+            (*it)->setCurrentPieces(m_StatusMap[type]);
+    }
+}
 void TkButton::clicked(){
+    setStatus(TkGui::click);
 }
  
 void TkButton::hovered(){
+    setStatus(TkGui::click);
     return;
 }
-void TkButton::pressed(){}
+void TkButton::pressed(){
+    setStatus(TkGui::click);
+}
+void TkButton::addStatus(TkGui::ControlStatus status, int index){
+    m_StatusMap.insert(std::make_pair(TkGui::click,1));
+}

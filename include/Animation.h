@@ -15,17 +15,26 @@
 @
 * * * * * * * * * * * * * * * */
 class TkAnimation: public TkGraphicsObject{
+public:
+    TkAnimation(const TkRect&, const std::string&, int TotalPieces = 1);
+    ~TkAnimation();
+public:
+    void play(SDL_Surface* );
+    int getCurrentPieces();
+    void setCurrentPieces(int);
 private:
-    int    m_CurrentPiece; // current image piece id
-    int    m_FrameRate;    //Milliseconds
+    void split( TkRect&, int); // split a image into several pieces
+    void changeIndex();
+private:
+    int m_CurrentPiece; // current image piece id
+    int m_PlayDelay;    // Milliseconds
+    int m_TotalPieces;  // a pic is composed from many pieces 
+    // status, this image in playing or static display status.
+    // it's different in button and grapghic drawing.
+    bool m_Playing;
+    bool m_Quit;
+    bool horizontal; // direction, horizontal or vertical
 public:
-    int    m_TotalPieces; // a pic is composed from many pieces
-    bool   m_Playing; // 
-public:
-    TkAnimation(int TotalPieces = 0);
-public:
-    void play();
-    int getStatus();
-    void setStatus(int);
+    void draw(SDL_Surface* dst);
 };
 

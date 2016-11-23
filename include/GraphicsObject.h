@@ -25,6 +25,7 @@ public:
     ~TkGraphicsObject(void);
 public:
     void draw(SDL_Surface* dst );
+    void draw(SDL_Surface* dst, TkRect& );
     void loadText(const std::string&);
     void load(const std::string&);
     void setCoord(TkRect& r){m_Rect = r;}
