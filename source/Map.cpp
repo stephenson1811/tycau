@@ -9,6 +9,7 @@
 #include "Map.h"
 
 TkMap::TkMap(void){
+    m_Type = mapWidget;
 }
 TkMap::~TkMap(void){
     for (std::vector<TkMapPrimitive*>::iterator it = m_Tiles.begin();
@@ -28,9 +29,25 @@ void TkMap::initMap(){
         }
     }
 }
-void TkMap::draw(/*CDC*pDC*/){
+void TkMap::draw( ){
     for (std::vector<TkMapPrimitive*>::iterator it = m_Tiles.begin();
         it != m_Tiles.end();it++){
             //(*it)->draw();
     }
 }
+void TkMap::draw(SDL_Surface* dst ){
+}
+void TkMap::draw(SDL_Surface* dst, TkRect& ){
+}
+bool TkMap::inRect(SDL_Event* e, TkMapPrimitive* mp){
+    for (std::vector<TkMapPrimitive*>::iterator it = m_Tiles.begin();
+        it != m_Tiles.end();it++){
+            if ((*it)->inRect(e)){
+                mp = (*it);
+                return true;
+            }
+    }
+    return false;
+}
+
+

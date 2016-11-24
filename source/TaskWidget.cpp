@@ -10,11 +10,22 @@
 
 
 TkTaskWidget::TkTaskWidget(void){
-
+    m_Type = taskWidget;
 }
-TkTaskWidget::TkTaskWidget(std::string&){}
-TkTaskWidget::TkTaskWidget(TkRect&, std::string&){}
+TkTaskWidget::TkTaskWidget(std::string&){
+    m_Type = taskWidget;
+}
+TkTaskWidget::TkTaskWidget(TkRect&, std::string&){
+    m_Type = taskWidget;
+}
 
 TkTaskWidget::~TkTaskWidget(void){
 
+}
+void TkTaskWidget::draw(SDL_Surface* dst ){
+}
+void TkTaskWidget::draw(SDL_Surface* dst, TkRect& ){
+}
+bool TkTaskWidget::inRect(SDL_Event*){
+    return true;
 }

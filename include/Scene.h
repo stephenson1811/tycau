@@ -50,7 +50,7 @@ public:
     virtual TkGameStatusType::Status dispatch(SDL_Event*) = 0;
     int getType(){return type;}
 protected:
-    virtual void which(SDL_Event*) = 0; // which control/picture is selected, pressed or clicked.
+    virtual TkGraphicsObject* whichControl(SDL_Event*) = 0; // which control/picture is selected, pressed or clicked.
     virtual void handle() = 0; // make a specific TkEvent according to SDL_Event variable;
     void pushSDLEvent(int type, int usercode);
 protected:
@@ -58,6 +58,7 @@ protected:
     int type;
     TkEvent m_Event;
     TkDialogBox* m_Dialog;  // dialog pictures and words
+    std::vector<TkObject*> m_Members;
 };
 /* 
  * for showing only one bkg piture. such as in house, in castle, in battle.
@@ -73,7 +74,7 @@ public:
     ~TkSingleScene();
     void run();
     void init(SDL_Surface*d = 0);
-    void which(SDL_Event*); // which control/picture is selected, pressed or clicked.
+    TkGraphicsObject* whichControl(SDL_Event*); // which control/picture is selected, pressed or clicked.
     void handle() ; // make a specific TkEvent according to SDL_Event variable;
     TkGameStatusType::Status dispatch(SDL_Event*);
 private:

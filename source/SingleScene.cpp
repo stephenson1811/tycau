@@ -51,49 +51,57 @@ void TkSingleScene::init(SDL_Surface*d){
     //m_Function->load(std::string("D:\\data\\background\\Room_3-1.bmp"));
     //m_OutDoor->load(std::string("D:\\data\\background\\Room_3-1.bmp"));
     //m_Persons->load(std::string("D:\\data\\background\\Room_3-1.bmp"));
+    m_Members.push_back(m_Bkgrd);
 }
-void TkSingleScene::which(SDL_Event*){}
-void TkSingleScene::handle(){}
+TkGraphicsObject* TkSingleScene::whichControl(SDL_Event* e){
+    TkGraphicsObject* control = NULL;
+    for (std::vector<TkObject*>::iterator it = m_Members.begin();
+        it != m_Members.end(); it ++){
+            if ( (*it)->getType() == graphicObject){
+                if ((*it)->inRect(e)){
+                    return static_cast<TkGraphicsObject*>(*it);
+                }
+            }else if((*it)->getType() == mapWidget){
+                //TkMap* m = dynamic_cast<TkMap*> (*it);
+                //if ((*it)->inRect(e, control)){
+                //}
+            }
+    }
+    return NULL;
+}
+void TkSingleScene::handle(){
+}
 
 
 // a msg dispatcher/processor
-TkGameStatusType::Status TkSingleScene::dispatch(SDL_Event*e){
+TkGameStatusType::Status TkSingleScene::dispatch(SDL_Event* e){
+    TkGraphicsObject* control;
     switch(e->type) {
-        case SDL_ACTIVEEVENT: {
-            switch(e->active.state) {
-                case SDL_APPACTIVE:    {
-                    break;
-                }
-            }
-            break;
-        }
-
-        case SDL_KEYDOWN: {
-            break;
-        }
-        case SDL_MOUSEMOTION: {
-            break;
-        }
+        //case SDL_MOUSEMOTION: {
+        //    break;
+        //}
         case SDL_MOUSEBUTTONDOWN: {
             switch(e->button.button) {
                 case SDL_BUTTON_LEFT: {
+                    control = whichControl(e);
                     break;
                 }
             }
             break;
         }
-        case SDL_MOUSEBUTTONUP:    {
+        case SDL_MOUSEBUTTONUP: {
             switch(e->button.button) {
                 case SDL_BUTTON_LEFT: {
+                    // is button clicked?
+                    control = whichControl(e);
                     break;
                 }
             }
             break;
         }
-        case SDL_QUIT: {
-            break;
-        }
-        default: {
+        default: { // mouse move
+            // is hovered?
+            
             break;
         }
     }

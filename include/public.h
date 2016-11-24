@@ -50,8 +50,10 @@ namespace TkGui{
     enum ControlStatus{
         Null = 0,
         pressed = 1,
-        click = 2,
+        released = 2,
         hover = 3,
+        click = 4,
+        doubleClick = 5,
     };
 };
 namespace TkGameStatusType{
@@ -160,3 +162,33 @@ public:
 private:
     int w,h,x,y;
 };
+/* 
+ * used as interface of all Gui components,
+ * include derived class of graphicobject and not.
+ * 
+ * 
+ * 
+ * 
+ */
+class TkObject{
+public:
+    virtual void draw(SDL_Surface* dst ) = 0;
+    virtual void draw(SDL_Surface* dst, TkRect& ) = 0;
+    virtual bool inRect(SDL_Event*) = 0;
+    virtual int getType() = 0;
+protected:
+    int m_Type;
+};
+const int graphicObject = 1;
+const int rolesList = 2;
+const int statusWidget = 3;
+const int taskWidget = 4;
+const int mapWidget = 5;
+
+
+
+
+
+
+
+

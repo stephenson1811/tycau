@@ -18,6 +18,7 @@ TkStatusWidget::TkStatusWidget(void){
 //    //Parts_A_73-1.bmp
 //}
 void TkStatusWidget::init(){
+    m_Type = statusWidget;
     TkRect r(9,9);
     m_BackGround = new TkLabel(r, std::string("D:\\data\\UI\\Parts_N_108-1.bmp"));
     TkRect delta2(8,8);
@@ -45,3 +46,10 @@ void TkStatusWidget::draw(SDL_Surface* dst){
     m_Weather->draw(dst);
     m_HP->draw(dst);
 }
+void TkStatusWidget::draw(SDL_Surface* dst, TkRect& ){
+}
+bool TkStatusWidget::inRect(SDL_Event* e){
+    return false;
+}
+
+

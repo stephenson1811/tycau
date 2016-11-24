@@ -10,22 +10,26 @@
 
 
 TkRolesItem::TkRolesItem(void){
-
 }
 TkRolesItem::~TkRolesItem(void){
-
 }
 TkRolesList::TkRolesList(void){
-
+    m_Type = rolesList;
 }
 TkRolesList::~TkRolesList(void){
-
 }
-
-
 void TkRolesList::draw(SDL_Surface* d){
     std::vector<TkRolesItem*>::iterator it = m_Person.begin();
     for(;it != m_Person.end();it++){
         (*it)->draw(d);
     }
 }
+void TkRolesList::draw(SDL_Surface* dst, TkRect& ){
+}
+bool TkRolesList::inRect(SDL_Event*){
+    return true;
+}
+
+
+
+

@@ -10,14 +10,14 @@
 #include "config.h"
 #include "public.h"
 /* 
- * 
- * 
- * 
+ * graphics object
+ * it is a fundamental component of all graphics
+ * it contains only one picture.
  * 
  * 
  * 
  */
-class TkGraphicsObject{
+class TkGraphicsObject: public TkObject{
 public:
     TkGraphicsObject(void);
     TkGraphicsObject(const std::string&);
@@ -30,9 +30,11 @@ public:
     void load(const std::string&);
     void setCoord(TkRect& r){m_Rect = r;}
     void setMask(SDL_Color& mask);
+    bool inRect(SDL_Event*);
     //void setScreen(SDL_Surface*);
     void setSize(int w, int h){m_Rect.setW(w);m_Rect.setH(h);}
     TkRect& getRect(){return m_Rect;}
+    int getType(){return m_Type;}
 protected:
     void init();
     void init(TkRect&);

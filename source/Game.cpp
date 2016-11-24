@@ -38,6 +38,17 @@ void  Game::processEvent(SDL_Event*e){
             m_Running = false;
             break;
         }
+    case SDL_ACTIVEEVENT: {
+        switch(e->active.state) {
+            case SDL_APPACTIVE:    {
+                break;
+            }
+        }
+        break;
+    }
+    case SDL_KEYDOWN: {
+        break;
+    }
     case SDL_USEREVENT:{
             switch(e->user.code){
             case TkGameStatusType::RETURN_TO_MAIN_MENU:{

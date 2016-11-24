@@ -10,8 +10,10 @@
 
 
 TkGraphicsObject::TkGraphicsObject(void):m_Rect(0,0,0,0),m_SrcDvc(NULL){
+    m_Type = graphicObject;
 }
 TkGraphicsObject::TkGraphicsObject(const std::string& name):m_Rect(0,0,0,0),m_Name(name),m_SrcDvc(NULL){
+    m_Type = graphicObject;
     load(name);
     //SDLGUI* g_gui;           
     //g_gui=new SDLGUI(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_BPP,WHITE);
@@ -19,6 +21,7 @@ TkGraphicsObject::TkGraphicsObject(const std::string& name):m_Rect(0,0,0,0),m_Na
     //atexit( SDL_Quit );
 }
 TkGraphicsObject::TkGraphicsObject(const TkRect& r,const std::string& name, bool isText):m_Rect(r),m_Name(name),m_SrcDvc(NULL){
+    m_Type = graphicObject;
     if (isText){
         loadText(name);
     }else{
@@ -32,6 +35,9 @@ void TkGraphicsObject::init(TkRect&){
 }
 TkGraphicsObject::~TkGraphicsObject(void){
     SDL_FreeSurface(m_SrcDvc);
+}
+bool TkGraphicsObject::inRect(SDL_Event*){
+    return true;
 }
 void TkGraphicsObject::loadText(const std::string& text){
     // load the font and set its style.

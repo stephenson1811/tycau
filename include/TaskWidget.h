@@ -16,12 +16,17 @@
  * 
  * 
  */
-class TkTaskWidget: public TkGraphicsObject{
+class TkTaskWidget: public TkObject{
 public:
     TkTaskWidget(void);
     TkTaskWidget(std::string&);
     TkTaskWidget(TkRect&, std::string&);
     ~TkTaskWidget(void);
+public:
+    void draw(SDL_Surface* dst );
+    void draw(SDL_Surface* dst, TkRect& );
+    bool inRect(SDL_Event*);
+    int getType(){return m_Type;}
 private:
 };
 
