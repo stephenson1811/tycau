@@ -31,7 +31,7 @@ public:
     void hovered();
     void released();
     void addStatus(TkGui::ControlStatus,int index /*for animation class*/);
-    void handle(SDL_Event*);
+    TkEvent handle(SDL_Event*); // make a specific TkEvent according to SDL_Event variable;
 private:
 
     void setStatus(TkGui::ControlStatus);
@@ -39,4 +39,19 @@ private:
     std::vector<TkAnimation*> m_Primitives;
     std::map<TkGui::ControlStatus, int> m_StatusMap;
 };
-
+/* 
+ * use for function and information buttons.
+ * they usually located on TopRight corner.
+ * 
+ * 
+ * 
+ * 
+ */
+class TkMenu;
+class TkButtonWithMenu : public TkButton{ //
+    TkButtonWithMenu();
+    ~TkButtonWithMenu();
+private:
+    // not every button contain menu, only information and function buttons have menu.
+    TkMenu* m_Menu; 
+};

@@ -30,7 +30,8 @@ void TkSingleScene::run(){
     m_OutDoor->draw(m_DstDvc);
 /*    m_Information->draw(m_DstDvc);
     m_Function->draw(m_DstDvc);
-    m_Persons->draw(m_DstDvc)*/;
+    */
+    m_Persons->draw(m_DstDvc);
     SDL_Flip(m_DstDvc);
     // music and other audio effect.
 }
@@ -44,7 +45,7 @@ void TkSingleScene::init(SDL_Surface*d){
     m_Information = new TkMenu ; // left menu
     m_Function = new TkMenu ;    // right menu
     m_OutDoor = new TkButton ;   // button, outdoor function
-    m_OutDoor->addStatus(TkGui::click,1);
+    m_OutDoor->addStatus(TkGui::click,2);
     m_Persons = new TkRolesList ;// persons in house, in right part of background
     // load back-ground picture
     //m_Task->load(std::string("D:\\data\\background\\Room_3-1.bmp"));
@@ -72,16 +73,15 @@ TkObject* TkSingleScene::whichControl(SDL_Event* e){
     }
     return NULL;
 }
-void TkSingleScene::handle(){
-}
-
 
 // a msg dispatcher/processor
-TkGameStatusType::Status TkSingleScene::dispatch(SDL_Event* e){
+void TkSingleScene::dispatch(SDL_Event* e){
     TkObject* control = whichControl(e);
     if (!control){
-        control->handle(e);
-        pushSDLEvent(1,2);
+        TkEvent t=control->handle(e);
+        pushSDLEvent(t.EventType,t.UserCode);
     }
-    return TkGameStatusType::ChangeScene;
 }
+
+
+

@@ -43,6 +43,8 @@ void TkButton::released(){
 }
 void TkButton::hovered(){
     setStatus(TkGui::click);
+    if (m_ObjectName.compare("") == 0){ // if it is go out button. it mustsend a event to scene object.
+    }
     return;
 }
 void TkButton::pressed(){
@@ -51,7 +53,7 @@ void TkButton::pressed(){
 void TkButton::addStatus(TkGui::ControlStatus status, int index){
     m_StatusMap.insert(std::make_pair(status, index ));
 }
-void TkButton::handle(SDL_Event* e){
+TkEvent TkButton::handle(SDL_Event* e){
     switch(e->type) {
         case SDL_MOUSEMOTION: {
             hovered();

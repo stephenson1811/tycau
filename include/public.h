@@ -46,29 +46,16 @@ namespace TkType{
         Ill = 3,
     };
 };
-namespace TkGui{
-    enum ControlStatus{
-        Null = 0,
-        pressed = 1,
-        released = 2,
-        hover = 3,
-        click = 4,
-        doubleClick = 5,
-    };
-};
+
+/* 
+ * which state should be set after event came up
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
 namespace TkGameStatusType{
-    /* 
-     * which state should be set after event came up
-     * 
-     * 
-     * 
-     * 
-     * 
-     */
-    enum Status{
-        Null = 0,
-        ChangeScene = 1,
-    };
     /* 
      * game status
      * 
@@ -89,7 +76,10 @@ namespace TkGameStatusType{
     };
 };
 
-const int CHANGE_SCENE = SDL_USEREVENT +1;
+
+
+
+
 
 /* 
  * 
@@ -100,6 +90,14 @@ const int CHANGE_SCENE = SDL_USEREVENT +1;
  * 
  */
 namespace TkGui{
+    enum ControlStatus{
+        Null = 0,
+        pressed = 1,
+        released = 2,
+        hover = 3,
+        click = 4,
+        doubleClick = 5,
+    };
     enum Type{
         TypeMap = 1,    // composed by many primitives
         TypeBkGrd = 2,  // back-ground filled with single pic
@@ -107,6 +105,29 @@ namespace TkGui{
     };
 };
 
+/* 
+ * which state should be set after event came up
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+namespace TkEventType{
+    const int CHANGE_SCENE = SDL_USEREVENT +1;
+};
+namespace TkUserCode{
+    const int DEFINED = 10000;
+    const int IN_HOUSE = DEFINED + 1;
+};
+class TkEvent{
+public:
+    TkEvent(){EventType = 0;UserCode = 0;}
+    TkEvent(int a,int b){EventType = a;UserCode = b;}
+    ~TkEvent(){}
+    int EventType;
+    int UserCode;
+};
 /* 
  * used as interface of all Gui components,
  * include derived class of graphicobject and not.
@@ -121,28 +142,20 @@ public:
     virtual void draw(SDL_Surface* dst, TkRect& ) = 0;
     virtual bool inRect(SDL_Event*) = 0;
     int getType(){return m_Type;}
-    void handle(SDL_Event*){}
+    TkEvent handle(SDL_Event*){return TkEvent();}
+    void setObjectName(std::string& name){m_ObjectName = name;}
+    std::string& getObjectName(){return m_ObjectName;}
 protected:
     int m_Type;
+    std::string m_ObjectName;
 };
 const int graphicObject = 1;
 const int rolesList = 2;
 const int statusWidget = 3;
 const int taskWidget = 4;
-const int mapWidget = 5;
+const int menuWidget = 5;
+const int mapWidget = 6;
 
-
-/* 
- * which state should be set after event came up
- * 
- * 
- * 
- * 
- * 
- */
-namespace TkEvent{
-
-};
 
 
 

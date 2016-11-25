@@ -34,11 +34,10 @@ public:
 public:
     virtual void run() = 0; // draw image, play music.
     virtual void init(SDL_Surface*d = 0); // initial dest surface and picture name.
-    virtual TkGameStatusType::Status dispatch(SDL_Event*) = 0;
+    virtual void dispatch(SDL_Event*) = 0;
     int getType(){return type;}
 protected:
     virtual TkObject* whichControl(SDL_Event*) = 0; // which control/picture is selected, pressed or clicked.
-    virtual void handle() = 0; // make a specific TkEvent according to SDL_Event variable;
     void pushSDLEvent(int type, int usercode);
 protected:
     SDL_Surface* m_DstDvc;           // destination device surface.
@@ -62,8 +61,8 @@ public:
     void run();
     void init(SDL_Surface*d = 0);
     TkObject* whichControl(SDL_Event*); // which control/picture is selected, pressed or clicked.
-    void handle() ; // make a specific TkEvent according to SDL_Event variable;
-    TkGameStatusType::Status dispatch(SDL_Event*);
+     
+    void dispatch(SDL_Event*);
 private:
     TkBackGround* m_Bkgrd;           // back-ground picyture
     TkTaskWidget* m_Task;            // personnel task widget 

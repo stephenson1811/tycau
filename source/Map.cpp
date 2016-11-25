@@ -12,7 +12,7 @@ TkMap::TkMap(void){
     m_Type = mapWidget;
 }
 TkMap::~TkMap(void){
-    for (std::vector<TkMapPrimitive*>::iterator it = m_Tiles.begin();
+    for (std::vector<TkPrimitive*>::iterator it = m_Tiles.begin();
         it != m_Tiles.end();it++){
             delete (*it);
     }
@@ -21,7 +21,7 @@ void TkMap::initMap(){
     for (int i = 0 ; i < 50 ; i++){
         int x = 0, y = 0;
         for (int j = 0 ; j < 50 ; j++){
-            TkMapPrimitive* m = new TkMapPrimitive(std::string("D:\\data\\task_map\\JapanMap_0026-1.bmp"));
+            TkPrimitive* m = new TkPrimitive(std::string("D:\\data\\task_map\\JapanMap_0026-1.bmp"));
             //SIZE s;
             //m->getSize(s);
             //m->setDstRect(x+s.cx*i, y+s.cy*j, s.cx, s.cy);
@@ -30,7 +30,7 @@ void TkMap::initMap(){
     }
 }
 void TkMap::draw( ){
-    for (std::vector<TkMapPrimitive*>::iterator it = m_Tiles.begin();
+    for (std::vector<TkPrimitive*>::iterator it = m_Tiles.begin();
         it != m_Tiles.end();it++){
             //(*it)->draw();
     }
@@ -39,8 +39,8 @@ void TkMap::draw(SDL_Surface* dst ){
 }
 void TkMap::draw(SDL_Surface* dst, TkRect& ){
 }
-bool TkMap::inRect(SDL_Event* e, TkMapPrimitive* mp){
-    for (std::vector<TkMapPrimitive*>::iterator it = m_Tiles.begin();
+bool TkMap::inRect(SDL_Event* e, TkPrimitive* mp){
+    for (std::vector<TkPrimitive*>::iterator it = m_Tiles.begin();
         it != m_Tiles.end();it++){
             if ((*it)->inRect(e)){
                 mp = (*it);

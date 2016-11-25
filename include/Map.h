@@ -7,7 +7,7 @@
  * Full text of license available in license.txt file, in main folder
  */
 #pragma once
-#include "MapPrimitive.h"
+#include "Primitive.h"
 #include <vector>
 /* 
  * 
@@ -26,8 +26,8 @@ public:
     void draw(SDL_Surface* dst );
     void draw(SDL_Surface* dst, TkRect& );
     //bool inRect(SDL_Event*);
-    bool inRect(SDL_Event*, TkMapPrimitive* );
+    bool inRect(SDL_Event*, TkPrimitive* );
 private:
-    std::vector<TkMapPrimitive*> m_Tiles;
+    std::vector<TkPrimitive*> m_Tiles;
 };
 

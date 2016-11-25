@@ -32,7 +32,7 @@ bool Game::loadGame(){
 }
 
 void  Game::processEvent(SDL_Event*e){
-    TkGameStatusType::Status status;
+    TkEvent ev;
     switch(e->type){
     case SDL_QUIT:{
             m_Running = false;
@@ -68,10 +68,10 @@ void  Game::processEvent(SDL_Event*e){
                 std::cout << "Error: unknown user event. Code " << e->user.code;
             }
         }
-    case CHANGE_SCENE:
+    case TkEventType::CHANGE_SCENE:
         changeScene( (TkType::SceneType)(e->user.code));
     case SDL_MOUSEBUTTONDOWN:
-        status = m_Scene->dispatch(e);
+        m_Scene->dispatch(e);
         break;
     case SDL_MOUSEMOTION:
         break;

@@ -15,6 +15,7 @@
 @ Return: 
 * * * * * * * * * * * * * * * */
 TkMenu::TkMenu(){
+    m_Type = menuWidget;
 }
 
 
@@ -29,3 +30,13 @@ TkMenu::~TkMenu(){
 
 void TkMenu::clicked(){
 }
+void TkMenu::draw(SDL_Surface* dst ) {
+}
+void TkMenu::draw(SDL_Surface* dst, TkRect& ) {
+}
+bool TkMenu::inRect(SDL_Event*) {
+    return true;
+}
+
+
+

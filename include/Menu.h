@@ -8,8 +8,9 @@
  */
 #pragma once
 
-#include "GraphicsObject.h"
-#include "Button.h"
+#include "config.h"
+#include "public.h"
+//#include "Button.h"
 /* 
  * this class is uses for showing texts or pictures.
  * 
@@ -18,12 +19,17 @@
  * 
  * 
  */
-class TkMenu : public TkButton{
+class TkButton;
+class TkMenu : public TkObject{
 public:
     TkMenu();
     ~TkMenu();
     void clicked( );
+    void draw(SDL_Surface* dst ) ;
+    void draw(SDL_Surface* dst, TkRect& ) ;
+    bool inRect(SDL_Event*) ;
 protected:
     std::string m_Text;
-    TkButton* m_Button;
+private:
+    std::vector<TkButton*> m_Buttons;
 };

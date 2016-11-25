@@ -79,7 +79,7 @@ void TkGraphicsObject::load(const std::string& name){
 void TkGraphicsObject::setMask(SDL_Color& mask){
     m_Mask = mask;
 }
-void TkGraphicsObject::handle(SDL_Event*){
+TkEvent TkGraphicsObject::handle(SDL_Event*){
     // highlight, if hovered.
 }
 //------------------------------------------------------------------------------
