@@ -18,7 +18,7 @@
  * 
  * 
  */
-class TkMenu : public TkGraphicsObject{
+class TkMenu : public TkButton{
 public:
     TkMenu();
     ~TkMenu();

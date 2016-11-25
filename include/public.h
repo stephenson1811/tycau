@@ -7,7 +7,7 @@
  * Full text of license available in license.txt file, in main folder
  */
 #pragma once
-const int CHANGE_SCENE = SDL_USEREVENT +1;
+#include "Rect.h"
 /* 
  * it defines public module in this file
  * 
@@ -88,7 +88,9 @@ namespace TkGameStatusType{
         PREPARE_RESTART_CAMPAIGN
     };
 };
-namespace TkStatus{};
+
+const int CHANGE_SCENE = SDL_USEREVENT +1;
+
 /* 
  * 
  * 
@@ -104,64 +106,7 @@ namespace TkGui{
         TypeItem = 3,   // single pic, such as a person portrait 
     };
 };
-class TkRect{
-public:
-    TkRect(void){w = 0;h = 0;x = 0;y = 0;}
-    TkRect(int x, int y, int w = 0, int h = 0){this->w = w;this->h = h;this->x = x;this->y = y;}
-    TkRect(const TkRect& r){
-        this->x = r.x;
-        this->y = r.y;
-        this->w = r.w;
-        this->h = r.h;    
-    }
-    ~TkRect(void){}
-    void operator =(const TkRect& r){
-        this->x = r.x;
-        this->y = r.y;
-        this->w = r.w;
-        this->h = r.h;
-    }
-    const TkRect& operator+=(const TkRect& r){
-        this->x += r.x;
-        this->y += r.y;
-        this->w += r.w;
-        this->h += r.h;  
-        return *this;
-    }
-    const TkRect& operator-=(const TkRect& r){
-        this->x -= r.x;
-        this->y -= r.y;
-        this->w -= r.w;
-        this->h -= r.h;
-        return *this;    
-    }
-    friend TkRect operator+(const TkRect& l, const TkRect& r){
-        TkRect tmp;
-        tmp.x = l.x + r.x;
-        tmp.y = l.y + r.y;
-        tmp.w = l.w + r.w;
-        tmp.h = l.h + r.h;  
-        return tmp;
-    }
-    friend TkRect operator - (const TkRect& l, const TkRect& r){
-        TkRect tmp;
-        tmp.x = l.x - r.x;
-        tmp.y = l.y - r.y;
-        tmp.w = l.w - r.w;
-        tmp.h = l.h - r.h; 
-        return tmp;    
-    }
-    int getX(){return x;}
-    int getY(){return y;}
-    int getW(){return w;}
-    int getH(){return h;}
-    void setX(int v){ x = v;}
-    void setY(int v){ y = v;}
-    void setW(int v){ w = v;}
-    void setH(int v){ h = v;}
-private:
-    int w,h,x,y;
-};
+
 /* 
  * used as interface of all Gui components,
  * include derived class of graphicobject and not.
@@ -175,7 +120,8 @@ public:
     virtual void draw(SDL_Surface* dst ) = 0;
     virtual void draw(SDL_Surface* dst, TkRect& ) = 0;
     virtual bool inRect(SDL_Event*) = 0;
-    virtual int getType() = 0;
+    int getType(){return m_Type;}
+    void handle(SDL_Event*){}
 protected:
     int m_Type;
 };
@@ -186,7 +132,17 @@ const int taskWidget = 4;
 const int mapWidget = 5;
 
 
+/* 
+ * which state should be set after event came up
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+namespace TkEvent{
 
+};
 
 
 

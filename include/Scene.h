@@ -19,20 +19,7 @@
 #include "Button.h"
 #include "RolesItem.h"
 #include "DialogBox.h"
-/* 
- * which state should be set after event came up
- * 
- * 
- * 
- * 
- * 
- */
-class TkEvent{
-public:
-    TkEvent(){}
-    ~TkEvent(){}
-private:
-};
+
 /* 
  * basic type.
  * abstract class.
@@ -50,15 +37,15 @@ public:
     virtual TkGameStatusType::Status dispatch(SDL_Event*) = 0;
     int getType(){return type;}
 protected:
-    virtual TkGraphicsObject* whichControl(SDL_Event*) = 0; // which control/picture is selected, pressed or clicked.
+    virtual TkObject* whichControl(SDL_Event*) = 0; // which control/picture is selected, pressed or clicked.
     virtual void handle() = 0; // make a specific TkEvent according to SDL_Event variable;
     void pushSDLEvent(int type, int usercode);
 protected:
     SDL_Surface* m_DstDvc;           // destination device surface.
     int type;
-    TkEvent m_Event;
     TkDialogBox* m_Dialog;  // dialog pictures and words
     std::vector<TkObject*> m_Members;
+    TkObject* m_CurrentControl;
 };
 /* 
  * for showing only one bkg piture. such as in house, in castle, in battle.
@@ -74,7 +61,7 @@ public:
     ~TkSingleScene();
     void run();
     void init(SDL_Surface*d = 0);
-    TkGraphicsObject* whichControl(SDL_Event*); // which control/picture is selected, pressed or clicked.
+    TkObject* whichControl(SDL_Event*); // which control/picture is selected, pressed or clicked.
     void handle() ; // make a specific TkEvent according to SDL_Event variable;
     TkGameStatusType::Status dispatch(SDL_Event*);
 private:

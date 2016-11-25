@@ -71,6 +71,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..;include;../include;.\3rd\SDL\include</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -94,6 +96,7 @@
     <ClInclude Include="include\MapPrimitive.h" />
     <ClInclude Include="include\Menu.h" />
     <ClInclude Include="include\public.h" />
+    <ClInclude Include="include\Rect.h" />
     <ClInclude Include="include\RolesItem.h" />
     <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\ScrollBar.h" />

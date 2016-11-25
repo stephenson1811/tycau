@@ -36,8 +36,12 @@ void TkGraphicsObject::init(TkRect&){
 TkGraphicsObject::~TkGraphicsObject(void){
     SDL_FreeSurface(m_SrcDvc);
 }
-bool TkGraphicsObject::inRect(SDL_Event*){
-    return true;
+bool TkGraphicsObject::inRect(SDL_Event* e){
+    e->button.x;
+    if (m_Rect.inRect(e->button.x,e->button.y)){ 
+        return true;
+    }
+    return false;
 }
 void TkGraphicsObject::loadText(const std::string& text){
     // load the font and set its style.
@@ -74,6 +78,9 @@ void TkGraphicsObject::load(const std::string& name){
 }
 void TkGraphicsObject::setMask(SDL_Color& mask){
     m_Mask = mask;
+}
+void TkGraphicsObject::handle(SDL_Event*){
+    // highlight, if hovered.
 }
 //------------------------------------------------------------------------------
 void TkGraphicsObject::draw(SDL_Surface* dst){

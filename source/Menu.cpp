@@ -9,20 +9,20 @@
 #include "Menu.h"
 
 /* * * * * * * * * * * * * * * *
-@ Name:
-@ Description:
-@ Arguments:
-@ Return:
+@ Name: 
+@ Description: 
+@ Arguments: 
+@ Return: 
 * * * * * * * * * * * * * * * */
 TkMenu::TkMenu(){
 }
 
 
 /* * * * * * * * * * * * * * * *
-@ Name:
-@ Description:
-@ Arguments:
-@ Return:
+@ Name: 
+@ Description: 
+@ Arguments: 
+@ Return: 
 * * * * * * * * * * * * * * * */
 TkMenu::~TkMenu(){
 }

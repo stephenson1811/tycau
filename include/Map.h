@@ -27,7 +27,6 @@ public:
     void draw(SDL_Surface* dst, TkRect& );
     //bool inRect(SDL_Event*);
     bool inRect(SDL_Event*, TkMapPrimitive* );
-    int getType(){return m_Type;}
 private:
     std::vector<TkMapPrimitive*> m_Tiles;
 };

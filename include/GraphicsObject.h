@@ -14,7 +14,7 @@
  * it is a fundamental component of all graphics
  * it contains only one picture.
  * 
- * 
+ * sometimes it is treat as controls.
  * 
  */
 class TkGraphicsObject: public TkObject{
@@ -34,7 +34,7 @@ public:
     //void setScreen(SDL_Surface*);
     void setSize(int w, int h){m_Rect.setW(w);m_Rect.setH(h);}
     TkRect& getRect(){return m_Rect;}
-    int getType(){return m_Type;}
+    void handle(SDL_Event*);
 protected:
     void init();
     void init(TkRect&);

@@ -9,10 +9,10 @@
 #include "Button.h"
 
 /* * * * * * * * * * * * * * * *
-@ Name:
-@ Description:
-@ Arguments:
-@ Return:
+@ Name: 
+@ Description: 
+@ Arguments: 
+@ Return: 
 * * * * * * * * * * * * * * * */
 TkButton::TkButton(void):TkGraphicsObject(){
 }
@@ -22,10 +22,10 @@ TkButton::TkButton(const std::string& name):TkGraphicsObject(name){
 TkButton::TkButton(const TkRect& r,const std::string& name, bool isText):TkGraphicsObject(r,name,isText){
 }
 /* * * * * * * * * * * * * * * *
-@ Name:
-@ Description:
-@ Arguments:
-@ Return:
+@ Name: 
+@ Description: 
+@ Arguments: 
+@ Return: 
 * * * * * * * * * * * * * * * */
 TkButton::~TkButton(){
 }
@@ -38,7 +38,9 @@ void TkButton::setStatus(TkGui::ControlStatus type){
 void TkButton::clicked(){
     setStatus(TkGui::click);
 }
- 
+void TkButton::released(){
+    setStatus(TkGui::click);
+}
 void TkButton::hovered(){
     setStatus(TkGui::click);
     return;
@@ -47,5 +49,31 @@ void TkButton::pressed(){
     setStatus(TkGui::click);
 }
 void TkButton::addStatus(TkGui::ControlStatus status, int index){
-    m_StatusMap.insert(std::make_pair(TkGui::click,1));
+    m_StatusMap.insert(std::make_pair(status, index ));
+}
+void TkButton::handle(SDL_Event* e){
+    switch(e->type) {
+        case SDL_MOUSEMOTION: {
+            hovered();
+            break;
+        }
+        case SDL_MOUSEBUTTONDOWN: {
+            switch(e->button.button) {
+                case SDL_BUTTON_LEFT: {
+                    pressed();
+                    break;
+                }
+            }
+            break;
+        }
+        case SDL_MOUSEBUTTONUP: {
+            switch(e->button.button) {
+                case SDL_BUTTON_LEFT: {
+                    released();
+                    break;
+                }
+            }
+            break;
+        }
+    }
 }

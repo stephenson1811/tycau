@@ -11,6 +11,7 @@
 
 TkTaskWidget::TkTaskWidget(void){
     m_Type = taskWidget;
+    m_BackGround = new TkLabel();
 }
 TkTaskWidget::TkTaskWidget(std::string&){
     m_Type = taskWidget;
@@ -26,6 +27,9 @@ void TkTaskWidget::draw(SDL_Surface* dst ){
 }
 void TkTaskWidget::draw(SDL_Surface* dst, TkRect& ){
 }
-bool TkTaskWidget::inRect(SDL_Event*){
-    return true;
+bool TkTaskWidget::inRect(SDL_Event* e){
+    if ( m_BackGround->inRect(e) ){ 
+        return true;
+    }
+    return false;
 }

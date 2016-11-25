@@ -15,6 +15,7 @@ TkSingleScene::TkSingleScene(TkType::SceneType /*type*/){
     m_Bkgrd=NULL;
     m_Task=NULL;
     m_Status=NULL;
+    m_CurrentControl=NULL;
 }
 TkSingleScene::~TkSingleScene(){
     deleteWidget(m_Bkgrd) ;
@@ -25,10 +26,10 @@ void TkSingleScene::run(){
     m_Bkgrd->draw(m_DstDvc);
     //m_Task->draw(m_DstDvc);
     m_Status->draw(m_DstDvc);
-    m_HouseType->draw(m_DstDvc);
+    m_HouseType->draw(m_DstDvc); 
+    m_OutDoor->draw(m_DstDvc);
 /*    m_Information->draw(m_DstDvc);
     m_Function->draw(m_DstDvc);
-    m_OutDoor->draw(m_DstDvc);
     m_Persons->draw(m_DstDvc)*/;
     SDL_Flip(m_DstDvc);
     // music and other audio effect.
@@ -43,6 +44,7 @@ void TkSingleScene::init(SDL_Surface*d){
     m_Information = new TkMenu ; // left menu
     m_Function = new TkMenu ;    // right menu
     m_OutDoor = new TkButton ;   // button, outdoor function
+    m_OutDoor->addStatus(TkGui::click,1);
     m_Persons = new TkRolesList ;// persons in house, in right part of background
     // load back-ground picture
     //m_Task->load(std::string("D:\\data\\background\\Room_3-1.bmp"));
@@ -53,15 +55,16 @@ void TkSingleScene::init(SDL_Surface*d){
     //m_Persons->load(std::string("D:\\data\\background\\Room_3-1.bmp"));
     m_Members.push_back(m_Bkgrd);
 }
-TkGraphicsObject* TkSingleScene::whichControl(SDL_Event* e){
+TkObject* TkSingleScene::whichControl(SDL_Event* e){
     TkGraphicsObject* control = NULL;
     for (std::vector<TkObject*>::iterator it = m_Members.begin();
         it != m_Members.end(); it ++){
             if ( (*it)->getType() == graphicObject){
                 if ((*it)->inRect(e)){
-                    return static_cast<TkGraphicsObject*>(*it);
+                    return static_cast<TkObject*>(*it);
                 }
-            }else if((*it)->getType() == mapWidget){
+            }
+            if((*it)->getType() == mapWidget){
                 //TkMap* m = dynamic_cast<TkMap*> (*it);
                 //if ((*it)->inRect(e, control)){
                 //}
@@ -75,35 +78,10 @@ void TkSingleScene::handle(){
 
 // a msg dispatcher/processor
 TkGameStatusType::Status TkSingleScene::dispatch(SDL_Event* e){
-    TkGraphicsObject* control;
-    switch(e->type) {
-        //case SDL_MOUSEMOTION: {
-        //    break;
-        //}
-        case SDL_MOUSEBUTTONDOWN: {
-            switch(e->button.button) {
-                case SDL_BUTTON_LEFT: {
-                    control = whichControl(e);
-                    break;
-                }
-            }
-            break;
-        }
-        case SDL_MOUSEBUTTONUP: {
-            switch(e->button.button) {
-                case SDL_BUTTON_LEFT: {
-                    // is button clicked?
-                    control = whichControl(e);
-                    break;
-                }
-            }
-            break;
-        }
-        default: { // mouse move
-            // is hovered?
-            
-            break;
-        }
+    TkObject* control = whichControl(e);
+    if (!control){
+        control->handle(e);
+        pushSDLEvent(1,2);
     }
     return TkGameStatusType::ChangeScene;
 }

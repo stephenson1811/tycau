@@ -39,7 +39,6 @@ public:
     void draw(SDL_Surface* dst );
     void draw(SDL_Surface* dst, TkRect& );
     bool inRect(SDL_Event*);
-    int getType(){return m_Type;}
 private:
     std::vector<TkRolesItem*> m_Person;
 };

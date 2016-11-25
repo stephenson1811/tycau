@@ -29,7 +29,9 @@ public:
     void pressed();
     void clicked();
     void hovered();
+    void released();
     void addStatus(TkGui::ControlStatus,int index /*for animation class*/);
+    void handle(SDL_Event*);
 private:
 
     void setStatus(TkGui::ControlStatus);

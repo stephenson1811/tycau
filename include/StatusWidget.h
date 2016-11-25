@@ -26,7 +26,6 @@ public:
     void draw(SDL_Surface* dst );
     void draw(SDL_Surface* dst, TkRect& );
     bool inRect(SDL_Event*);
-    int getType(){return m_Type;}
 private:
     TkLabel* m_BackGround;
     TkLabel* m_Portraits;   // player image
