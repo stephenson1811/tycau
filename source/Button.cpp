@@ -19,7 +19,7 @@ TkButtonPrimitive::TkButtonPrimitive(void):TkGraphicsObject(){
 
 TkButtonPrimitive::TkButtonPrimitive(const std::string& name):TkGraphicsObject(name){
 }
-TkButtonPrimitive::TkButtonPrimitive(const std::string& name,const TkRect& r, bool isText):TkGraphicsObject(name,r,isText){
+TkButtonPrimitive::TkButtonPrimitive(const std::string& name,const TkRect& r, int status, bool isText):TkGraphicsObject(name,r,isText){
 }
 /* * * * * * * * * * * * * * * *
 @ Name: 
@@ -53,6 +53,8 @@ void TkButtonPrimitive::pressed(){
 void TkButtonPrimitive::addStatus(TkGui::ControlStatus status, int index){
     m_StatusMap.insert(std::make_pair(status, index ));
 }
+void TkButtonPrimitive::draw(SDL_Surface* dst ) {
+}
 TkEvent TkButtonPrimitive::handle(SDL_Event* e){
     switch(e->type) {
         case SDL_MOUSEMOTION: {
@@ -81,17 +83,16 @@ TkEvent TkButtonPrimitive::handle(SDL_Event* e){
     return TkEvent();
 }
 TkButton::TkButton(){}
-TkButton::TkButton(std::vector<std::string> & v){
-
-}
-TkButton::TkButton(std::vector<std::string> &v, const TkRect& r){ 
-    init(v,r);
+TkButton::TkButton(std::vector<ButtonInfo> &v,  int status){ 
+    init(v, status);
 }
 TkButton::~TkButton(){}
-void TkButton::init(std::vector<std::string> & vname, const TkRect& rect){
-    for (std::vector<std::string>::iterator it = vname.begin();
+void TkButton::init(std::vector<ButtonInfo> & vname, int status){
+    TkRect r;
+    for (std::vector<ButtonInfo>::iterator it = vname.begin();
         it != vname.end(); it ++){
-            m_Primitives.push_back(new TkButtonPrimitive((*it),rect ));
+            TkButtonPrimitive* bp = new TkButtonPrimitive((*it).m_Dir,(*it).m_Rect/(*it).m_Pieces,(*it).m_Pieces );
+            m_Primitives.push_back(bp);
     }
     ;
 }

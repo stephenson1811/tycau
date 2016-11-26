@@ -33,6 +33,37 @@ public:
         this->h += r.h;  
         return *this;
     }
+    friend TkRect operator /(const TkRect& r, int div){
+        TkRect tmp(r);
+        tmp.w = r.w / div;
+        return tmp;
+    }
+    const TkRect& increaseSize(const TkRect& r){
+        this->w += r.w;
+        this->h += r.h;
+        return *this;    
+    }
+    const TkRect& decreaseSize(const TkRect& r){
+        this->w -= r.w;
+        this->h -= r.h;
+        return *this;    
+    }
+    const TkRect& increaseW(const TkRect& r){
+        this->w += r.w;
+        return *this;    
+    }
+    const TkRect& decreaseW(const TkRect& r){
+        this->w -= r.w;
+        return *this;    
+    }
+    const TkRect& increaseH(const TkRect& r){
+        this->h += r.h;
+        return *this;    
+    }
+    const TkRect& decreaseH(const TkRect& r){
+        this->h -= r.h;
+        return *this;    
+    }
     const TkRect& operator-=(const TkRect& r){
         this->x -= r.x;
         this->y -= r.y;

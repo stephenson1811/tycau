@@ -11,6 +11,15 @@
 #include "GraphicsObject.h"
 #include "Animation.h"
 #include <map>
+struct ButtonInfo{
+    ButtonInfo(void){m_Dir;m_Rect;m_Pieces = 1;}
+    ButtonInfo(const char* name,TkRect& rect,int p = 1){m_Dir = name;m_Rect = rect;m_Pieces = p;} 
+    ButtonInfo(std::string& name,TkRect& rect,int p = 1){m_Dir = name;m_Rect = rect;m_Pieces = p;} 
+    ~ButtonInfo(){}
+    std::string m_Dir;
+    TkRect m_Rect;
+    int m_Pieces;
+};
 /* 
  * buttons with variate performance.
  * such as clicked, pressed, hovered etc..
@@ -23,9 +32,9 @@ class TkButtonPrimitive : public TkGraphicsObject {
 public:
     TkButtonPrimitive(void);
     TkButtonPrimitive(const std::string&);
-    TkButtonPrimitive(const std::string&, const TkRect&, bool isText = false);
+    TkButtonPrimitive(const std::string&, const TkRect&, int status = 1, bool isText = false);
     ~TkButtonPrimitive(void);
-
+    void draw(SDL_Surface* dst ) ;
     void pressed();
     void clicked();
     void hovered();
@@ -41,19 +50,19 @@ private:
 class TkButton : public TkObject{
 public: 
     TkButton();
-    TkButton(std::vector<std::string> &);
-    TkButton(std::vector<std::string> &,const TkRect& );
+    TkButton(std::vector<ButtonInfo> &, int status = 1);
     ~TkButton();
 public:
     void draw(SDL_Surface* dst ) ;
     void draw(SDL_Surface* dst, TkRect& );
     bool inRect(SDL_Event*) ;
-    void addStatus(TkGui::ControlStatus,int index /*for animation class*/);
+    void addStatus(TkGui::ControlStatus, int index /*for animation class*/);
 private:
-    void init(std::vector<std::string> &, const TkRect&);
+    void init(std::vector<ButtonInfo> &, int status );
 private:
     std::vector<TkButtonPrimitive*> m_Primitives;
 };
+
 /* 
  * use for function and information buttons.
  * they usually located on TopRight corner.
