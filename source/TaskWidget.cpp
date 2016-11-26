@@ -16,7 +16,7 @@ TkTaskWidget::TkTaskWidget(void){
 TkTaskWidget::TkTaskWidget(std::string&){
     m_Type = taskWidget;
 }
-TkTaskWidget::TkTaskWidget(TkRect&, std::string&){
+TkTaskWidget::TkTaskWidget(std::string&, TkRect& ){
     m_Type = taskWidget;
 }
 

@@ -20,7 +20,7 @@ class TkBackGround:public TkGraphicsObject{
 public:
     TkBackGround(void);
     TkBackGround(std::string&);
-    TkBackGround(TkRect&,std::string&);
+    TkBackGround(std::string&, TkRect&);
     ~TkBackGround(void);
 };
 

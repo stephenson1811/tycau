@@ -13,7 +13,7 @@
 @
 @
 * * * * * * * * * * * * * * * */
-TkAnimation::TkAnimation(const TkRect&, const std::string&, int TotalPieces) {
+TkAnimation::TkAnimation(const std::string&, const TkRect&, int TotalPieces) {
     horizontal = true;
     m_PlayDelay = 800;
     m_Quit = false;

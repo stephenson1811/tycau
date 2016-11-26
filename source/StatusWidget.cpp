@@ -20,13 +20,13 @@ TkStatusWidget::TkStatusWidget(void){
 void TkStatusWidget::init(){
     m_Type = statusWidget;
     TkRect r(9,9);
-    m_BackGround = new TkLabel(r, std::string("D:\\data\\UI\\Parts_N_108-1.bmp"));
+    m_BackGround = new TkLabel( std::string("D:\\data\\UI\\Parts_N_108-1.bmp"), r );
     TkRect delta2(8,8);
-    m_Portraits = new TkLabel(r+delta2,std::string("D:\\data\\little_portraits\\Face0_113-1.bmp")) ;   // player image
+    m_Portraits = new TkLabel(std::string("D:\\data\\little_portraits\\Face0_113-1.bmp"), r+delta2) ;   // player image
     TkRect delta3(353,30);
-    m_Weather = new TkLabel(r+delta3,std::string("D:\\data\\UI\\Parts_A_67-1.bmp"));
-    TkRect delta4(352,52);
-    m_HP = new TkLabel(r+delta4,std::string("D:\\data\\UI\\Parts_A_73-1.bmp"));
+    m_Weather = new TkLabel(std::string("D:\\data\\UI\\Parts_A_67-1.bmp"), r+delta3);
+    TkRect delta4(237,70);
+    m_HP = new TkLabel(std::string("D:\\data\\UI\\Parts_A_73-1.bmp"), r+delta4);
     TkRect delta5(9,9);
     m_ProtagonistName = new TkLabel();   // player name
     TkRect delta6(9,9);

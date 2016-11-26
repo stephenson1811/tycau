@@ -21,7 +21,7 @@ class TkGraphicsObject: public TkObject{
 public:
     TkGraphicsObject(void);
     TkGraphicsObject(const std::string&);
-    TkGraphicsObject(const TkRect&,const std::string&,bool isText = false);
+    TkGraphicsObject(const std::string&,const TkRect&,bool isText = false);
     ~TkGraphicsObject(void);
 public:
     void draw(SDL_Surface* dst );

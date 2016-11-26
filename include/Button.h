@@ -19,12 +19,12 @@
  * 
  * 
  */
-class TkButton : public TkGraphicsObject {
+class TkButtonPrimitive : public TkGraphicsObject {
 public:
-    TkButton(void);
-    TkButton(const std::string&);
-    TkButton(const TkRect&, const std::string&, bool isText = false);
-    ~TkButton(void);
+    TkButtonPrimitive(void);
+    TkButtonPrimitive(const std::string&);
+    TkButtonPrimitive(const std::string&, const TkRect&, bool isText = false);
+    ~TkButtonPrimitive(void);
 
     void pressed();
     void clicked();
@@ -33,11 +33,26 @@ public:
     void addStatus(TkGui::ControlStatus,int index /*for animation class*/);
     TkEvent handle(SDL_Event*); // make a specific TkEvent according to SDL_Event variable;
 private:
-
     void setStatus(TkGui::ControlStatus);
 private:
     std::vector<TkAnimation*> m_Primitives;
     std::map<TkGui::ControlStatus, int> m_StatusMap;
+};
+class TkButton : public TkObject{
+public: 
+    TkButton();
+    TkButton(std::vector<std::string> &);
+    TkButton(std::vector<std::string> &,const TkRect& );
+    ~TkButton();
+public:
+    void draw(SDL_Surface* dst ) ;
+    void draw(SDL_Surface* dst, TkRect& );
+    bool inRect(SDL_Event*) ;
+    void addStatus(TkGui::ControlStatus,int index /*for animation class*/);
+private:
+    void init(std::vector<std::string> &, const TkRect&);
+private:
+    std::vector<TkButtonPrimitive*> m_Primitives;
 };
 /* 
  * use for function and information buttons.

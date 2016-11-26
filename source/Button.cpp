@@ -14,12 +14,12 @@
 @ Arguments: 
 @ Return: 
 * * * * * * * * * * * * * * * */
-TkButton::TkButton(void):TkGraphicsObject(){
+TkButtonPrimitive::TkButtonPrimitive(void):TkGraphicsObject(){
 }
 
-TkButton::TkButton(const std::string& name):TkGraphicsObject(name){
+TkButtonPrimitive::TkButtonPrimitive(const std::string& name):TkGraphicsObject(name){
 }
-TkButton::TkButton(const TkRect& r,const std::string& name, bool isText):TkGraphicsObject(r,name,isText){
+TkButtonPrimitive::TkButtonPrimitive(const std::string& name,const TkRect& r, bool isText):TkGraphicsObject(name,r,isText){
 }
 /* * * * * * * * * * * * * * * *
 @ Name: 
@@ -27,33 +27,33 @@ TkButton::TkButton(const TkRect& r,const std::string& name, bool isText):TkGraph
 @ Arguments: 
 @ Return: 
 * * * * * * * * * * * * * * * */
-TkButton::~TkButton(){
+TkButtonPrimitive::~TkButtonPrimitive(){
 }
-void TkButton::setStatus(TkGui::ControlStatus type){
+void TkButtonPrimitive::setStatus(TkGui::ControlStatus type){
     for (std::vector<TkAnimation*>::iterator it = m_Primitives.begin();
         it != m_Primitives.end(); it ++){
             (*it)->setCurrentPieces(m_StatusMap[type]);
     }
 }
-void TkButton::clicked(){
+void TkButtonPrimitive::clicked(){
     setStatus(TkGui::click);
 }
-void TkButton::released(){
-    setStatus(TkGui::click);
+void TkButtonPrimitive::released(){
+    setStatus(TkGui::released);
 }
-void TkButton::hovered(){
+void TkButtonPrimitive::hovered(){
     setStatus(TkGui::click);
     if (m_ObjectName.compare("") == 0){ // if it is go out button. it mustsend a event to scene object.
     }
     return;
 }
-void TkButton::pressed(){
+void TkButtonPrimitive::pressed(){
     setStatus(TkGui::click);
 }
-void TkButton::addStatus(TkGui::ControlStatus status, int index){
+void TkButtonPrimitive::addStatus(TkGui::ControlStatus status, int index){
     m_StatusMap.insert(std::make_pair(status, index ));
 }
-TkEvent TkButton::handle(SDL_Event* e){
+TkEvent TkButtonPrimitive::handle(SDL_Event* e){
     switch(e->type) {
         case SDL_MOUSEMOTION: {
             hovered();
@@ -78,4 +78,44 @@ TkEvent TkButton::handle(SDL_Event* e){
             break;
         }
     }
+    return TkEvent();
 }
+TkButton::TkButton(){}
+TkButton::TkButton(std::vector<std::string> & v){
+
+}
+TkButton::TkButton(std::vector<std::string> &v, const TkRect& r){ 
+    init(v,r);
+}
+TkButton::~TkButton(){}
+void TkButton::init(std::vector<std::string> & vname, const TkRect& rect){
+    for (std::vector<std::string>::iterator it = vname.begin();
+        it != vname.end(); it ++){
+            m_Primitives.push_back(new TkButtonPrimitive((*it),rect ));
+    }
+    ;
+}
+void TkButton::draw(SDL_Surface* dst ) {
+    for (std::vector<TkButtonPrimitive*>::iterator it = m_Primitives.begin();
+        it != m_Primitives.end();it ++){
+            (*it)->draw(dst);
+    }
+}
+void TkButton::draw(SDL_Surface* dst, TkRect& ){
+}
+bool TkButton::inRect(SDL_Event*) {
+    return false;
+}
+void TkButton::addStatus(TkGui::ControlStatus status,int index ){
+    for (std::vector<TkButtonPrimitive*>::iterator it = m_Primitives.begin();
+        it != m_Primitives.end();it ++){
+            (*it)->addStatus( status, index );
+    }
+}
+
+
+
+
+
+
+

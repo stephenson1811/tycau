@@ -14,7 +14,7 @@ TkBackGround::TkBackGround(void):TkGraphicsObject(){
 }
 TkBackGround::TkBackGround(std::string& name):TkGraphicsObject(name){
 }
-TkBackGround::TkBackGround(TkRect& r,std::string& name):TkGraphicsObject(r,name){
+TkBackGround::TkBackGround(std::string& name, TkRect& r):TkGraphicsObject(name,r){
 }
 
 TkBackGround::~TkBackGround(void){

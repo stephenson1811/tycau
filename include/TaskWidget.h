@@ -21,7 +21,7 @@ class TkTaskWidget: public TkObject{
 public:
     TkTaskWidget(void);
     TkTaskWidget(std::string&);
-    TkTaskWidget(TkRect&, std::string&);
+    TkTaskWidget(std::string&,TkRect& );
     ~TkTaskWidget(void);
 public:
     void draw(SDL_Surface* dst );

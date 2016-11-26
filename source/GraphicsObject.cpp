@@ -20,7 +20,7 @@ TkGraphicsObject::TkGraphicsObject(const std::string& name):m_Rect(0,0,0,0),m_Na
     //g_gui->SetFont( "arial.ttf", ARIAL, 26, TTF_STYLE_NORMAL );
     //atexit( SDL_Quit );
 }
-TkGraphicsObject::TkGraphicsObject(const TkRect& r,const std::string& name, bool isText):m_Rect(r),m_Name(name),m_SrcDvc(NULL){
+TkGraphicsObject::TkGraphicsObject(const std::string& name,const TkRect& r, bool isText):m_Rect(r),m_Name(name),m_SrcDvc(NULL){
     m_Type = graphicObject;
     if (isText){
         loadText(name);
@@ -81,6 +81,7 @@ void TkGraphicsObject::setMask(SDL_Color& mask){
 }
 TkEvent TkGraphicsObject::handle(SDL_Event*){
     // highlight, if hovered.
+    return TkEvent();
 }
 //------------------------------------------------------------------------------
 void TkGraphicsObject::draw(SDL_Surface* dst){

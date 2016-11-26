@@ -16,7 +16,7 @@
 * * * * * * * * * * * * * * * */
 class TkAnimation: public TkGraphicsObject{
 public:
-    TkAnimation(const TkRect&, const std::string&, int TotalPieces = 1);
+    TkAnimation(const std::string&, const TkRect&, int TotalPieces = 1);
     ~TkAnimation();
 public:
     void play(SDL_Surface* );
