@@ -21,25 +21,28 @@ class TkGraphicsObject: public TkObject{
 public:
     TkGraphicsObject(void);
     TkGraphicsObject(const std::string&);
-    TkGraphicsObject(const std::string&,const TkRect&,bool isText = false);
+    TkGraphicsObject(const std::string&,const TkPoint&,bool isText = false);
     ~TkGraphicsObject(void);
 public:
     void draw(SDL_Surface* dst );
     void draw(SDL_Surface* dst, TkRect& );
     void loadText(const std::string&);
     void load(const std::string&);
-    void setCoord(TkRect& r){m_Rect = r;}
+    void setCoord(const TkPoint& p){m_Point = p;}
+    void setCoord(int x, int y){m_Point.setX(x);m_Point.setY(y);}
     void setMask(SDL_Color& mask);
     bool inRect(SDL_Event*);
     void setSize(int w, int h){m_Rect.setW(w);m_Rect.setH(h);}
-    TkRect& getRect(){return m_Rect;}
+    TkPoint& getPoint(){return m_Point;}
+    TkRect& getRect();
     TkEvent handle(SDL_Event*);
 protected:
     void init();
     void init(TkRect&);
 protected:
     std::string m_Name; // picture to shown
-    TkRect m_Rect;    // pic coord and size
+    TkPoint m_Point;    // pic coord
+    TkRect m_Rect;  // src pic coord, it may be shown after clipping.
     SDL_Surface* m_SrcDvc; // pic convert to sdl surface
     SDL_Color m_Mask;
 };

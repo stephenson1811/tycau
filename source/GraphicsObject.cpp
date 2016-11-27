@@ -9,10 +9,10 @@
 #include "GraphicsObject.h"
 
 
-TkGraphicsObject::TkGraphicsObject(void):m_Rect(0,0,0,0),m_SrcDvc(NULL){
+TkGraphicsObject::TkGraphicsObject(void):m_Point(0,0),m_SrcDvc(NULL){
     m_Type = graphicObject;
 }
-TkGraphicsObject::TkGraphicsObject(const std::string& name):m_Rect(0,0,0,0),m_Name(name),m_SrcDvc(NULL){
+TkGraphicsObject::TkGraphicsObject(const std::string& name):m_Point(0,0),m_Name(name),m_SrcDvc(NULL){
     m_Type = graphicObject;
     load(name);
     //SDLGUI* g_gui;           
@@ -20,7 +20,8 @@ TkGraphicsObject::TkGraphicsObject(const std::string& name):m_Rect(0,0,0,0),m_Na
     //g_gui->SetFont( "arial.ttf", ARIAL, 26, TTF_STYLE_NORMAL );
     //atexit( SDL_Quit );
 }
-TkGraphicsObject::TkGraphicsObject(const std::string& name,const TkRect& r, bool isText):m_Rect(r),m_Name(name),m_SrcDvc(NULL){
+TkGraphicsObject::TkGraphicsObject(const std::string& name,const TkPoint& p, bool isText)
+    :m_Point(p),m_Name(name),m_SrcDvc(NULL){
     m_Type = graphicObject;
     if (isText){
         loadText(name);
@@ -33,12 +34,17 @@ void TkGraphicsObject::init(){
 }
 void TkGraphicsObject::init(TkRect&){
 }
+TkRect& TkGraphicsObject::getRect(){
+    m_SrcDvc->w;
+    m_SrcDvc->h;
+    return TkRect();
+}
 TkGraphicsObject::~TkGraphicsObject(void){
     SDL_FreeSurface(m_SrcDvc);
 }
 bool TkGraphicsObject::inRect(SDL_Event* e){
-    e->button.x;
-    if (m_Rect.inRect(e->button.x,e->button.y)){ 
+    TkRect rect(m_Point.getX(), m_Point.getY(), m_SrcDvc->w, m_SrcDvc->h);
+    if (rect.inRect(e->button.x,e->button.y)){ 
         return true;
     }
     return false;
@@ -86,8 +92,8 @@ TkEvent TkGraphicsObject::handle(SDL_Event*){
 //------------------------------------------------------------------------------
 void TkGraphicsObject::draw(SDL_Surface* dst){
     SDL_Rect DstR;
-    DstR.x = m_Rect.getX();
-    DstR.y = m_Rect.getY();
+    DstR.x = m_Point.getX();
+    DstR.y = m_Point.getY();
 
     SDL_Rect SrcR;
     SrcR.x = 0;
@@ -100,8 +106,8 @@ void TkGraphicsObject::draw(SDL_Surface* dst){
 }
 void TkGraphicsObject::draw(SDL_Surface* dst, TkRect& rect ){
     SDL_Rect DstR;
-    DstR.x = m_Rect.getX();
-    DstR.y = m_Rect.getY();
+    DstR.x = m_Point.getX();
+    DstR.y = m_Point.getY();
 
     SDL_Rect SrcR;
     SrcR.x = rect.getX();
@@ -113,3 +119,4 @@ void TkGraphicsObject::draw(SDL_Surface* dst, TkRect& rect ){
     SDL_SetColorKey(m_SrcDvc, SDL_SRCCOLORKEY | SDL_RLEACCEL, SDL_MapRGB(m_SrcDvc->format, m_Mask.r, m_Mask.g, m_Mask.b));
 }
 
+//

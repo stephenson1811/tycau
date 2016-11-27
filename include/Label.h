@@ -21,7 +21,7 @@ class TkLabel : public TkGraphicsObject{
 public:
     TkLabel(void);
     TkLabel(const std::string&);
-    TkLabel(const std::string&,const TkRect&,bool isText = false);
+    TkLabel(const std::string&,const TkPoint&,bool isText = false);
     ~TkLabel(void);
 };
 

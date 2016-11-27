@@ -28,39 +28,36 @@ struct ButtonInfo{
  * 
  * 
  */
-class TkButtonPrimitive : public TkGraphicsObject {
+class TkButtonPrimitive : public TkAnimation {
 public:
     TkButtonPrimitive(void);
-    TkButtonPrimitive(const std::string&);
-    TkButtonPrimitive(const std::string&, const TkRect&, int status = 1, bool isText = false);
+    TkButtonPrimitive(const std::string&, const TkRect&, int index , int pieces );
     ~TkButtonPrimitive(void);
-    void draw(SDL_Surface* dst ) ;
-    void pressed();
-    void clicked();
-    void hovered();
-    void released();
-    void addStatus(TkGui::ControlStatus,int index /*for animation class*/);
-    TkEvent handle(SDL_Event*); // make a specific TkEvent according to SDL_Event variable;
 private:
-    void setStatus(TkGui::ControlStatus);
-private:
-    std::vector<TkAnimation*> m_Primitives;
-    std::map<TkGui::ControlStatus, int> m_StatusMap;
 };
+
 class TkButton : public TkObject{
 public: 
     TkButton();
-    TkButton(std::vector<ButtonInfo> &, int status = 1);
+    TkButton(std::vector<std::string> &, const TkRect&, int status = 1);
     ~TkButton();
 public:
     void draw(SDL_Surface* dst ) ;
     void draw(SDL_Surface* dst, TkRect& );
     bool inRect(SDL_Event*) ;
+    void pressed();
+    void clicked();
+    void hovered();
+    void released();
     void addStatus(TkGui::ControlStatus, int index /*for animation class*/);
+    TkEvent handle(SDL_Event*); // make a specific TkEvent according to SDL_Event variable;
 private:
-    void init(std::vector<ButtonInfo> &, int status );
+    void setStatus(TkGui::ControlStatus);
+    void init(std::vector<std::string> &, const TkRect&, int status );
 private:
+    std::map<TkGui::ControlStatus, int> m_StatusMap;
     std::vector<TkButtonPrimitive*> m_Primitives;
+    TkRect m_Rect;
 };
 
 /* 

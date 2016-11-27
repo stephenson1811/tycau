@@ -18,7 +18,7 @@ TkLabel::TkLabel(void):TkGraphicsObject(){
 }
 TkLabel::TkLabel(const std::string& name):TkGraphicsObject(name){
 }
-TkLabel::TkLabel(const std::string& name,const TkRect& r,bool isText):TkGraphicsObject(name,r,isText){
+TkLabel::TkLabel(const std::string& name,const TkPoint& p,bool isText):TkGraphicsObject(name,p,isText){
 }
 TkLabel::~TkLabel(void){
 }

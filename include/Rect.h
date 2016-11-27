@@ -7,7 +7,36 @@
  * Full text of license available in license.txt file, in main folder
  */
 #pragma once
-
+class TkPoint{
+public:
+    TkPoint(void){}
+    TkPoint(int x, int y){this->x = x;this->y = y;}
+    TkPoint(const TkPoint& p){this->x = p.x;this->y = p.y;}
+    ~TkPoint(void){}
+    void setX(int v){this->x = v; }
+    void setY(int v){this->y = v; }
+    int getX(){return x;}
+    int getY(){return y;}
+    void operator = (const TkPoint& l){
+        this->x = l.x;
+        this->y = l.y;
+    }
+    friend TkPoint operator+(const TkPoint& l, const TkPoint& r){
+        TkPoint tmp;
+        tmp.x = l.x + r.x;
+        tmp.y = l.y + r.y; 
+        return tmp;
+    }
+    friend TkPoint operator - (const TkPoint& l, const TkPoint& r){
+        TkPoint tmp;
+        tmp.x = l.x - r.x;
+        tmp.y = l.y - r.y;
+        return tmp;    
+    }
+private:
+    int x;
+    int y;
+};
 
 class TkRect{
 public:

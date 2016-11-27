@@ -14,12 +14,17 @@
 @ Arguments: 
 @ Return: 
 * * * * * * * * * * * * * * * */
-TkButtonPrimitive::TkButtonPrimitive(void):TkGraphicsObject(){
+TkButtonPrimitive::TkButtonPrimitive(void):TkAnimation(){
 }
 
-TkButtonPrimitive::TkButtonPrimitive(const std::string& name):TkGraphicsObject(name){
-}
-TkButtonPrimitive::TkButtonPrimitive(const std::string& name,const TkRect& r, int status, bool isText):TkGraphicsObject(name,r,isText){
+TkButtonPrimitive::TkButtonPrimitive(const std::string& name,const TkRect& r, int index, int pieces )
+    :TkAnimation(name,pieces ){
+        TkRect rect = r;
+        //int w = m_Rect.getW()/pieces;
+        //int h = m_Rect.getH();
+        //int x = rect.getX() + index * w;
+        //int y = rect.getY();
+        //setCoord(x,y,w,h);
 }
 /* * * * * * * * * * * * * * * *
 @ Name: 
@@ -29,33 +34,48 @@ TkButtonPrimitive::TkButtonPrimitive(const std::string& name,const TkRect& r, in
 * * * * * * * * * * * * * * * */
 TkButtonPrimitive::~TkButtonPrimitive(){
 }
-void TkButtonPrimitive::setStatus(TkGui::ControlStatus type){
-    for (std::vector<TkAnimation*>::iterator it = m_Primitives.begin();
+
+TkButton::TkButton(){}
+TkButton::TkButton(std::vector<std::string> &v, const TkRect& rect, int status):m_Rect(rect){ 
+    init(v, rect, status);
+}
+TkButton::~TkButton(){}
+void TkButton::init(std::vector<std::string> & vname, const TkRect& r, int pieces){
+    int index = 0;
+    TkRect rect = r;
+    int x = rect.getX();
+    for (std::vector<std::string>::iterator it = vname.begin();
+        it != vname.end(); it ++, index++){
+            TkButtonPrimitive* bp = new TkButtonPrimitive((*it), rect, index, pieces);
+            int w = bp->getRect().getW();
+            x = x + w;
+            rect.setW(w);
+            rect.setX(x);
+            //bp->setCoord(rect);
+            m_Primitives.push_back(bp);
+    }
+}
+void TkButton::draw(SDL_Surface* dst ) {
+    for (std::vector<TkButtonPrimitive*>::iterator it = m_Primitives.begin();
+        it != m_Primitives.end();it ++){
+            (*it)->draw(dst);
+    }
+}
+void TkButton::draw(SDL_Surface* dst, TkRect& ){
+}
+bool TkButton::inRect(SDL_Event* e) {
+    return m_Rect.inRect(e->button.x,e->button.y);
+}
+void TkButton::addStatus(TkGui::ControlStatus status,int index ){
+    m_StatusMap.insert(std::make_pair(status, index ));
+}
+void TkButton::setStatus(TkGui::ControlStatus type){
+    for (std::vector<TkButtonPrimitive*>::iterator it = m_Primitives.begin();
         it != m_Primitives.end(); it ++){
             (*it)->setCurrentPieces(m_StatusMap[type]);
     }
 }
-void TkButtonPrimitive::clicked(){
-    setStatus(TkGui::click);
-}
-void TkButtonPrimitive::released(){
-    setStatus(TkGui::released);
-}
-void TkButtonPrimitive::hovered(){
-    setStatus(TkGui::click);
-    if (m_ObjectName.compare("") == 0){ // if it is go out button. it mustsend a event to scene object.
-    }
-    return;
-}
-void TkButtonPrimitive::pressed(){
-    setStatus(TkGui::click);
-}
-void TkButtonPrimitive::addStatus(TkGui::ControlStatus status, int index){
-    m_StatusMap.insert(std::make_pair(status, index ));
-}
-void TkButtonPrimitive::draw(SDL_Surface* dst ) {
-}
-TkEvent TkButtonPrimitive::handle(SDL_Event* e){
+TkEvent TkButton::handle(SDL_Event* e){
     switch(e->type) {
         case SDL_MOUSEMOTION: {
             hovered();
@@ -82,38 +102,21 @@ TkEvent TkButtonPrimitive::handle(SDL_Event* e){
     }
     return TkEvent();
 }
-TkButton::TkButton(){}
-TkButton::TkButton(std::vector<ButtonInfo> &v,  int status){ 
-    init(v, status);
+void TkButton::clicked(){
+    setStatus(TkGui::click);
 }
-TkButton::~TkButton(){}
-void TkButton::init(std::vector<ButtonInfo> & vname, int status){
-    TkRect r;
-    for (std::vector<ButtonInfo>::iterator it = vname.begin();
-        it != vname.end(); it ++){
-            TkButtonPrimitive* bp = new TkButtonPrimitive((*it).m_Dir,(*it).m_Rect/(*it).m_Pieces,(*it).m_Pieces );
-            m_Primitives.push_back(bp);
+void TkButton::released(){
+    setStatus(TkGui::released);
+}
+void TkButton::hovered(){
+    setStatus(TkGui::click);
+    if (m_ObjectName.compare("") == 0){ // if it is go out button. it mustsend a event to scene object.
     }
-    ;
+    return;
 }
-void TkButton::draw(SDL_Surface* dst ) {
-    for (std::vector<TkButtonPrimitive*>::iterator it = m_Primitives.begin();
-        it != m_Primitives.end();it ++){
-            (*it)->draw(dst);
-    }
+void TkButton::pressed(){
+    setStatus(TkGui::click);
 }
-void TkButton::draw(SDL_Surface* dst, TkRect& ){
-}
-bool TkButton::inRect(SDL_Event*) {
-    return false;
-}
-void TkButton::addStatus(TkGui::ControlStatus status,int index ){
-    for (std::vector<TkButtonPrimitive*>::iterator it = m_Primitives.begin();
-        it != m_Primitives.end();it ++){
-            (*it)->addStatus( status, index );
-    }
-}
-
 
 
 

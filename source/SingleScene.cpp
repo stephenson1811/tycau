@@ -41,14 +41,14 @@ void TkSingleScene::init(SDL_Surface*d){
     m_Bkgrd = new TkBackGround(std::string("D:\\data\\background\\Room_3-1.bmp"));
     m_Task = new TkTaskWidget() ;            // personnel task widget 
     m_Status = new TkStatusWidget() ;        // personnel status 
-    m_HouseType = new TkLabel(std::string("D:\\data\\infrastructure\\KyotenBtn_46-1.bmp"), TkRect(10,430) ) ;  // left bottom label
+    m_HouseType = new TkLabel(std::string("D:\\data\\infrastructure\\KyotenBtn_46-1.bmp"), TkPoint(10,430) ) ;  // left bottom label
     m_Information = new TkMenu ; // left menu
     m_Function = new TkMenu ;    // right menu
-    std::vector<ButtonInfo> vbi ;
-    vbi.push_back(ButtonInfo ("D:\\data\\UI\\Parts_N_4-1.bmp", TkRect(400,300,136,40) , 4));
-    vbi.push_back(ButtonInfo ("D:\\data\\UI\\Parts_N_5-1.bmp", TkRect(722,545,96,40) , 4));
-    vbi.push_back(ButtonInfo ("D:\\data\\UI\\Parts_N_6-1.bmp", TkRect(722,545,152,40) , 4));
-    m_OutDoor = new TkButton(vbi,4) ;   // button, outdoor function
+    std::vector< std::string> vbi ;
+    vbi.push_back("D:\\data\\UI\\Parts_N_4-1.bmp");
+    vbi.push_back("D:\\data\\UI\\Parts_N_5-1.bmp");
+    vbi.push_back("D:\\data\\UI\\Parts_N_6-1.bmp");
+    m_OutDoor = new TkButton(vbi,TkRect(200,300,100,50/*722,545,96,40*/),4) ;   // button, outdoor function
     m_OutDoor->addStatus(TkGui::click,2);
     m_OutDoor->addStatus(TkGui::released,3);
     m_Persons = new TkRolesList ;// persons in house, in right part of background

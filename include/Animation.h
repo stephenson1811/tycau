@@ -16,7 +16,9 @@
 * * * * * * * * * * * * * * * */
 class TkAnimation: public TkGraphicsObject{
 public:
-    TkAnimation(const std::string&, const TkRect&, int TotalPieces = 1);
+    TkAnimation();
+    TkAnimation(const std::string&, int TotalPieces = 1);
+    TkAnimation(const std::string&, const TkPoint&, int TotalPieces = 1);
     ~TkAnimation();
 public:
     void play(SDL_Surface* );
@@ -24,7 +26,8 @@ public:
     void setCurrentPieces(int);
 private:
     void split( TkRect&, int); // split a image into several pieces
-    void changeIndex();
+    void nextIndex();
+    void init(int);
 private:
     int m_CurrentPiece; // current image piece id
     int m_PlayDelay;    // Milliseconds
