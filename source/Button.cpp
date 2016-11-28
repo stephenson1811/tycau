@@ -17,9 +17,8 @@
 TkButtonPrimitive::TkButtonPrimitive(void):TkAnimation(){
 }
 
-TkButtonPrimitive::TkButtonPrimitive(const std::string& name,const TkRect& r, int index, int pieces )
+TkButtonPrimitive::TkButtonPrimitive(const std::string& name,const TkPoint& p, int index, int pieces )
     :TkAnimation(name,pieces ){
-        TkRect rect = r;
         //int w = m_Rect.getW()/pieces;
         //int h = m_Rect.getH();
         //int x = rect.getX() + index * w;
@@ -43,16 +42,16 @@ TkButton::~TkButton(){}
 void TkButton::init(std::vector<std::string> & vname, const TkRect& r, int pieces){
     int index = 0;
     TkRect rect = r;
-    int x = rect.getX();
+    TkPoint point (rect.getX(),rect.getY());// point - topleft of button.
+    int x = point.getX();
     for (std::vector<std::string>::iterator it = vname.begin();
         it != vname.end(); it ++, index++){
-            TkButtonPrimitive* bp = new TkButtonPrimitive((*it), rect, index, pieces);
+            TkButtonPrimitive* bp = new TkButtonPrimitive((*it), point, index, pieces);
             int w = bp->getRect().getW();
-            x = x + w;
-            rect.setW(w);
-            rect.setX(x);
-            //bp->setCoord(rect);
-            m_Primitives.push_back(bp);
+            point.setX(x);
+            bp->setCoord(point);
+            m_Primitives.push_back(bp);  
+            x+=w;
     }
 }
 void TkButton::draw(SDL_Surface* dst ) {

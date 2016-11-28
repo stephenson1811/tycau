@@ -27,7 +27,14 @@ void TkAnimation::init(int tp){
     m_PlayDelay = 800;
     m_Quit = false;
     m_TotalPieces = tp;
-    m_CurrentPiece = 1;
+    m_CurrentPiece = 0;
+    TkRect r(0,0,m_SrcDvc->w,m_SrcDvc->h);
+    m_Rect = r;
+
+    int x = r.getX();
+    int w = r.getW() / m_TotalPieces;
+    m_Rect.setX( x + w * m_CurrentPiece );
+    m_Rect.setW( w );
 }
 TkAnimation::~TkAnimation(){
     m_Quit = true;
@@ -54,17 +61,14 @@ int TkAnimation::getCurrentPieces() {
 }
 void TkAnimation::setCurrentPieces(int index) {
     m_CurrentPiece = index;
-    return ;
-}
-void TkAnimation::split(TkRect& rect, int index){
-    TkRect r = getRect();
-    rect = r;
+    TkRect r(0,0,m_SrcDvc->w,m_SrcDvc->h);
+    m_Rect = r;
     //if ( r.getH() < r.getW() ){
         horizontal = true;
         int x = r.getX();
-        int w = r.getW();
-        rect.setX( x + w * index );
-        rect.setW( w );
+        int w = r.getW() / m_TotalPieces;
+        m_Rect.setX( x + w * index );
+        m_Rect.setW( w );
     //}else{
     //    horizontal = false;
     //    int y = r.getY();
@@ -72,9 +76,9 @@ void TkAnimation::split(TkRect& rect, int index){
     //    rect.setY( y + h * index );
     //    rect.setH( h );
     //}
+    return ;
 }
+
 void TkAnimation::draw(SDL_Surface* dst){
-    TkRect rect;
-    split(rect, m_CurrentPiece);
-    TkGraphicsObject::draw(dst,rect);
+    TkGraphicsObject::draw(dst,m_Rect);
 }

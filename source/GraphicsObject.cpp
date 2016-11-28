@@ -34,10 +34,8 @@ void TkGraphicsObject::init(){
 }
 void TkGraphicsObject::init(TkRect&){
 }
-TkRect& TkGraphicsObject::getRect(){
-    m_SrcDvc->w;
-    m_SrcDvc->h;
-    return TkRect();
+TkRect TkGraphicsObject::getRect(){
+    return TkRect(m_Point.getX(), m_Point.getY(), m_SrcDvc->w, m_SrcDvc->h);
 }
 TkGraphicsObject::~TkGraphicsObject(void){
     SDL_FreeSurface(m_SrcDvc);

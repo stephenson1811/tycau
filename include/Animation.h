@@ -21,11 +21,12 @@ public:
     TkAnimation(const std::string&, const TkPoint&, int TotalPieces = 1);
     ~TkAnimation();
 public:
+    void draw(SDL_Surface* dst);
     void play(SDL_Surface* );
     int getCurrentPieces();
     void setCurrentPieces(int);
+    TkRect& getRect(){return m_Rect;}
 private:
-    void split( TkRect&, int); // split a image into several pieces
     void nextIndex();
     void init(int);
 private:
@@ -37,7 +38,6 @@ private:
     bool m_Playing;
     bool m_Quit;
     bool horizontal; // direction, horizontal or vertical
-public:
-    void draw(SDL_Surface* dst);
+    TkRect m_Rect; // to be shown after clipping.
 };
 

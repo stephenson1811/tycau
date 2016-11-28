@@ -31,7 +31,7 @@ struct ButtonInfo{
 class TkButtonPrimitive : public TkAnimation {
 public:
     TkButtonPrimitive(void);
-    TkButtonPrimitive(const std::string&, const TkRect&, int index , int pieces );
+    TkButtonPrimitive(const std::string&, const TkPoint&, int index , int pieces );
     ~TkButtonPrimitive(void);
 private:
 };
