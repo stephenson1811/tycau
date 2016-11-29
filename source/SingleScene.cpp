@@ -52,6 +52,7 @@ void TkSingleScene::init(SDL_Surface*d){
     m_OutDoor->addStatus(TkGui::click,2);
     m_OutDoor->addStatus(TkGui::released,3);
     m_Persons = new TkRolesList ;// persons in house, in right part of background
+    //m_Persons->addRoles();
     // load back-ground picture
     //m_Task->load(std::string("D:\\data\\background\\Room_3-1.bmp"));
     //m_Status->load(std::string("D:\\data\\background\\Room_3-1.bmp"));
