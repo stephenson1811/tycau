@@ -8,7 +8,7 @@
  */
 
 #include "scene.h"
-#include "Sound.h"
+
 
 TkSingleScene::TkSingleScene(){}
 TkSingleScene::TkSingleScene(TkType::SceneType /*type*/){

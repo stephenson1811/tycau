@@ -24,6 +24,7 @@ TkButtonPrimitive::TkButtonPrimitive(const std::string& name,const TkPoint& p, i
         //int x = rect.getX() + index * w;
         //int y = rect.getY();
         //setCoord(x,y,w,h);
+        m_Type = buttonWidget ;
 }
 /* * * * * * * * * * * * * * * *
 @ Name: 

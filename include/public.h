@@ -158,6 +158,8 @@ const int statusWidget = 3;
 const int taskWidget = 4;
 const int menuWidget = 5;
 const int mapWidget = 6;
+const int buttonWidget = 7;
+const int mapPrimitive = 8;
 
 
 

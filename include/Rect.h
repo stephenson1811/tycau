@@ -124,21 +124,23 @@ public:
     void setY(int v){ y = v;}
     void setW(int v){ w = v;}
     void setH(int v){ h = v;}
-	bool inRect(int x, int y){
-		if ( (this->x < x && this->x + this->w > x)&&
-			(this->y < y && this->y + this->h > y) ){
-				return true;
-		}
-		return false;
-	}
-	bool inRect(TkRect& rect){
-		if ( (this->x < rect.x && this->x + this->w > rect.x)&&
-			(this->y < rect.y && this->y + this->h > rect.y) ){
-				return true;
-		}
-		return false;
-	}
+    bool inRect(int x, int y){
+        if ( (this->x < x && this->x + this->w > x)&&
+            (this->y < y && this->y + this->h > y) ){
+                return true;
+        }
+        return false;
+    }
+    bool inRect(TkRect& rect){
+        if ( (this->x < rect.x && this->x + this->w > rect.x)&&
+            (this->y < rect.y && this->y + this->h > rect.y) ){
+                return true;
+        }
+        return false;
+    }
 private:
     int w,h,x,y;
 };
+
+
 

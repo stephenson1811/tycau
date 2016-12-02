@@ -9,17 +9,17 @@
 #include "Primitive.h"
 
 
-TkPrimitive::TkPrimitive(void){
-    //m_x = 0;
-    //m_y = 0;
-    //m_width = 100;
-    //m_height = 150;
+TkPrimitive::TkPrimitive(void):TkGraphicsObject(){
+    m_Type = mapPrimitive;
 }
-TkPrimitive::TkPrimitive(std::string& name):TkGraphicsObject(name){
-    //m_x = 0;
-    //m_y = 0;
-    //m_width = 100;
-    //m_height = 150;
+TkPrimitive::TkPrimitive(std::string& name, MapIndex& index):TkGraphicsObject(name){
+    m_Index = index;
+    int w = m_SrcDvc->w;
+    int h = m_SrcDvc->h;
+    int xbase = 0, ybase = 0;
+    m_Point.setX(xbase + w*index.x) ;
+    m_Point.setY(ybase + h*index.y) ;
+    m_Type = mapPrimitive;
 }
 TkPrimitive::~TkPrimitive(void){
 }

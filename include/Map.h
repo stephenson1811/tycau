@@ -20,14 +20,21 @@
 class TkMap : public TkObject{
 public:
     TkMap(void);
+    TkMap(TkType::SceneType);
     ~TkMap(void);
-    void initMap();
-    void draw();
+    void initMap(TkType::SceneType);
     void draw(SDL_Surface* dst );
     void draw(SDL_Surface* dst, TkRect& );
-    //bool inRect(SDL_Event*);
+    bool inRect(SDL_Event*);
     bool inRect(SDL_Event*, TkPrimitive* );
 private:
+    void initGiantMap();
+    void initMiniMap();
+    void initFieldBattleMap();
+    void initNavyBattleMap();
+    void initSiegeBattleMap();
+private:
     std::vector<TkPrimitive*> m_Tiles;
+    std::vector<TkPrimitive*> m_Cities; // ninjas' , pirates', samurais' castles, villages.
 };
 

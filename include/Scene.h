@@ -10,7 +10,7 @@
 #include "config.h"
 #include "public.h"
 #include "event.h"
-
+#include "Sound.h"
 #include "BackGround.h"
 #include "StatusWidget.h"
 #include "TaskWidget.h"
@@ -19,7 +19,7 @@
 #include "Button.h"
 #include "RolesItem.h"
 #include "DialogBox.h"
-
+#include "Map.h"
 /* 
  * basic type.
  * abstract class.
@@ -91,6 +91,9 @@ public:
     TkObject* whichControl(SDL_Event*); // which control/picture is selected, pressed or clicked.
      
     void dispatch(SDL_Event*);
+    void moveMap(int dx, int dy);
+private:
+    TkMap* m_Map;
 };
 /* 
  * 
