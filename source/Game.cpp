@@ -27,7 +27,7 @@ bool Game::loadGame(){
     initVideo();            //init view
     initAudio();            //init audio effective
     //
-    m_Scene = TkSceneFactory::getScene(TkType::InHouse,m_Display);
+    m_Scene = TkSceneFactory::getScene(TkType::InGiantMap,m_Display);
     return true;
 }
 

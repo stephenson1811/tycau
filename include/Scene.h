@@ -81,7 +81,16 @@ private:
  * 
  * 
  */
-class TkMapScene{
+class TkMapScene:public TkAbstractScene{
+public: 
+    TkMapScene();
+    TkMapScene(TkType::SceneType);
+    ~TkMapScene();
+    void run();
+    void init(SDL_Surface*d = 0);
+    TkObject* whichControl(SDL_Event*); // which control/picture is selected, pressed or clicked.
+     
+    void dispatch(SDL_Event*);
 };
 /* 
  * 

@@ -28,6 +28,9 @@ namespace TkType{
     enum SceneType{
         Null = 0,
         InHouse = 1,
+        InGiantMap = 2,
+        InMiniMap = 3,
+        InBattle = 6,
     };
     enum SeasonType{
         Spring = 1,

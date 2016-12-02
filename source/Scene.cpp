@@ -27,6 +27,9 @@ TkAbstractScene* TkSceneFactory::getScene(TkType::SceneType type,SDL_Surface* d)
     case TkType::InHouse:
         scene =  new TkSingleScene(type);
         break;
+    case TkType::InGiantMap:
+        scene =  new TkMapScene(type);
+        break;
     }
     scene->init(d);
     return scene;
