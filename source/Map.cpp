@@ -32,18 +32,17 @@ void TkMap::draw(SDL_Surface* dst ){
 }
 void TkMap::draw(SDL_Surface* dst, TkRect& ){
 }
-bool TkMap::inRect(SDL_Event* e, TkPrimitive* mp){
+bool TkMap::inRect(SDL_Event* e){
+    return true;
+}
+TkPrimitive* TkMap::whichMapPrimitive(SDL_Event* e){
     for (std::vector<TkPrimitive*>::iterator it = m_Tiles.begin();
         it != m_Tiles.end();it++){
             if ((*it)->inRect(e)){
-                mp = (*it);
-                return true;
+                return (*it);
             }
     }
-    return false;
-}
-bool TkMap::inRect(SDL_Event*){
-    return true;
+    return NULL;
 }
 void TkMap::initGiantMap(){
     std::vector<MapIndex> v;

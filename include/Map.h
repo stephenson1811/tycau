@@ -26,7 +26,7 @@ public:
     void draw(SDL_Surface* dst );
     void draw(SDL_Surface* dst, TkRect& );
     bool inRect(SDL_Event*);
-    bool inRect(SDL_Event*, TkPrimitive* );
+    TkPrimitive* whichMapPrimitive(SDL_Event*);
 private:
     void initGiantMap();
     void initMiniMap();

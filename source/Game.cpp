@@ -70,10 +70,9 @@ void  Game::processEvent(SDL_Event*e){
         }
     case TkEventType::CHANGE_SCENE:
         changeScene( (TkType::SceneType)(e->user.code));
+    case SDL_MOUSEMOTION:
     case SDL_MOUSEBUTTONDOWN:
         m_Scene->dispatch(e);
-        break;
-    case SDL_MOUSEMOTION:
         break;
     }
 

@@ -33,7 +33,7 @@ int main(int argc, char* argv[]){
         SDL_mutexP(lock);
         game.processEvent(&e);
         SDL_mutexV(lock);
-        SDL_Delay(1000);
+        SDL_Delay(100);
     }
     // To play ending animation 
     return 0;

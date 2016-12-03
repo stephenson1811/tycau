@@ -39,6 +39,7 @@ public:
 protected:
     virtual TkObject* whichControl(SDL_Event*) = 0; // which control/picture is selected, pressed or clicked.
     void pushSDLEvent(int type, int usercode);
+    //void handle();
 protected:
     SDL_Surface* m_DstDvc;           // destination device surface.
     int type;
