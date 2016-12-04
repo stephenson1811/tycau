@@ -11,19 +11,20 @@
 
 
 TkMapScene::TkMapScene(){
+    m_LeftButonPressed = false;
 }
 TkMapScene::TkMapScene(TkType::SceneType){
+    m_LeftButonPressed = false;
 }
 TkMapScene::~TkMapScene(){}
 
 
 void TkMapScene::run(){
     m_Map->draw(m_DstDvc);
-    SDL_Flip(m_DstDvc);
 }
 void TkMapScene::init(SDL_Surface*d ){
+    TkAbstractScene::init(d);
     m_Map = new TkMap();
-    m_DstDvc = d;
     m_Members.push_back(m_Map);
 }
 TkObject* TkMapScene::whichControl(SDL_Event* e){ // which control/picture is selected, pressed or clicked.
@@ -40,23 +41,41 @@ TkObject* TkMapScene::whichControl(SDL_Event* e){ // which control/picture is se
     }
     return NULL;
 }
-void TkMapScene::moveMap(int dx, int dy){}
+void TkMapScene::moveMap(SDL_MouseMotionEvent& me){
+    if (m_LeftButonPressed){ // could move map
+        //std::cout<<"moveMap, xrel="<<me.xrel<<",yrel="<<me.yrel;
+        m_Map->move(me.xrel, me.yrel);
+        //SDL_Flip(m_DstDvc);
+    }
+}
 // a msg dispatcher/processor
 void TkMapScene::dispatch(SDL_Event* e ){
     TkObject* control = whichControl(e);
+#ifdef Control
     if (!control){
         return; 
     }
     if (control->getType() == buttonWidget){
-        TkEvent t=control->handle(e);
-        pushSDLEvent(t.EventType,t.UserCode);
-    }else if(control->getType() == mapPrimitive){
+        //TkEvent t=control->handle(e);
+        //pushSDLEvent(t.EventType,t.UserCode);
+    }else if(control->getType() == mapPrimitive)
+#endif
+    {
         switch(e->type){
             case SDL_MOUSEMOTION:
                 switch(e->button.button) {
                     case SDL_BUTTON_LEFT: { // move the map
-                        moveMap(e->motion.x, e->motion.y);
-                        std::cout<<"xrel="<<e->motion.xrel<<",yrel="<<e->motion.yrel<<std::endl;
+                        moveMap(e->motion);
+                        //std::cout<<"xrel="<<e->motion.xrel<<",yrel="<<e->motion.yrel<<std::endl;
+                        break;
+                    }
+                }
+                break;
+            case SDL_MOUSEBUTTONUP:
+                switch(e->button.button) {
+                    case SDL_BUTTON_LEFT: { // move the map
+                        m_LeftButonPressed = false;
+                        std::cout<<"leftreleased,xrel="<<e->motion.xrel<<",yrel="<<e->motion.yrel<<std::endl;
                         break;
                     }
                 }
@@ -64,13 +83,11 @@ void TkMapScene::dispatch(SDL_Event* e ){
             case SDL_MOUSEBUTTONDOWN:
                 switch(e->button.button) {
                     case SDL_BUTTON_LEFT: { // move the map
-                        moveMap(e->motion.x, e->motion.y);
-                        std::cout<<"xrel="<<e->motion.xrel<<",yrel="<<e->motion.yrel<<std::endl;
+                        m_LeftButonPressed = true;
+                        //std::cout<<"leftpressed,xrel="<<e->motion.xrel<<",yrel="<<e->motion.yrel<<std::endl;
                         break;
                     }
                 }
-                break;
-            case SDL_MOUSEBUTTONUP:
                 break;
         }
     }

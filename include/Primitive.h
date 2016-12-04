@@ -30,6 +30,7 @@ public:
     TkPrimitive(std::string&,MapIndex&);
     ~TkPrimitive(void);
     void setDstRect(int x, int y, int w, int h);
+    void move(int x, int y);
     //void getSize(SIZE&);
 private:
     MapIndex m_Index; // this pic showing in m_Index.x column, and m_Index.y row.

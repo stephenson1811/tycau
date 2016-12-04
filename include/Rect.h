@@ -33,6 +33,10 @@ public:
         tmp.y = l.y - r.y;
         return tmp;    
     }
+    void operator += (const TkPoint& r){
+        this->x += r.x;
+        this->y += r.y;
+    }
 private:
     int x;
     int y;

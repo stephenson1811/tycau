@@ -16,7 +16,7 @@ int eventLoop(void *temp){
     while(1){
         Game* game = (Game*)temp ;
         game ->runGame();
-        SDL_Delay(100);
+        SDL_Delay(50);
         //TkSceneFactory::getScene( globleSceneType )->run();
         //
     }

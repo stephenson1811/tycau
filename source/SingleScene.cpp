@@ -32,7 +32,6 @@ void TkSingleScene::run(){
     m_Function->draw(m_DstDvc);
     */
     m_Persons->draw(m_DstDvc);
-    SDL_Flip(m_DstDvc);
     // music and other audio effect.
 }
 void TkSingleScene::init(SDL_Surface*d){

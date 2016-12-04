@@ -23,6 +23,12 @@ TkPrimitive::TkPrimitive(std::string& name, MapIndex& index):TkGraphicsObject(na
 }
 TkPrimitive::~TkPrimitive(void){
 }
+void TkPrimitive::move(int dx, int dy){
+    int x = m_Point.getX();
+    int y = m_Point.getY();
+    m_Point.setX(x + dx) ;
+    m_Point.setY(y + dy) ;
+}
 void TkPrimitive::setDstRect(int x, int y, int w, int h){
     //m_x = x;
     //m_y = y;

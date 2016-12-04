@@ -92,9 +92,10 @@ public:
     TkObject* whichControl(SDL_Event*); // which control/picture is selected, pressed or clicked.
      
     void dispatch(SDL_Event*);
-    void moveMap(int dx, int dy);
+    void moveMap(SDL_MouseMotionEvent&);
 private:
     TkMap* m_Map;
+    bool m_LeftButonPressed;
 };
 /* 
  * 
