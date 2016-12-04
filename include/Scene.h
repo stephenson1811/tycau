@@ -93,6 +93,7 @@ public:
      
     void dispatch(SDL_Event*);
     void moveMap(SDL_MouseMotionEvent&);
+    void moveMap(int , int y);
 private:
     TkMap* m_Map;
     bool m_LeftButonPressed;

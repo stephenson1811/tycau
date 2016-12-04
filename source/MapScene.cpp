@@ -48,6 +48,9 @@ void TkMapScene::moveMap(SDL_MouseMotionEvent& me){
         //SDL_Flip(m_DstDvc);
     }
 }
+void TkMapScene::moveMap(int x, int y){
+    m_Map->move(x, y);
+}
 // a msg dispatcher/processor
 void TkMapScene::dispatch(SDL_Event* e ){
     TkObject* control = whichControl(e);
@@ -63,12 +66,15 @@ void TkMapScene::dispatch(SDL_Event* e ){
     {
         switch(e->type){
             case SDL_MOUSEMOTION:
-                switch(e->button.button) {
-                    case SDL_BUTTON_LEFT: { // move the map
-                        moveMap(e->motion);
-                        //std::cout<<"xrel="<<e->motion.xrel<<",yrel="<<e->motion.yrel<<std::endl;
-                        break;
-                    }
+                //switch(e->button.button) {
+                //    case SDL_BUTTON_LEFT: { // move the map
+                //        moveMap(e->motion);
+                //        //std::cout<<"xrel="<<e->motion.xrel<<",yrel="<<e->motion.yrel<<std::endl;
+                //        break;
+                //    }
+                //}
+                if (e->motion.x < 100){
+                    moveMap(-10,0);
                 }
                 break;
             case SDL_MOUSEBUTTONUP:
