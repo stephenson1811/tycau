@@ -20,11 +20,14 @@ TkMapScene::~TkMapScene(){}
 
 
 void TkMapScene::run(){
+    m_Bkgrd->draw(m_DstDvc);
     m_Map->draw(m_DstDvc);
+
 }
 void TkMapScene::init(SDL_Surface*d ){
     TkAbstractScene::init(d);
     m_Map = new TkMap();
+    m_Bkgrd = new TkBackGround(std::string("D:\\data\\background\\Room_3-1.bmp")); 
     m_Members.push_back(m_Map);
 }
 TkObject* TkMapScene::whichControl(SDL_Event* e){ // which control/picture is selected, pressed or clicked.
@@ -66,16 +69,16 @@ void TkMapScene::dispatch(SDL_Event* e ){
     {
         switch(e->type){
             case SDL_MOUSEMOTION:
-                //switch(e->button.button) {
-                //    case SDL_BUTTON_LEFT: { // move the map
-                //        moveMap(e->motion);
-                //        //std::cout<<"xrel="<<e->motion.xrel<<",yrel="<<e->motion.yrel<<std::endl;
-                //        break;
-                //    }
-                //}
-                if (e->motion.x < 100){
-                    moveMap(-10,0);
+                switch(e->button.button) {
+                    case SDL_BUTTON_LEFT: { // move the map
+                        moveMap(e->motion);
+                        //std::cout<<"xrel="<<e->motion.xrel<<",yrel="<<e->motion.yrel<<std::endl;
+                        break;
+                    }
                 }
+                //if (e->motion.x < 100){
+                //    moveMap(-10,0);
+                //}
                 break;
             case SDL_MOUSEBUTTONUP:
                 switch(e->button.button) {

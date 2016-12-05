@@ -21,7 +21,9 @@ TkMap::~TkMap(void){
     }
 }
 void TkMap::initMap(TkType::SceneType){
-    m_Type = mapWidget;
+    m_Type = mapWidget;   
+    m_TestFont = TTF_OpenFont( "arial.ttf", 10/*size*/ );
+    TTF_SetFontStyle(m_TestFont, TTF_STYLE_NORMAL );
     initGiantMap();
 }
 void TkMap::draw(SDL_Surface* dst ){

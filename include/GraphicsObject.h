@@ -26,6 +26,7 @@ public:
 public:
     void draw(SDL_Surface* dst ); // show all area of picture. 
     void draw(SDL_Surface* dst, TkRect& ); // show part of pic.
+    void drawText(SDL_Surface* ,TTF_Font*, const std::string&);
     void loadText(const std::string&);
     void load(const std::string&);
     void setCoord(const TkPoint& p){m_Point = p;}

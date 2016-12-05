@@ -61,6 +61,12 @@ void TkGraphicsObject::loadText(const std::string& text){
                                  back.g,
                                  back.b ) );
 }
+void TkGraphicsObject::drawText(SDL_Surface* dst, TTF_Font* font,const std::string& text){
+    SDL_Color fore;fore.r = 0x0;fore.g = 0xFF;fore.b = 0xFF;
+    SDL_Color back;back.r = 0xFF;back.g = 0xFF;back.b = 0xFF;
+    m_SrcDvc = TTF_RenderText_Shaded( font, text.c_str(), fore, back );
+    SDL_SetColorKey(m_SrcDvc, SDL_SRCCOLORKEY | SDL_RLEACCEL, SDL_MapRGB(m_SrcDvc->format, back.r, back.g, back.b));
+}
 void TkGraphicsObject::load(const std::string& name){
     if (m_SrcDvc != NULL){
         SDL_FreeSurface(m_SrcDvc);

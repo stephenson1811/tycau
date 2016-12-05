@@ -11,8 +11,8 @@
 
 Game::Game(){
     m_Display=NULL;
-    WIDTH = 800;
-    HEIGHT = 600;
+    WIDTH = 1200;//800
+    HEIGHT = 700;//600
     BPP = 32;
     m_Scene = NULL;
     m_Running = true;
@@ -101,6 +101,7 @@ void Game::initVideo(){//init game view
         WIDTH, HEIGHT, BPP,SDL_HWSURFACE | SDL_DOUBLEBUF)) == NULL) {
             return;
     }
+    SDL_FillRect(m_Display, 0, SDL_MapRGB(m_Display->format, 0xFF, 0xFF, 0xFF));
     // hide cursor
     SDL_ShowCursor(1);
     // load font

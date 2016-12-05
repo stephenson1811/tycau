@@ -37,5 +37,6 @@ private:
 private:
     std::vector<TkPrimitive*> m_Tiles;
     std::vector<TkPrimitive*> m_Cities; // ninjas' , pirates', samurais' castles, villages.
+    TTF_Font * m_TestFont;
 };
 

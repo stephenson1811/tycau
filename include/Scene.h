@@ -96,6 +96,7 @@ public:
     void moveMap(int , int y);
 private:
     TkMap* m_Map;
+    TkBackGround* m_Bkgrd; 
     bool m_LeftButonPressed;
 };
 /* 
