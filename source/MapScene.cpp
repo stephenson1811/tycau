@@ -22,12 +22,12 @@ TkMapScene::~TkMapScene(){}
 void TkMapScene::run(){
     m_Bkgrd->draw(m_DstDvc);
     m_Map->draw(m_DstDvc);
-
+    SDL_Flip(m_DstDvc);
 }
 void TkMapScene::init(SDL_Surface*d ){
     TkAbstractScene::init(d);
     m_Map = new TkMap();
-    m_Bkgrd = new TkBackGround(std::string("D:\\data\\background\\Room_3-1.bmp")); 
+    m_Bkgrd = new TkBackGround(std::string("D:\\data\\bk.bmp")); 
     m_Members.push_back(m_Map);
 }
 TkObject* TkMapScene::whichControl(SDL_Event* e){ // which control/picture is selected, pressed or clicked.
@@ -48,7 +48,7 @@ void TkMapScene::moveMap(SDL_MouseMotionEvent& me){
     if (m_LeftButonPressed){ // could move map
         //std::cout<<"moveMap, xrel="<<me.xrel<<",yrel="<<me.yrel;
         m_Map->move(me.xrel, me.yrel);
-        //SDL_Flip(m_DstDvc);
+        SDL_Flip(m_DstDvc);
     }
 }
 void TkMapScene::moveMap(int x, int y){

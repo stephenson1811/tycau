@@ -17,8 +17,8 @@ TkPrimitive::TkPrimitive(std::string& name, MapIndex& index):TkGraphicsObject(na
     int w = m_SrcDvc->w;
     int h = m_SrcDvc->h;
     int xbase = 0, ybase = 0;
-    m_Point.setX(xbase + w*index.x) ;
-    m_Point.setY(ybase + h*index.y) ;
+    m_Point.setX(xbase + (w+1)*index.x) ;
+    m_Point.setY(ybase + (h+1)*index.y) ;
     m_Type = mapPrimitive;
     std::ostringstream os;
     os<<""<<index.x<<","<<index.y; 
