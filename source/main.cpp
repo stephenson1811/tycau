@@ -25,14 +25,14 @@ int main(int argc, char* argv[]){
     SDL_Event e;
     //show game view thread
     thread.start(&game);
-    //SDL_mutex *lock = SDL_CreateMutex();
+    SDL_mutex *lock = SDL_CreateMutex();
     // start a mouse/key events listening loop
     while(game.isRunning()){
         SDL_WaitEvent(&e);
         // process messages in its inner loop.
-        //SDL_mutexP(lock);
+        SDL_mutexP(lock);
         game.processEvent(&e);
-        //SDL_mutexV(lock);
+        SDL_mutexV(lock);
         SDL_Delay(50);
     }
     // To play ending animation 

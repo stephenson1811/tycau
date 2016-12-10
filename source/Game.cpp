@@ -27,7 +27,7 @@ bool Game::loadGame(){
     initVideo();            //init view
     initAudio();            //init audio effective
     //
-    m_Scene = TkSceneFactory::getScene(TkType::InGiantMap,m_Display);
+    m_Scene = TkSceneFactory::getScene(TkType::InHouse,m_Display);
     return true;
 }
 
@@ -69,7 +69,7 @@ void  Game::processEvent(SDL_Event*e){
             }
         }
     case TkEventType::CHANGE_SCENE:
-        changeScene( (TkType::SceneType)(e->user.code));
+        changeScene( (TkType::SceneType)(e->user.code-10000));
     case SDL_MOUSEMOTION:
     case SDL_MOUSEBUTTONDOWN:
     case SDL_MOUSEBUTTONUP:
@@ -88,9 +88,16 @@ void  Game::processEvent(SDL_Event*e){
 }
 void Game::changeScene(TkType::SceneType type){
     if (m_Scene){
-        delete m_Scene;
+        switch (m_Scene->getType()){
+        case TkType::InHouse:
+            delete dynamic_cast<TkSingleScene*> (m_Scene);
+        case TkType::InGiantMap:
+            delete dynamic_cast<TkMapScene*> (m_Scene);
+        }
+        m_Scene = NULL;
     }
     m_Scene = TkSceneFactory::getScene( type);
+
 }
 
 void Game::initVideo(){//init game view
@@ -119,6 +126,9 @@ bool Game::endGame(){// end game
 
 bool Game::runGame(){
     // 
-    m_Scene->run();
+    if (!m_Scene){
+        return false;
+    }
+    m_Scene->run(m_Display);
     return true;
 }

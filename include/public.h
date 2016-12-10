@@ -117,11 +117,13 @@ namespace TkGui{
  * 
  */
 namespace TkEventType{
-    const int CHANGE_SCENE = SDL_USEREVENT +1;
+    const int CHANGE_SCENE = SDL_USEREVENT + 1;
+    const int BUTTON_CLICK = SDL_USEREVENT + 2;
 };
 namespace TkUserCode{
     const int DEFINED = 10000;
     const int IN_HOUSE = DEFINED + 1;
+    const int OUT_HOUSE = DEFINED + 2;
 };
 class TkEvent{
 public:

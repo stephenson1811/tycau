@@ -12,7 +12,7 @@
 
 void TkAbstractScene::init(SDL_Surface*d ){ 
     if (d != NULL){
-        m_DstDvc = d;
+        //m_DstDvc = d;
     }
 }
 void TkAbstractScene::pushSDLEvent(int type, int usercode){

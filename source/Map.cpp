@@ -18,6 +18,7 @@ TkMap::~TkMap(void){
     for (std::vector<TkPrimitive*>::iterator it = m_Tiles.begin();
         it != m_Tiles.end();it++){
             delete (*it);
+            (*it) = NULL;
     }
 }
 void TkMap::initMap(TkType::SceneType){
@@ -29,6 +30,12 @@ void TkMap::initMap(TkType::SceneType){
 void TkMap::draw(SDL_Surface* dst ){
     for (std::vector<TkPrimitive*>::iterator it = m_Tiles.begin();
         it != m_Tiles.end();it++){
+            if((*it)){ 
+                (*it)->draw(dst);
+            }
+    }
+    for (std::vector<TkPrimitive*>::iterator it = m_Cities.begin();
+        it != m_Cities.end();it++){
             (*it)->draw(dst);
     }
 }
@@ -49,6 +56,10 @@ TkPrimitive* TkMap::whichMapPrimitive(SDL_Event* e){
 void TkMap::move(int x, int y){
     for (std::vector<TkPrimitive*>::iterator it = m_Tiles.begin();
         it != m_Tiles.end(); it ++){
+            (*it)->move(x,y);
+    }
+    for (std::vector<TkPrimitive*>::iterator it = m_Cities.begin();
+        it != m_Cities.end(); it ++){
             (*it)->move(x,y);
     }
 }

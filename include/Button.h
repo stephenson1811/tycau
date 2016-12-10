@@ -45,10 +45,10 @@ public:
     void draw(SDL_Surface* dst ) ;
     void draw(SDL_Surface* dst, TkRect& );
     bool inRect(SDL_Event*) ;
-    void pressed();
-    void clicked();
-    void hovered();
-    void released();
+    TkEvent pressed();
+    TkEvent clicked();
+    TkEvent hovered();
+    TkEvent released();
     void addStatus(TkGui::ControlStatus, int index /*for animation class*/);
     TkEvent handle(SDL_Event*); // make a specific TkEvent according to SDL_Event variable;
 private:

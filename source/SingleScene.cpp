@@ -11,27 +11,41 @@
 
 
 TkSingleScene::TkSingleScene(){}
-TkSingleScene::TkSingleScene(TkType::SceneType /*type*/){
+TkSingleScene::TkSingleScene(TkType::SceneType type ){
     m_Bkgrd=NULL;
     m_Task=NULL;
     m_Status=NULL;
     m_CurrentControl=NULL;
+    m_SceneType = type;
 }
 TkSingleScene::~TkSingleScene(){
     deleteWidget(m_Bkgrd) ;
     deleteWidget(m_Task);
     deleteWidget(m_Status);
 }
-void TkSingleScene::run(){
-    m_Bkgrd->draw(m_DstDvc);
-    //m_Task->draw(m_DstDvc);
-    m_Status->draw(m_DstDvc);
-    m_HouseType->draw(m_DstDvc); 
-    m_OutDoor->draw(m_DstDvc);
-/*    m_Information->draw(m_DstDvc);
-    m_Function->draw(m_DstDvc);
+void TkSingleScene::run(SDL_Surface* d){
+    if (m_Bkgrd){ 
+        m_Bkgrd->draw(d);
+    }
+   
+    //m_Task->draw(d);
+    if(m_Status){
+        m_Status->draw(d);
+    }
+    if(m_HouseType){  
+        m_HouseType->draw(d);
+    }
+    if(m_OutDoor){ 
+        m_OutDoor->draw(d);
+    }
+  
+/*    m_Information->draw(d);
+    m_Function->draw(d);
     */
-    m_Persons->draw(m_DstDvc);
+    if(m_Persons){ 
+        m_Persons->draw(d);
+    }
+  
     // music and other audio effect.
 }
 void TkSingleScene::init(SDL_Surface*d){
@@ -48,8 +62,11 @@ void TkSingleScene::init(SDL_Surface*d){
     vbi.push_back("D:\\data\\UI\\Parts_N_5-1.bmp");
     vbi.push_back("D:\\data\\UI\\Parts_N_6-1.bmp");
     m_OutDoor = new TkButton(vbi,TkRect(200,300,100,50/*722,545,96,40*/),4) ;   // button, outdoor function
-    m_OutDoor->addStatus(TkGui::click,2);
-    m_OutDoor->addStatus(TkGui::released,3);
+    m_OutDoor->setObjectName(std::string("goOutDoor"));
+    m_OutDoor->addStatus(TkGui::click,1);
+    m_OutDoor->addStatus(TkGui::released,0);
+    m_OutDoor->addStatus(TkGui::hover,2);
+    m_OutDoor->addStatus(TkGui::pressed,1);
     m_Persons = new TkRolesList ;// persons in house, in right part of background
     //m_Persons->addRoles();
     // load back-ground picture
@@ -59,22 +76,24 @@ void TkSingleScene::init(SDL_Surface*d){
     //m_Function->load(std::string("D:\\data\\background\\Room_3-1.bmp"));
     //m_OutDoor->load(std::string("D:\\data\\background\\Room_3-1.bmp"));
     //m_Persons->load(std::string("D:\\data\\background\\Room_3-1.bmp"));
-    m_Members.push_back(m_Bkgrd);
+    //m_Members.push_back(m_Bkgrd);
+    m_Members.push_back(m_OutDoor);
 }
 TkObject* TkSingleScene::whichControl(SDL_Event* e){
     TkGraphicsObject* control = NULL;
     for (std::vector<TkObject*>::iterator it = m_Members.begin();
         it != m_Members.end(); it ++){
-            if ( (*it)->getType() == graphicObject){
-                if ((*it)->inRect(e)){
+            if ((*it)->inRect(e)){
+                if((*it)->getType() == buttonWidget){
                     return static_cast<TkObject*>(*it);
                 }
             }
-            if((*it)->getType() == mapWidget){
-                //TkMap* m = dynamic_cast<TkMap*> (*it);
-                //if ((*it)->inRect(e, control)){
-                //}
-            }
+
+            /*if ( (*it)->getType() == graphicObject){
+                if ((*it)->inRect(e)){
+                    return static_cast<TkObject*>(*it);
+                }
+            }else */
     }
     return NULL;
 }
@@ -83,8 +102,12 @@ TkObject* TkSingleScene::whichControl(SDL_Event* e){
 void TkSingleScene::dispatch(SDL_Event* e){
     TkObject* control = whichControl(e);
     if (control){
-        TkEvent t=control->handle(e);
-        pushSDLEvent(t.EventType,t.UserCode);
+        if (control->getType() == buttonWidget){
+            TkButton* b = dynamic_cast<TkButton*>(control);
+
+            TkEvent t = b->handle(e);
+            pushSDLEvent(t.EventType,t.UserCode);        
+        }
     }
 }
 

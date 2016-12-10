@@ -30,19 +30,20 @@ class TkAbstractScene{
 public:
     TkAbstractScene(){}
     TkAbstractScene(TkType::SceneType){}
-    ~TkAbstractScene(){}
+    ~TkAbstractScene(){
+    }
 public:
-    virtual void run() = 0; // draw image, play music.
+    virtual void run(SDL_Surface*) = 0; // draw image, play music.
     virtual void init(SDL_Surface*d = 0); // initial dest surface and picture name.
     virtual void dispatch(SDL_Event*) = 0;
-    int getType(){return type;}
+    int getType(){return m_SceneType;}
 protected:
     virtual TkObject* whichControl(SDL_Event*) = 0; // which control/picture is selected, pressed or clicked.
     void pushSDLEvent(int type, int usercode);
     //void handle();
 protected:
-    SDL_Surface* m_DstDvc;           // destination device surface.
-    int type;
+    //SDL_Surface* m_DstDvc;           // destination device surface.
+    int m_SceneType;
     TkDialogBox* m_Dialog;  // dialog pictures and words
     std::vector<TkObject*> m_Members;
     TkObject* m_CurrentControl;
@@ -59,7 +60,7 @@ public:
     TkSingleScene();
     TkSingleScene(TkType::SceneType);
     ~TkSingleScene();
-    void run();
+    void run(SDL_Surface*);
     void init(SDL_Surface*d = 0);
     TkObject* whichControl(SDL_Event*); // which control/picture is selected, pressed or clicked.
      
@@ -87,7 +88,7 @@ public:
     TkMapScene();
     TkMapScene(TkType::SceneType);
     ~TkMapScene();
-    void run();
+    void run(SDL_Surface*);
     void init(SDL_Surface*d = 0);
     TkObject* whichControl(SDL_Event*); // which control/picture is selected, pressed or clicked.
      
@@ -97,6 +98,10 @@ public:
 private:
     TkMap* m_Map;
     TkBackGround* m_Bkgrd; 
+    TkStatusWidget* m_Status;
+    TkButton* m_GoHome;
+    TkButton* m_GoTo;
+    TkButton* m_Wait;
     bool m_LeftButonPressed;
 };
 /* 

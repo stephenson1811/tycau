@@ -15,6 +15,7 @@
 @ Return: 
 * * * * * * * * * * * * * * * */
 TkButtonPrimitive::TkButtonPrimitive(void):TkAnimation(){
+    m_Type = buttonWidget ;
 }
 
 TkButtonPrimitive::TkButtonPrimitive(const std::string& name,const TkPoint& p, int index, int pieces )
@@ -54,6 +55,7 @@ void TkButton::init(std::vector<std::string> & vname, const TkRect& r, int piece
             m_Primitives.push_back(bp);  
             x+=w;
     }
+    m_Type = buttonWidget ;
 }
 void TkButton::draw(SDL_Surface* dst ) {
     for (std::vector<TkButtonPrimitive*>::iterator it = m_Primitives.begin();
@@ -84,38 +86,44 @@ TkEvent TkButton::handle(SDL_Event* e){
         case SDL_MOUSEBUTTONDOWN: {
             switch(e->button.button) {
                 case SDL_BUTTON_LEFT: {
-                    pressed();
-                    break;
+                    return pressed();
                 }
             }
-            break;
         }
         case SDL_MOUSEBUTTONUP: {
             switch(e->button.button) {
                 case SDL_BUTTON_LEFT: {
-                    released();
-                    break;
+                    return released();
                 }
             }
+        }
+        case TkEventType::BUTTON_CLICK:{
             break;
         }
     }
     return TkEvent();
 }
-void TkButton::clicked(){
+TkEvent TkButton::clicked(){
     setStatus(TkGui::click);
+    return TkEvent();
 }
-void TkButton::released(){
+TkEvent TkButton::released(){
     setStatus(TkGui::released);
+    if (m_ObjectName=="goOutDoor"){ 
+        return TkEvent(TkEventType::CHANGE_SCENE,TkUserCode::OUT_HOUSE);
+    }else if(m_ObjectName.compare("goHome") == 0){
+        return TkEvent(TkEventType::CHANGE_SCENE,TkUserCode::IN_HOUSE);
+    }
 }
-void TkButton::hovered(){
-    setStatus(TkGui::click);
+TkEvent TkButton::hovered(){
+    setStatus(TkGui::hover);
     if (m_ObjectName.compare("") == 0){ // if it is go out button. it mustsend a event to scene object.
     }
-    return;
+    return TkEvent();
 }
-void TkButton::pressed(){
-    setStatus(TkGui::click);
+TkEvent TkButton::pressed(){
+    setStatus(TkGui::pressed);
+    return TkEvent();
 }
 
 
