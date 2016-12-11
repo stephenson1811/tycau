@@ -31,9 +31,11 @@ private:
     void initVideo();                    //init view
     void initAudio();                    //init audio
     void changeScene(TkType::SceneType); // player in another place, scene must be changed.
+    void generateScenes();
 private:
     SDL_Surface* m_Display;                //destination screen device
     TkAbstractScene* m_Scene;
+    std::map<int, TkAbstractScene*> m_SceneRepo;
     int WIDTH;    // for screen
     int HEIGHT;    
     int BPP;

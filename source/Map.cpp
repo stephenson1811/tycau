@@ -157,10 +157,9 @@ void TkMap::initGiantMap(){
         total<<"D:\\data\\task_map\\JapanMap_"<<os.str()<<"-1.bmp"; 
         m_Tiles.push_back(new TkPrimitive(std::string(total.str()),(*it)));
     }
-
-
-
-
+}
+bool TkMap::onBoard(MapIndex&){
+    return true;
 }
 void TkMap::initMiniMap(){}
 void TkMap::initFieldBattleMap(){}

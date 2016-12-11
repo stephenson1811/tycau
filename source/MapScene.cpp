@@ -110,9 +110,9 @@ void TkMapScene::dispatch(SDL_Event* e ){
         return; 
     }
     if (control->getType() == buttonWidget){
-            TkButton* b = dynamic_cast<TkButton*>(control);
-            TkEvent t = b->handle(e);
-            pushSDLEvent(t.EventType,t.UserCode);  
+        TkButton* b = dynamic_cast<TkButton*>(control);
+        TkEvent t = b->handle(e);
+        pushSDLEvent(t.EventType,t.UserCode);  
     }else if(control->getType() == mapWidget || control->getType() == mapPrimitive ){
         switch(e->type){
             case SDL_MOUSEMOTION:

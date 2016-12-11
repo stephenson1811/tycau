@@ -29,6 +29,7 @@ public:
     TkPrimitive* whichMapPrimitive(SDL_Event*);
     void move(int x, int y);
 private:
+    bool onBoard(MapIndex&);
     void initGiantMap();
     void initMiniMap();
     void initFieldBattleMap();

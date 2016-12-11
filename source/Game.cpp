@@ -27,10 +27,14 @@ bool Game::loadGame(){
     initVideo();            //init view
     initAudio();            //init audio effective
     //
-    m_Scene = TkSceneFactory::getScene(TkType::InHouse,m_Display);
+    generateScenes();
+    m_Scene =  m_SceneRepo[TkType::InGiantMap];
     return true;
 }
-
+void Game::generateScenes(){
+    m_SceneRepo[TkType::InHouse] = TkSceneFactory::getScene(TkType::InHouse,m_Display);
+    m_SceneRepo[TkType::InGiantMap] = TkSceneFactory::getScene(TkType::InGiantMap,m_Display);
+}
 void  Game::processEvent(SDL_Event*e){
     TkEvent ev;
     switch(e->type){
@@ -87,16 +91,7 @@ void  Game::processEvent(SDL_Event*e){
     //}
 }
 void Game::changeScene(TkType::SceneType type){
-    if (m_Scene){
-        switch (m_Scene->getType()){
-        case TkType::InHouse:
-            delete dynamic_cast<TkSingleScene*> (m_Scene);
-        case TkType::InGiantMap:
-            delete dynamic_cast<TkMapScene*> (m_Scene);
-        }
-        m_Scene = NULL;
-    }
-    m_Scene = TkSceneFactory::getScene( type);
+    m_Scene = m_SceneRepo[type];
 
 }
 
