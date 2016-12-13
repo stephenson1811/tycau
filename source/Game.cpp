@@ -92,7 +92,6 @@ void  Game::processEvent(SDL_Event*e){
 }
 void Game::changeScene(TkType::SceneType type){
     m_Scene = m_SceneRepo[type];
-
 }
 
 void Game::initVideo(){//init game view

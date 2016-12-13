@@ -7,20 +7,19 @@
  * Full text of license available in license.txt file, in main folder
  */
 #pragma once
+
+#include "GraphicsObject.h"
 /* 
- * shows persons in giant map.
+ * this class is uses for showing castles, villages, ninjas' and pirates' bases.
  * 
- * it would shows person move behaviors.
+ * according to the level of city, icon would be changed.
  * 
- * it's different in warrior, merchants, ninjas, pirates.
+ * 
  * 
  */
-#include "Animation.h"
 
-class TkPerson : public TkAnimation{
+class TkCity: public TkGraphicsObject{
 };
-
-
 
 
 

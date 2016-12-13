@@ -88,6 +88,7 @@
   <ItemGroup>
     <ClInclude Include="include\Animation.h" />
     <ClInclude Include="include\BackGround.h" />
+    <ClInclude Include="include\City.h" />
     <ClInclude Include="include\ComboBox.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\config.h" />
@@ -116,6 +117,7 @@
     <ClCompile Include="source\Button.cpp" />
     <ClCompile Include="source\ButtonWithMenu.cpp" />
     <ClCompile Include="source\CheckBox.cpp" />
+    <ClCompile Include="source\City.cpp" />
     <ClCompile Include="source\ComboBox.cpp" />
     <ClCompile Include="source\DialogBox.cpp" />
     <ClCompile Include="source\Game.cpp" />

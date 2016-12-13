@@ -8,6 +8,8 @@
  */
 #pragma once
 #include "Primitive.h"
+#include "City.h"
+#include "Person.h"
 #include <vector>
 /* 
  * 
@@ -37,7 +39,10 @@ private:
     void initSiegeBattleMap();
 private:
     std::vector<TkPrimitive*> m_Tiles;
-    std::vector<TkPrimitive*> m_Cities; // ninjas' , pirates', samurais' castles, villages.
+    std::vector<TkCity*> m_Cities; // ninjas' , pirates', samurais' castles, villages.
+    std::vector<TkPerson*> m_Persons; // ninjas , pirates, samurais.
     TTF_Font * m_TestFont;
+    TkPoint m_TopLftPnt; // top left point of screen
+    TkRect m_ScreenRect;
 };
 

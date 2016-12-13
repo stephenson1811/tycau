@@ -82,7 +82,7 @@ TkObject* TkMapScene::whichControl(SDL_Event* e){ // which control/picture is se
     for (std::vector<TkObject*>::iterator it = m_Members.begin();
         it != m_Members.end(); it ++){
             if ((*it)->inRect(e)){
-                if((*it)->getType() ==mapPrimitive /*(*it)->getType() == mapWidget*/){
+                if((*it)->getType() == mapWidget||(*it)->getType() ==mapPrimitive ){
                     TkMap* m = dynamic_cast<TkMap*> (*it);
                     TkPrimitive* mp = m->whichMapPrimitive(e);
                     return static_cast<TkObject*>(mp); 
@@ -95,9 +95,7 @@ TkObject* TkMapScene::whichControl(SDL_Event* e){ // which control/picture is se
 }
 void TkMapScene::moveMap(SDL_MouseMotionEvent& me){
     if (m_LeftButonPressed){ // could move map
-        //std::cout<<"moveMap, xrel="<<me.xrel<<",yrel="<<me.yrel;
         m_Map->move(me.xrel, me.yrel);
-        //SDL_Flip(m_DstDvc);
     }
 }
 void TkMapScene::moveMap(int x, int y){
@@ -148,3 +146,11 @@ void TkMapScene::dispatch(SDL_Event* e ){
         }
     }
 }
+
+
+
+
+
+
+
+
