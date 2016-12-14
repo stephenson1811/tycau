@@ -174,8 +174,8 @@ bool TkMap::onBoard(MapIndex& index){
     int right = (index.x+1)*dx;
     int top = index.y*dy;
     int bottom = (index.y+1)*dy;
-    if ((left<m_TopLftPnt.getX()&&right > m_TopLftPnt.getX())&&
-        (top<m_TopLftPnt.getY()&&bottom>m_TopLftPnt.getY())){
+    if (( left>m_ScreenRect.getX() || right <(m_ScreenRect.getX()+m_ScreenRect.getW()) )&&
+        ( top >m_ScreenRect.getY() && bottom<(m_ScreenRect.getY()+m_ScreenRect.getH()) )){
         return true;
     }
     return false;
