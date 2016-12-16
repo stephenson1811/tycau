@@ -7,6 +7,7 @@
  * Full text of license available in license.txt file, in main folder
  */
 #include "Map.h"
+#include <fstream>
 
 TkMap::TkMap(void){
     initMap(TkType::InGiantMap);
@@ -79,15 +80,15 @@ void TkMap::move(int x, int y){
     m.push_back(mx);  \
 }
 void TkMap::initGiantMap(){
-    std::vector<MapIndex> v;
-    std::vector<std::vector<int> > m;
-    // 1 - 5
-    int u = -14;//33
-    F1( 14+u ,7);
-    F1( 14+u , 9);
-    F1( 14+u ,10);
-    F1( 14+u , 11);
-    F1( 14+u , 11);
+    //std::vector<MapIndex> v;
+    //std::vector<std::vector<int> > m;
+    //// 1 - 5
+    //int u = -14;//33
+    //F1( 14+u ,7);
+    //F1( 14+u , 9);
+    //F1( 14+u ,10);
+    //F1( 14+u , 11);
+    //F1( 14+u , 11);
     //// 6 - 10
     //F1( 14+u , 11);
     //F1( 14+u , 11);
@@ -144,26 +145,31 @@ void TkMap::initGiantMap(){
     //F1( 5 , 9);
     ////51
     //F1( 5 , 7);
-    int y = 0;
-    for ( std::vector<std::vector<int> >::iterator it = m.begin(); it != m.end(); it++, y++){
-        for ( std::vector<int>::iterator i = (*it).begin(); i != (*it).end(); i++){
-            MapIndex index((*i),y);
-            if(onBoard(index)){
-                v.push_back(index);
-            }
-        }
-    }
+    //int y = 0;
+    //for ( std::vector<std::vector<int> >::iterator it = m.begin(); it != m.end(); it++, y++){
+    //    for ( std::vector<int>::iterator i = (*it).begin(); i != (*it).end(); i++){
+    //        MapIndex index((*i),y);
+    //        if(onBoard(index)){
+    //            v.push_back(index);
+    //        }
+    //    }
+    //}
 
+    // load map primitives
+    std::ifstream ifs;
+    std::string line;
+    ifs.open("./data/map.txt", std::ios::in);
     int i = 5;
-    for (std::vector<MapIndex>::iterator it = v.begin();
-        it != v.end();it++,i++){
-        std::ostringstream total, os;
-        os.width(4);
-        os.fill('0');
-        os<<i;
-        total<<"D:\\data\\task_map\\JapanMap_"<<os.str()<<"-1.bmp"; 
-        m_Tiles.push_back(new TkPrimitive(std::string(total.str()),(*it)));
-    }
+    //for (;ifs>>line;i++){
+    //    for (;;){
+    //        std::ostringstream total, os;
+    //        os.width(4);
+    //        os.fill('0');
+    //        os<<i;
+    //        total<<"D:\\data\\task_map\\JapanMap_"<<os.str()<<"-1.bmp"; 
+    //        m_Tiles.push_back(new TkPrimitive(std::string(total.str()),(*it)));        
+    //    }
+    //}
 }
 bool TkMap::onBoard(MapIndex& index){
     m_TopLftPnt;
