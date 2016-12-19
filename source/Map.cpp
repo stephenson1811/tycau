@@ -160,16 +160,16 @@ void TkMap::initGiantMap(){
     std::string line;
     ifs.open("./data/map.txt", std::ios::in);
     int i = 5;
-    //for (;ifs>>line;i++){
-    //    for (;;){
-    //        std::ostringstream total, os;
-    //        os.width(4);
-    //        os.fill('0');
-    //        os<<i;
-    //        total<<"D:\\data\\task_map\\JapanMap_"<<os.str()<<"-1.bmp"; 
-    //        m_Tiles.push_back(new TkPrimitive(std::string(total.str()),(*it)));        
-    //    }
-    //}
+    for (;ifs>>line;i++){
+        for (;;){
+            std::ostringstream total, os;
+            os.width(4);
+            os.fill('0');
+            os<<i;
+            total<<"D:\\data\\task_map\\JapanMap_"<<os.str()<<"-1.bmp"; 
+            //m_Tiles.push_back(new TkPrimitive(std::string(total.str()),(*it)));        
+        }
+    }
 }
 bool TkMap::onBoard(MapIndex& index){
     m_TopLftPnt;
