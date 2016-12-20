@@ -161,6 +161,7 @@ void TkMap::initGiantMap(){
     ifs.open("./data/map.txt", std::ios::in);
     int i = 5;
     for (;ifs>>line;i++){
+        std::vector<int> vi = getSegments(line);
         for (;;){
             std::ostringstream total, os;
             os.width(4);
@@ -170,6 +171,10 @@ void TkMap::initGiantMap(){
             //m_Tiles.push_back(new TkPrimitive(std::string(total.str()),(*it)));        
         }
     }
+}
+std::vector<int> TkMap::getSegments(std::string& str){
+    std::vector<int> v;
+    return v;
 }
 bool TkMap::onBoard(MapIndex& index){
     m_TopLftPnt;
