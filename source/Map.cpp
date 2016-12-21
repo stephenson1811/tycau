@@ -161,8 +161,8 @@ void TkMap::initGiantMap(){
     ifs.open("./data/map.txt", std::ios::in);
     int i = 5;
     for (;ifs>>line;i++){
-        std::vector<int> vi = getSegments(line);
-        for (;;){
+        std::vector<int> vi = split(line);
+        for ( std::vector<int>::iterator it = vi.begin();it != vi.end(); it++){
             std::ostringstream total, os;
             os.width(4);
             os.fill('0');
@@ -172,8 +172,16 @@ void TkMap::initGiantMap(){
         }
     }
 }
-std::vector<int> TkMap::getSegments(std::string& str){
+std::vector<int> TkMap::split(std::string& str){
     std::vector<int> v;
+    std::string s;
+    for (std::string::iterator it = str.begin();it != str.end(); it ++){
+        if ((*it) == ','){
+            s .clear();
+        }else if ((*it) != ' '){
+            s.push_back((*it));
+        }
+    };
     return v;
 }
 bool TkMap::onBoard(MapIndex& index){
