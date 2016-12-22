@@ -34,6 +34,7 @@ public:
     void draw(SDL_Surface* dst );
     void draw(SDL_Surface* dst ,TTF_Font*);
     //void getSize(SIZE&);
+    MapIndex getIndex(){return m_Index;}
 private:
     MapIndex m_Index; // this pic showing in m_Index.x column, and m_Index.y row.
     std::string m_test;

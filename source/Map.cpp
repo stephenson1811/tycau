@@ -32,12 +32,18 @@ void TkMap::initMap(TkType::SceneType){
     initGiantMap();
 }
 void TkMap::draw(SDL_Surface* dst ){
-    for (std::vector<TkPrimitive*>::iterator it = m_Tiles.begin();
-        it != m_Tiles.end();it++){
-            if((*it)){ 
-                (*it)->draw(dst);
-            }
+    for ( std::vector<TkPrimitive* >::iterator it = m_Tiles.begin(); it != m_Tiles.end(); it++ ){
+        MapIndex index = (*it)->getIndex();
+        if(onBoard( index)){
+            (*it)->draw(dst);
+        }
     }
+    //for (std::vector<TkPrimitive*>::iterator it = m_Tiles.begin();
+    //    it != m_Tiles.end();it++){
+    //        if((*it)){ 
+    //            (*it)->draw(dst);
+    //        }
+    //}
     //for (std::vector<TkPrimitive*>::iterator it = m_Cities.begin();
     //    it != m_Cities.end();it++){
     //        (*it)->draw(dst);
@@ -146,37 +152,37 @@ void TkMap::initGiantMap(){
     ////51
     //F1( 5 , 7);
     //int y = 0;
-    //for ( std::vector<std::vector<int> >::iterator it = m.begin(); it != m.end(); it++, y++){
-    //    for ( std::vector<int>::iterator i = (*it).begin(); i != (*it).end(); i++){
-    //        MapIndex index((*i),y);
-    //        if(onBoard(index)){
-    //            v.push_back(index);
-    //        }
-    //    }
-    //}
+
 
     // load map primitives
     std::ifstream ifs;
     std::string line;
     ifs.open("./data/map.txt", std::ios::in);
-    int i = 5;
-    for (;ifs>>line;i++){
+    int i = 5, row = 0;
+    for (;ifs>>line;){
         std::vector<int> vi = split(line);
-        for ( std::vector<int>::iterator it = vi.begin();it != vi.end(); it++){
-            std::ostringstream total, os;
-            os.width(4);
-            os.fill('0');
-            os<<i;
-            total<<"D:\\data\\task_map\\JapanMap_"<<os.str()<<"-1.bmp"; 
-            //m_Tiles.push_back(new TkPrimitive(std::string(total.str()),(*it)));        
+        if(!vi.empty()){
+            for ( std::vector<int>::iterator it = vi.begin();it != vi.end(); i ++, it++){
+                std::ostringstream total, os;
+                os.width(4);
+                os.fill('0');
+                os<<i;
+                total<<"D:\\data\\task_map\\JapanMap_"<<os.str()<<"-1.bmp"; 
+                m_Tiles.push_back(new TkPrimitive(std::string(total.str()),MapIndex(row,(*it) )));        
+            }
+            row ++;        
         }
     }
+}
+int TkMap::str2int(const std::string& str){
+    return atoi(str.c_str());
 }
 std::vector<int> TkMap::split(std::string& str){
     std::vector<int> v;
     std::string s;
     for (std::string::iterator it = str.begin();it != str.end(); it ++){
         if ((*it) == ','){
+            v.push_back(str2int(s));
             s .clear();
         }else if ((*it) != ' '){
             s.push_back((*it));
