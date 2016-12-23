@@ -27,7 +27,7 @@ void TkMap::initMap(TkType::SceneType){
     m_TestFont = TTF_OpenFont( "arial.ttf", 10/*size*/ );
     TTF_SetFontStyle(m_TestFont, TTF_STYLE_NORMAL );
     // screen would changed, when mouse move.
-    m_TopLftPnt = TkPoint(100,200); 
+    m_TopLftPnt = TkPoint(12000,200);
     m_ScreenRect = TkRect(m_TopLftPnt.getX(),m_TopLftPnt.getY(),800,600);
     initGiantMap();
 }
@@ -35,6 +35,7 @@ void TkMap::draw(SDL_Surface* dst ){
     for ( std::vector<TkPrimitive* >::iterator it = m_Tiles.begin(); it != m_Tiles.end(); it++ ){
         MapIndex index = (*it)->getIndex();
         if(onBoard( index)){
+            (*it)->move(-m_TopLftPnt.getX(),-m_TopLftPnt.getY());
             (*it)->draw(dst);
         }
     }
@@ -170,7 +171,7 @@ void TkMap::initGiantMap(){
                 total<<"D:\\data\\task_map\\JapanMap_"<<os.str()<<"-1.bmp"; 
                 m_Tiles.push_back(new TkPrimitive(std::string(total.str()),MapIndex(row,(*it) )));        
             }
-            row ++;        
+            row ++;
         }
     }
 }
