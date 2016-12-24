@@ -114,6 +114,7 @@ TkEvent TkButton::released(){
     }else if(m_ObjectName.compare("goHome") == 0){
         return TkEvent(TkEventType::CHANGE_SCENE,TkUserCode::IN_HOUSE);
     }
+    return TkEvent();
 }
 TkEvent TkButton::hovered(){
     setStatus(TkGui::hover);

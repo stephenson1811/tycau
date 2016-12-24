@@ -40,6 +40,7 @@ private:
     void initSiegeBattleMap();
     std::vector<int> split(std::string&);
     int str2int(const std::string&);
+    void reFresh();
 private:
     std::vector<TkPrimitive*> m_TilesToShow;
     std::vector<TkCity*> m_CitiesToShow; // ninjas' , pirates', samurais' castles, villages.

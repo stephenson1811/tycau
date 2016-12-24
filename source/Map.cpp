@@ -52,10 +52,27 @@ TkPrimitive* TkMap::whichMapPrimitive(SDL_Event* e){
     return NULL;
 }
 void TkMap::move(int x, int y){
-    //for (std::vector<TkPrimitive*>::iterator it = m_Tiles.begin();
-    //    it != m_Tiles.end(); it ++){
-    //        (*it)->move(x,y);
+    m_TopLftPnt+=TkPoint(x,y);
+    m_ScreenRect.locTo(m_TopLftPnt);
+    for (std::vector<TkPrimitive*>::iterator it = m_TilesToShow.begin();
+        it != m_TilesToShow.end();it++){
+            (*it)->move(x,y);
+
+    }
+    //for ( std::map<std::string, MapIndex>::iterator it = m_Tiles.begin(); 
+    //    it != m_Tiles.end(); it++ ){
+    //    MapIndex index = (*it).second;
+    //    std::string n = (*it).first; 
+
+    //    if(onBoard( index)){
+    //        TkPrimitive* p = new TkPrimitive( n ,index);
+    //        p->move( -m_TopLftPnt.getX(), -m_TopLftPnt.getY() );
+    //        m_TilesToShow.push_back(p);
+    //    }
     //}
+    reFresh();
+}
+void TkMap::reFresh(){
 }
 #define F(A,n) {\
     int *num = A;\
@@ -185,8 +202,6 @@ std::vector<int> TkMap::split(std::string& str){
     return v;
 }
 bool TkMap::onBoard(MapIndex& index){
-    m_TopLftPnt;
-    m_ScreenRect;
     int dx = 256;
     int dy = 160;
     int left = index.c*dx;

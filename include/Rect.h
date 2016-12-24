@@ -66,6 +66,20 @@ public:
         this->h += r.h;  
         return *this;
     }
+    void move(TkPoint& p){
+        move(p.getX(),p.getY());
+    }
+    void move(int x , int y){
+        this->x += x;
+        this->y += y;
+    }
+    void locTo(TkPoint& p){
+        locTo(p.getX(),p.getY());
+    }
+    void locTo(int x , int y){
+        this->x = x;
+        this->y = y;
+    }
     friend TkRect operator /(const TkRect& r, int div){
         TkRect tmp(r);
         tmp.w = r.w / div;
