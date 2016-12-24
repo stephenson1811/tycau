@@ -17,12 +17,12 @@ TkPrimitive::TkPrimitive(std::string& name, MapIndex& index):TkGraphicsObject(na
     int w = m_SrcDvc->w;
     int h = m_SrcDvc->h;
     int xbase = 0, ybase = 0;
-    m_Point.setX(xbase + (w+1)*index.x) ;
-    m_Point.setY(ybase + (h+1)*index.y) ;
+    m_Point.setX(xbase + (w+1)*index.c) ;
+    m_Point.setY(ybase + (h+1)*index.r) ;
     m_Type = mapPrimitive;
-    std::ostringstream os;
-    os<<""<<index.x<<","<<index.y; 
-    m_test = os.str();
+    //std::ostringstream os;
+    //os<<""<<index.r<<","<<index.c; 
+    //m_test = os.str();
 }
 TkPrimitive::~TkPrimitive(void){
 }
@@ -43,7 +43,7 @@ void TkPrimitive::draw(SDL_Surface* dst ){
 }
 void TkPrimitive::draw(SDL_Surface* dst,TTF_Font* font ){
     TkGraphicsObject::draw(dst);
-    TkGraphicsObject::drawText(dst,font,m_test);
+    //TkGraphicsObject::drawText(dst,font,m_test);
 }
 //void TkPrimitive::getSize(SIZE& size){
 //    //if (!m_Image.IsNull()){

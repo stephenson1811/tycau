@@ -28,18 +28,10 @@ TkMapScene::~TkMapScene(){
 
 
 void TkMapScene::run(SDL_Surface* d){
-    if(m_Bkgrd){ 
-        m_Bkgrd->draw(d);
-    }
-    if(m_Map){  
-        m_Map->draw(d);
-    }
-    if(m_GoHome){  
-        m_GoHome->draw(d);
-    }
-    if(m_GoTo){  
-        m_GoTo->draw(d);
-    }
+    m_Bkgrd->draw(d); 
+    m_Map->draw(d);
+    m_GoHome->draw(d); 
+    m_GoTo->draw(d);
     SDL_Flip(d);
 }
 void TkMapScene::init(SDL_Surface*d ){

@@ -11,6 +11,7 @@
 #include "City.h"
 #include "Person.h"
 #include <vector>
+#include <map>
 /* 
  * 
  * 
@@ -40,9 +41,10 @@ private:
     std::vector<int> split(std::string&);
     int str2int(const std::string&);
 private:
-    std::vector<TkPrimitive*> m_Tiles;
-    std::vector<TkCity*> m_Cities; // ninjas' , pirates', samurais' castles, villages.
-    std::vector<TkPerson*> m_Persons; // ninjas , pirates, samurais.
+    std::vector<TkPrimitive*> m_TilesToShow;
+    std::vector<TkCity*> m_CitiesToShow; // ninjas' , pirates', samurais' castles, villages.
+    std::vector<TkPerson*> m_PersonsToShow; // ninjas , pirates, samurais.
+    std::map<std::string, MapIndex> m_Tiles;
     TTF_Font * m_TestFont;
     TkPoint m_TopLftPnt; // top left point of screen
     TkRect m_ScreenRect;

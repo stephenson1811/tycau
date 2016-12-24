@@ -124,5 +124,6 @@ bool Game::runGame(){
         return false;
     }
     m_Scene->run(m_Display);
+    SDL_Delay(50);
     return true;
 }

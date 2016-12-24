@@ -18,11 +18,11 @@
  */
 class MapIndex{
 public:
-    MapIndex(){x = 0;y = 0;}
-    MapIndex(int x, int y){this->x = x;this->y = y;}
-    MapIndex& operator()(int x, int y){this->x = x;this->y = y;}
-    int x; // x-coord index
-    int y; // y-coord index
+    MapIndex(){r = 0;c = 0;}
+    MapIndex(int r, int c){this->r = r;this->c = c;}
+    MapIndex& operator()(int r, int c){this->r = r;this->c = c;}
+    int c; // column index, x-orient
+    int r; // row index, y-orient
 };
 class TkPrimitive :public TkGraphicsObject{
 public:
