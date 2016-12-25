@@ -21,6 +21,16 @@ public:
     MapIndex(){r = 0;c = 0;}
     MapIndex(int r, int c){this->r = r;this->c = c;}
     MapIndex& operator()(int r, int c){this->r = r;this->c = c;}
+    bool operator == (MapIndex& index){
+        if (index.c == this->c && index.r == this->r)
+            return true;
+        return false;
+    }
+    bool operator != (MapIndex& index){
+        if (index.c == this->c && index.r == this->r)
+            return false;
+        return true;
+    }
     int c; // column index, x-orient
     int r; // row index, y-orient
 };
