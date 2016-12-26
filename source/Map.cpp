@@ -8,7 +8,7 @@
  */
 #include "Map.h"
 #include <fstream>
-
+#include <algorithm>
 TkMap::TkMap(void){
     initMap(TkType::InGiantMap);
 }
@@ -55,33 +55,45 @@ void TkMap::move(int x, int y){
     m_TopLftPnt+=TkPoint(x,y);
     m_ScreenRect.locTo(m_TopLftPnt);
 
+    std::list<TkPrimitive*> t ;
     for (std::list<TkPrimitive*>::iterator it = m_TilesToShow.begin();
         it != m_TilesToShow.end(); it++){ // unload
             MapIndex index = (*it)->getIndex();
-            if(!onBoard( index)){
-                if ((*it)->getIndex() == index){
-                    m_TilesToShow.erase(it);
-                    delete (*it);
-                }            
+            if(onBoard( index)){
+                t.push_back((*it));
             }
     }
-
-    for ( std::map<std::string, MapIndex>::iterator it = m_Tiles.begin(); 
-        it != m_Tiles.end(); it++ ){
-        MapIndex index = (*it).second;
-        std::string n = (*it).first;
-
-        if(onBoard( index)){
-            for (std::list<TkPrimitive*>::iterator itv = m_TilesToShow.begin();
-                itv != m_TilesToShow.end(); itv++){
-                    if ((*itv)->getIndex() != index){
-                        //TkPrimitive* p = new TkPrimitive( n ,index);
-                        //p->move( x, y );
-                        //m_TilesToShow.push_back(p);
-                    }
-            }
+    m_TilesToShow.swap(t);
+    if (m_TilesToShow.size() < t.size()){
+        for (std::list<TkPrimitive*>::iterator it1 = t.begin();
+            it1 != t.end(); it1++){
+                //if (find(m_TilesToShow.begin(), m_TilesToShow.end() , (*it1)) == m_TilesToShow.end()){
+                //    //delete (*it1);
+                //}
         }
     }
+   
+    for ( std::map<std::string, MapIndex>::iterator it1 = m_Tiles.begin(); 
+        it1 != m_Tiles.end(); it1++ ){
+        MapIndex index = (*it1).second;
+        std::string n = (*it1).first;
+
+        if(onBoard( index)){
+            bool exist = false;
+            for (std::list<TkPrimitive*>::iterator it2 = t.begin();
+                it2 != t.end(); it2++){
+                    if (index == (*it2)->getIndex()){
+                       exist = true;
+                    }
+            }
+            if (!exist){
+/*                TkPrimitive* p = new TkPrimitive( n ,index);
+                p->move( x, y );
+                m_TilesToShow.push_back(p); */ 
+            }
+        }
+    }    
+
     for (std::list<TkPrimitive*>::iterator it = m_TilesToShow.begin();
         it != m_TilesToShow.end();it++){
             (*it)->move(x,y);
