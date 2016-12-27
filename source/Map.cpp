@@ -16,7 +16,7 @@ TkMap::TkMap(TkType::SceneType type){
     initMap(type);
 }
 TkMap::~TkMap(void){
-    for (std::list<TkPrimitive*>::iterator it = m_TilesToShow.begin();
+    for (std::vector<TkPrimitive*>::iterator it = m_TilesToShow.begin();
         it != m_TilesToShow.end();it++){
             delete (*it);
             (*it) = NULL;
@@ -32,7 +32,7 @@ void TkMap::initMap(TkType::SceneType){
     initGiantMap();
 }
 void TkMap::draw(SDL_Surface* dst ){
-    for ( std::list<TkPrimitive* >::iterator it = m_TilesToShow.begin(); 
+    for ( std::vector<TkPrimitive* >::iterator it = m_TilesToShow.begin(); 
         it != m_TilesToShow.end(); it++ ){  
             (*it)->draw(dst);
     }
@@ -43,7 +43,7 @@ bool TkMap::inRect(SDL_Event* e){
     return true;
 }
 TkPrimitive* TkMap::whichMapPrimitive(SDL_Event* e){
-    for (std::list<TkPrimitive*>::iterator it = m_TilesToShow.begin();
+    for (std::vector<TkPrimitive*>::iterator it = m_TilesToShow.begin();
         it != m_TilesToShow.end();it++){
             if ((*it)->inRect(e)){
                 return (*it);
@@ -55,8 +55,8 @@ void TkMap::move(int x, int y){
     m_TopLftPnt+=TkPoint(x,y);
     m_ScreenRect.locTo(m_TopLftPnt);
 
-    std::list<TkPrimitive*> t ;
-    for (std::list<TkPrimitive*>::iterator it = m_TilesToShow.begin();
+    std::vector<TkPrimitive*> t ;
+    for (std::vector<TkPrimitive*>::iterator it = m_TilesToShow.begin();
         it != m_TilesToShow.end(); it++){ // unload
             MapIndex index = (*it)->getIndex();
             if(onBoard( index)){
@@ -65,11 +65,15 @@ void TkMap::move(int x, int y){
     }
     m_TilesToShow.swap(t);
     if (m_TilesToShow.size() < t.size()){
-        for (std::list<TkPrimitive*>::iterator it1 = t.begin();
-            it1 != t.end(); it1++){
-                //if (find(m_TilesToShow.begin(), m_TilesToShow.end() , (*it1)) == m_TilesToShow.end()){
-                //    //delete (*it1);
-                //}
+        std::vector<TkPrimitive*>::iterator it;
+        std::vector<TkPrimitive*> v(4);
+        std::sort (t.begin(), t.end(),m_l);
+        std::sort (m_TilesToShow.begin(), m_TilesToShow.end(),m_l);
+        it = std::set_difference (t.begin(), t.end(), m_TilesToShow.begin(), m_TilesToShow.end(), v.begin());
+
+        for (std::vector<TkPrimitive*>::iterator it1 = v.begin();
+            it1 != it; it1++){
+                delete (*it1);
         }
     }
    
@@ -80,7 +84,7 @@ void TkMap::move(int x, int y){
 
         if(onBoard( index)){
             bool exist = false;
-            for (std::list<TkPrimitive*>::iterator it2 = t.begin();
+            for (std::vector<TkPrimitive*>::iterator it2 = t.begin();
                 it2 != t.end(); it2++){
                     if (index == (*it2)->getIndex()){
                        exist = true;
@@ -94,7 +98,7 @@ void TkMap::move(int x, int y){
         }
     }    
 
-    for (std::list<TkPrimitive*>::iterator it = m_TilesToShow.begin();
+    for (std::vector<TkPrimitive*>::iterator it = m_TilesToShow.begin();
         it != m_TilesToShow.end();it++){
             (*it)->move(x,y);
     }

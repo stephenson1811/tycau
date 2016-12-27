@@ -12,7 +12,7 @@
 #include "Person.h"
 #include <vector>
 #include <map>
-#include <list>
+//#include <list>
 /* 
  * 
  * 
@@ -43,7 +43,8 @@ private:
     int str2int(const std::string&);
     void reFresh();
 private:
-    std::list<TkPrimitive*> m_TilesToShow;
+    less m_l;
+    std::vector<TkPrimitive*> m_TilesToShow;
     std::vector<TkCity*> m_CitiesToShow; // ninjas' , pirates', samurais' castles, villages.
     std::vector<TkPerson*> m_PersonsToShow; // ninjas , pirates, samurais.
     std::map<std::string, MapIndex> m_Tiles;

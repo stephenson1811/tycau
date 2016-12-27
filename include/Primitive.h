@@ -49,4 +49,21 @@ private:
     MapIndex m_Index; // this pic showing in m_Index.x column, and m_Index.y row.
     std::string m_test;
 };
-
+struct less{
+    bool operator () (TkPrimitive* a,TkPrimitive* b){
+        MapIndex na = a->getIndex();
+        MapIndex nb = b->getIndex(); 
+        if (na.r > nb.r){
+            return true;
+        }else if (na.r < nb.r){
+            return false;
+        }else{
+            if (na.c > nb.c){
+                return true;
+            }else if(na.c < nb.c){
+                return false;
+            }
+        }
+        return false;
+    }
+};
