@@ -27,7 +27,7 @@ void TkMap::initMap(TkType::SceneType){
     //m_TestFont = TTF_OpenFont( "arial.ttf", 10/*size*/ );
     //TTF_SetFontStyle(m_TestFont, TTF_STYLE_NORMAL );
     // screen would changed, when mouse move.
-    m_TopLftPnt = TkPoint(12000,0);
+    m_TopLftPnt = TkPoint(12000,1000);
     m_ScreenRect = TkRect(m_TopLftPnt.getX(),m_TopLftPnt.getY(),800,600);
     initGiantMap();
 }
@@ -66,34 +66,34 @@ void TkMap::move(int x, int y){
     m_TilesToShow.swap(t);
     if (m_TilesToShow.size() < t.size()){
         std::vector<TkPrimitive*>::iterator it;
-        std::vector<TkPrimitive*> v(4);
-        std::sort (t.begin(), t.end(),m_l);
-        std::sort (m_TilesToShow.begin(), m_TilesToShow.end(),m_l);
+        std::vector<TkPrimitive*> v(t.size()-m_TilesToShow.size());
+        std::sort (t.begin(), t.end());
+        std::sort (m_TilesToShow.begin(), m_TilesToShow.end());
         it = std::set_difference (t.begin(), t.end(), m_TilesToShow.begin(), m_TilesToShow.end(), v.begin());
 
         for (std::vector<TkPrimitive*>::iterator it1 = v.begin();
-            it1 != it; it1++){
+            it1 != v.end(); it1++){
                 delete (*it1);
         }
-    }
-   
-    for ( std::map<std::string, MapIndex>::iterator it1 = m_Tiles.begin(); 
-        it1 != m_Tiles.end(); it1++ ){
-        MapIndex index = (*it1).second;
-        std::string n = (*it1).first;
 
-        if(onBoard( index)){
-            bool exist = false;
-            for (std::vector<TkPrimitive*>::iterator it2 = t.begin();
-                it2 != t.end(); it2++){
-                    if (index == (*it2)->getIndex()){
-                       exist = true;
-                    }
-            }
-            if (!exist){
-/*                TkPrimitive* p = new TkPrimitive( n ,index);
-                p->move( x, y );
-                m_TilesToShow.push_back(p); */ 
+        for ( std::map<std::string, MapIndex>::iterator it1 = m_Tiles.begin(); 
+            it1 != m_Tiles.end(); it1++ ){
+            MapIndex index = (*it1).second;
+            std::string n = (*it1).first;
+
+            if(onBoard( index)){
+                bool exist = false;
+                for (std::vector<TkPrimitive*>::iterator it2 = m_TilesToShow.begin();
+                    it2 != m_TilesToShow.end(); it2++){
+                        if (index == (*it2)->getIndex()){
+                           exist = true;
+                        }
+                }
+                if (!exist){
+                    TkPrimitive* p = new TkPrimitive( n ,index);
+                    p->move( x, y );
+                    m_TilesToShow.push_back(p);  
+                }
             }
         }
     }    
