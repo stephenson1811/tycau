@@ -9,6 +9,7 @@
 #include "Map.h"
 #include <fstream>
 #include <algorithm>
+#include "SDL_mutex.h"
 TkMap::TkMap(void){
     initMap(TkType::InGiantMap);
 }
@@ -75,7 +76,7 @@ void TkMap::move(int x, int y){
             it1 != v.end(); it1++){
                 delete (*it1);
         }
-
+        //SDL_mutex *lock = SDL_CreateMutex();
         for ( std::map<std::string, MapIndex>::iterator it1 = m_Tiles.begin(); 
             it1 != m_Tiles.end(); it1++ ){
             MapIndex index = (*it1).second;
@@ -91,11 +92,14 @@ void TkMap::move(int x, int y){
                 }
                 if (!exist){
                     TkPrimitive* p = new TkPrimitive( n ,index);
-                    p->move( x, y );
+                    p->move( -m_TopLftPnt.getX(), -m_TopLftPnt.getY() );
+                    //SDL_mutexP(lock);
                     m_TilesToShow.push_back(p);  
+                    //SDL_mutexV(lock);
                 }
             }
         }
+        //SDL_DestroyMutex(SDL_mutex *mutex)
     }    
 
     for (std::vector<TkPrimitive*>::iterator it = m_TilesToShow.begin();
