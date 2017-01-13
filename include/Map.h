@@ -47,7 +47,7 @@ private:
     std::vector<TkPrimitive*> m_TilesToShow;
     std::vector<TkCity*> m_CitiesToShow; // ninjas' , pirates', samurais' castles, villages.
     std::vector<TkPerson*> m_PersonsToShow; // ninjas , pirates, samurais.
-    std::map<std::string, MapIndex> m_Tiles;
+    std::map<TkPrimitive*, MapIndex> m_Tiles;
     TTF_Font * m_TestFont;
     TkPoint m_TopLftPnt; // top left point of screen
     TkRect m_ScreenRect;

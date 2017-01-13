@@ -66,21 +66,10 @@ void TkMap::move(int x, int y){
     }
     m_TilesToShow.swap(t);
     if (m_TilesToShow.size() < t.size()){
-        std::vector<TkPrimitive*>::iterator it;
-        std::vector<TkPrimitive*> v(t.size()-m_TilesToShow.size());
-        std::sort (t.begin(), t.end());
-        std::sort (m_TilesToShow.begin(), m_TilesToShow.end());
-        it = std::set_difference (t.begin(), t.end(), m_TilesToShow.begin(), m_TilesToShow.end(), v.begin());
-
-        for (std::vector<TkPrimitive*>::iterator it1 = v.begin();
-            it1 != v.end(); it1++){
-                delete (*it1);
-        }
-        //SDL_mutex *lock = SDL_CreateMutex();
-        for ( std::map<std::string, MapIndex>::iterator it1 = m_Tiles.begin(); 
+        for ( std::map<TkPrimitive*, MapIndex>::iterator it1 = m_Tiles.begin(); 
             it1 != m_Tiles.end(); it1++ ){
             MapIndex index = (*it1).second;
-            std::string n = (*it1).first;
+            TkPrimitive* p = (*it1).first;
 
             if(onBoard( index)){
                 bool exist = false;
@@ -91,7 +80,6 @@ void TkMap::move(int x, int y){
                         }
                 }
                 if (!exist){
-                    TkPrimitive* p = new TkPrimitive( n ,index);
                     p->move( -m_TopLftPnt.getX(), -m_TopLftPnt.getY() );
                     //SDL_mutexP(lock);
                     m_TilesToShow.push_back(p);  
@@ -99,8 +87,14 @@ void TkMap::move(int x, int y){
                 }
             }
         }
-        //SDL_DestroyMutex(SDL_mutex *mutex)
-    }    
+
+        // delete useless map primitives.
+        std::vector<TkPrimitive*>::iterator it;
+        std::vector<TkPrimitive*> v(t.size()-m_TilesToShow.size());
+        std::sort (t.begin(), t.end());
+        std::sort (m_TilesToShow.begin(), m_TilesToShow.end());
+        it = std::set_difference (t.begin(), t.end(), m_TilesToShow.begin(), m_TilesToShow.end(), v.begin());
+    }
 
     for (std::vector<TkPrimitive*>::iterator it = m_TilesToShow.begin();
         it != m_TilesToShow.end();it++){
@@ -202,19 +196,19 @@ void TkMap::initGiantMap(){
                 os.width(4);
                 os.fill('0');
                 os<<i;
-                total<<"D:\\data\\task_map\\JapanMap_"<<os.str()<<"-1.bmp"; 
-                m_Tiles[std::string(total.str())] = MapIndex(row,(*it) );  
+                total<<"D:\\data\\task_map\\JapanMap_"<<os.str()<<"-1.bmp";
+                TkPrimitive* p = new TkPrimitive(total.str(),MapIndex(row,(*it) ));
+                m_Tiles.insert(std::pair<TkPrimitive*,MapIndex>(p,MapIndex(row,(*it) )));  
             }
             row ++;
         }
     }
     // map primitives could be seen.
-    for ( std::map<std::string, MapIndex>::iterator it = m_Tiles.begin(); 
+    for ( std::map<TkPrimitive*, MapIndex>::iterator it = m_Tiles.begin(); 
         it != m_Tiles.end(); it++ ){
         MapIndex index = (*it).second;
-        std::string n = (*it).first; 
+        TkPrimitive* p = (*it).first; 
         if(onBoard( index)){
-            TkPrimitive* p = new TkPrimitive( n ,index);
             p->move( -m_TopLftPnt.getX(), -m_TopLftPnt.getY() );
             m_TilesToShow.push_back(p);
         }

@@ -71,20 +71,20 @@ void TkGraphicsObject::load(const std::string& name){
     if (m_SrcDvc != NULL){
         SDL_FreeSurface(m_SrcDvc);
     }
-    SDL_Surface* Surf_Temp = NULL;
+    //SDL_Surface* Surf_Temp = NULL;
 
-    if((Surf_Temp = SDL_LoadBMP(name.c_str())) == NULL) {
-         return ;
-     }
-    //if((Surf_Temp = IMG_Load(File)) == NULL) {
-    //    return NULL;
-    //}
-    m_SrcDvc = SDL_DisplayFormat(Surf_Temp);
-    setSize(m_SrcDvc->w, m_SrcDvc->h);
-    m_Mask.r = 0x00;
-    m_Mask.g = 0xFF;
-    m_Mask.b = 0x00;
-    SDL_FreeSurface(Surf_Temp);
+    //if((m_SrcDvc = SDL_LoadBMP(name.c_str())) == NULL) {
+    //     return ;
+    // }
+    if((m_SrcDvc = IMG_Load(name.c_str())) == NULL) {
+        return ;
+    }
+    //m_SrcDvc = SDL_DisplayFormat(Surf_Temp);
+    //setSize(m_SrcDvc->w, m_SrcDvc->h);
+    //m_Mask.r = 0x00;
+    //m_Mask.g = 0xFF;
+    //m_Mask.b = 0x00;
+    //SDL_FreeSurface(Surf_Temp);
 }
 void TkGraphicsObject::setMask(SDL_Color& mask){
     m_Mask = mask;
