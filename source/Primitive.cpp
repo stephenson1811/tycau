@@ -43,7 +43,6 @@ void TkPrimitive::draw(SDL_Surface* dst ){
 }
 void TkPrimitive::draw(SDL_Surface* dst,TTF_Font* font ){
     TkGraphicsObject::draw(dst);
-    //TkGraphicsObject::drawText(dst,font,m_test);
 }
 //void TkPrimitive::getSize(SIZE& size){
 //    //if (!m_Image.IsNull()){

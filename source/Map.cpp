@@ -9,7 +9,7 @@
 #include "Map.h"
 #include <fstream>
 #include <algorithm>
-#include "SDL_mutex.h"
+
 TkMap::TkMap(void){
     initMap(TkType::InGiantMap);
 }
@@ -25,18 +25,19 @@ TkMap::~TkMap(void){
 }
 void TkMap::initMap(TkType::SceneType){
     m_Type = mapWidget;   
-    //m_TestFont = TTF_OpenFont( "arial.ttf", 10/*size*/ );
-    //TTF_SetFontStyle(m_TestFont, TTF_STYLE_NORMAL );
     // screen would changed, when mouse move.
     m_TopLftPnt = TkPoint(12000,1000);
     m_ScreenRect = TkRect(m_TopLftPnt.getX(),m_TopLftPnt.getY(),800,600);
     initGiantMap();
 }
 void TkMap::draw(SDL_Surface* dst ){
+    boost::lock_guard<boost::mutex> lock(m_Mutex); 
+    //std::cout<<"enter read"<<std::endl;
     for ( std::vector<TkPrimitive* >::iterator it = m_TilesToShow.begin(); 
         it != m_TilesToShow.end(); it++ ){  
             (*it)->draw(dst);
     }
+    //std::cout<<"quit read"<<std::endl<<std::endl;
 }
 void TkMap::draw(SDL_Surface* dst, TkRect& ){
 }
@@ -55,51 +56,20 @@ TkPrimitive* TkMap::whichMapPrimitive(SDL_Event* e){
 void TkMap::move(int x, int y){
     m_TopLftPnt+=TkPoint(x,y);
     m_ScreenRect.locTo(m_TopLftPnt);
-
     std::vector<TkPrimitive*> t ;
-    for (std::vector<TkPrimitive*>::iterator it = m_TilesToShow.begin();
-        it != m_TilesToShow.end(); it++){ // unload
+
+    for (std::vector<TkPrimitive*>::iterator it = m_Tiles.begin();
+        it != m_Tiles.end(); it++){ //
+            (*it)->move(x,y);
             MapIndex index = (*it)->getIndex();
             if(onBoard( index)){
                 t.push_back((*it));
             }
     }
+    boost::lock_guard<boost::mutex> lock(m_Mutex);   
+    //std::cout<<"enter write"<<std::endl;
     m_TilesToShow.swap(t);
-    if (m_TilesToShow.size() < t.size()){
-        for ( std::map<TkPrimitive*, MapIndex>::iterator it1 = m_Tiles.begin(); 
-            it1 != m_Tiles.end(); it1++ ){
-            MapIndex index = (*it1).second;
-            TkPrimitive* p = (*it1).first;
-
-            if(onBoard( index)){
-                bool exist = false;
-                for (std::vector<TkPrimitive*>::iterator it2 = m_TilesToShow.begin();
-                    it2 != m_TilesToShow.end(); it2++){
-                        if (index == (*it2)->getIndex()){
-                           exist = true;
-                        }
-                }
-                if (!exist){
-                    p->move( -m_TopLftPnt.getX(), -m_TopLftPnt.getY() );
-                    //SDL_mutexP(lock);
-                    m_TilesToShow.push_back(p);  
-                    //SDL_mutexV(lock);
-                }
-            }
-        }
-
-        // delete useless map primitives.
-        std::vector<TkPrimitive*>::iterator it;
-        std::vector<TkPrimitive*> v(t.size()-m_TilesToShow.size());
-        std::sort (t.begin(), t.end());
-        std::sort (m_TilesToShow.begin(), m_TilesToShow.end());
-        it = std::set_difference (t.begin(), t.end(), m_TilesToShow.begin(), m_TilesToShow.end(), v.begin());
-    }
-
-    for (std::vector<TkPrimitive*>::iterator it = m_TilesToShow.begin();
-        it != m_TilesToShow.end();it++){
-            (*it)->move(x,y);
-    }
+    //std::cout<<"quit write"<<std::endl<<std::endl;
 }
 void TkMap::reFresh(){
 }
@@ -198,16 +168,15 @@ void TkMap::initGiantMap(){
                 os<<i;
                 total<<"D:\\data\\task_map\\JapanMap_"<<os.str()<<"-1.bmp";
                 TkPrimitive* p = new TkPrimitive(total.str(),MapIndex(row,(*it) ));
-                m_Tiles.insert(std::pair<TkPrimitive*,MapIndex>(p,MapIndex(row,(*it) )));  
+                m_Tiles.push_back(p);  
             }
             row ++;
         }
     }
     // map primitives could be seen.
-    for ( std::map<TkPrimitive*, MapIndex>::iterator it = m_Tiles.begin(); 
-        it != m_Tiles.end(); it++ ){
-        MapIndex index = (*it).second;
-        TkPrimitive* p = (*it).first; 
+    for ( std::vector<TkPrimitive*>::iterator it = m_Tiles.begin();it != m_Tiles.end(); it++ ){
+        TkPrimitive* p = (*it); 
+        MapIndex index = p->getIndex();
         if(onBoard( index)){
             p->move( -m_TopLftPnt.getX(), -m_TopLftPnt.getY() );
             m_TilesToShow.push_back(p);
@@ -231,42 +200,35 @@ std::vector<int> TkMap::split(std::string& str){
     return v;
 }
 bool TkMap::onBoard(MapIndex& index){
+    return onXBoard(index.c) || onYBoard(index.r);
+}
+bool TkMap::onXBoard(int c){
     int dx = 256;
+    int left = c*dx;
+    int right = (c+1)*dx;
+    int x = m_ScreenRect.getX();
+    int w = m_ScreenRect.getW();
+    if (left <= x && x <= left){// left < x < right
+        return true;
+    }else if (left <= x + w && x + w <= right){ // left < x + w < right
+        return true;
+    }else if (x <= left && right <= x + w){ // x < left < right < x + w  
+        return true;
+    }
+    return false;
+}
+bool TkMap::onYBoard(int r){
     int dy = 160;
-    int left = index.c*dx;
-    int right = (index.c+1)*dx;
-    int top = index.r*dy;
-    int bottom = (index.r+1)*dy;
-    if (left <= m_ScreenRect.getX() + m_ScreenRect.getW()){
-        if (right < m_ScreenRect.getX()){
-            return false;
-        }
-        if (top <= m_ScreenRect.getY() + m_ScreenRect.getH()){
-            if (bottom < m_ScreenRect.getY()){
-                return false;
-            }
-            return true;
-        }else if (bottom >= m_ScreenRect.getY()){
-            if (top > m_ScreenRect.getY() + m_ScreenRect.getH()){
-                return false;
-            }
-            return true;
-        }
-    }else if (right >= m_ScreenRect.getX()){
-        if (left > m_ScreenRect.getX() + m_ScreenRect.getW()){
-            return false;
-        }
-        if (top <= m_ScreenRect.getY() + m_ScreenRect.getH()){
-            if (bottom < m_ScreenRect.getY()){
-                return false;
-            }
-            return true;
-        }else if (bottom >= m_ScreenRect.getY()){
-            if (top > m_ScreenRect.getY() + m_ScreenRect.getH()){
-                return false;
-            }
-            return true;
-        }
+    int top = r*dy;
+    int bottom = (r+1)*dy;
+    int y = m_ScreenRect.getY();
+    int h = m_ScreenRect.getH();
+    if (top <= y && y <= bottom){
+        return true;
+    }else if (top <= y + h && y + h <= bottom){
+        return true;
+    }else if (y <= top && bottom <= y + h){
+        return true;
     }
     return false;
 }

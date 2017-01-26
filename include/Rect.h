@@ -37,6 +37,10 @@ public:
         this->x += r.x;
         this->y += r.y;
     }
+    void operator -= (const TkPoint& r){
+        this->x -= r.x;
+        this->y -= r.y;
+    }
 private:
     int x;
     int y;
@@ -64,6 +68,13 @@ public:
         this->y += r.y;
         this->w += r.w;
         this->h += r.h;  
+        return *this;
+    }
+    const TkRect& operator-=(const TkRect& r){
+        this->x -= r.x;
+        this->y -= r.y;
+        this->w -= r.w;
+        this->h -= r.h;  
         return *this;
     }
     void move(TkPoint& p){
@@ -108,13 +119,6 @@ public:
         return *this;    
     }
     const TkRect& decreaseH(const TkRect& r){
-        this->h -= r.h;
-        return *this;    
-    }
-    const TkRect& operator-=(const TkRect& r){
-        this->x -= r.x;
-        this->y -= r.y;
-        this->w -= r.w;
         this->h -= r.h;
         return *this;    
     }

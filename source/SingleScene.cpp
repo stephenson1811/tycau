@@ -17,6 +17,9 @@ TkSingleScene::TkSingleScene(TkType::SceneType type ){
     m_Status=NULL;
     m_CurrentControl=NULL;
     m_SceneType = type;
+    m_OutDoor=NULL;
+    m_Persons=NULL;
+    m_HouseType=NULL;
 }
 TkSingleScene::~TkSingleScene(){
     deleteWidget(m_Bkgrd) ;

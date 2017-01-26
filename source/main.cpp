@@ -6,7 +6,8 @@
  * License: GNU General Public License v2.0 or later
  * Full text of license available in license.txt file, in main folder
  */
-#include "tkthread.h"
+#include "boost/thread/thread.hpp"
+#include "boost/bind.hpp"
 #include "Game.h"
 /* 
  * 
@@ -18,13 +19,14 @@
  */
 
 int main(int argc, char* argv[]){
-    TkThread thread;
+
     Game game;
     game.loadGame();
     
     SDL_Event e;
-    //show game view thread
-    thread.start(&game);
+    //show game view thread 
+    boost::thread thread(&Game::runGame,&game);
+    //thread.start();
     //SDL_mutex *lock = SDL_CreateMutex();
     // start a mouse/key events listening loop
     while(game.isRunning()){

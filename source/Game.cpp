@@ -118,12 +118,13 @@ bool Game::endGame(){// end game
 }
 
 
-bool Game::runGame(){
+void Game::runGame(){
     // 
-    if (!m_Scene){
-        return false;
+    while(1){
+        if (!m_Scene){
+            return ;
+        }
+        m_Scene->run(m_Display);
+        SDL_Delay(50);  
     }
-    m_Scene->run(m_Display);
-    SDL_Delay(50);
-    return true;
 }

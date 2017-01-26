@@ -24,7 +24,7 @@ public:
     ~Game();
     bool isRunning(){return m_Running;}
     bool loadGame();                    //load game, the initial view
-    bool runGame();                    //start game
+    void runGame();                    //start game
     bool endGame();                        //end game
     void processEvent(SDL_Event*);         // process events        
 private:

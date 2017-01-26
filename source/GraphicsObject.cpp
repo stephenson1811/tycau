@@ -23,12 +23,7 @@ TkGraphicsObject::TkGraphicsObject(const std::string& name):m_Point(0,0),m_Name(
 TkGraphicsObject::TkGraphicsObject(const std::string& name,const TkPoint& p, bool isText)
     :m_Point(p),m_Name(name),m_SrcDvc(NULL){
     m_Type = graphicObject;
-    if (isText){
-        loadText(name);
-    }else{
-        load(name);
-    }
-    
+    load(name);
 }
 void TkGraphicsObject::init(){
 }
@@ -46,26 +41,6 @@ bool TkGraphicsObject::inRect(SDL_Event* e){
         return true;
     }
     return false;
-}
-void TkGraphicsObject::loadText(const std::string& text){
-    // load the font and set its style.
-    TTF_Font* font = TTF_OpenFont( "arial.ttf", 10/*size*/ );
-    TTF_SetFontStyle(font, TTF_STYLE_NORMAL );
-    SDL_Color fore;fore.r = 0x0;fore.g = 0xFF;fore.b = 0xFF;
-    SDL_Color back;back.r = 0xFF;back.g = 0xFF;back.b = 0xFF;
-    m_SrcDvc = TTF_RenderText_Shaded( font, text.c_str(), fore, back );
-    
-    SDL_SetColorKey( m_SrcDvc, SDL_SRCCOLORKEY, 
-                     SDL_MapRGB( m_SrcDvc->format, 
-                                 back.r,
-                                 back.g,
-                                 back.b ) );
-}
-void TkGraphicsObject::drawText(SDL_Surface* dst, TTF_Font* font,const std::string& text){
-    SDL_Color fore;fore.r = 0x0;fore.g = 0xFF;fore.b = 0xFF;
-    SDL_Color back;back.r = 0xFF;back.g = 0xFF;back.b = 0xFF;
-    m_SrcDvc = TTF_RenderText_Shaded( font, text.c_str(), fore, back );
-    SDL_SetColorKey(m_SrcDvc, SDL_SRCCOLORKEY | SDL_RLEACCEL, SDL_MapRGB(m_SrcDvc->format, back.r, back.g, back.b));
 }
 void TkGraphicsObject::load(const std::string& name){
     if (m_SrcDvc != NULL){

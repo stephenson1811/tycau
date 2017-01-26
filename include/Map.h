@@ -11,7 +11,7 @@
 #include "City.h"
 #include "Person.h"
 #include <vector>
-#include <map>
+#include "boost/thread/thread.hpp"
 //#include <list>
 /* 
  * 
@@ -34,6 +34,8 @@ public:
     void move(int x, int y);
 private:
     bool onBoard(MapIndex&);
+    bool onXBoard(int);
+    bool onYBoard(int);
     void initGiantMap();
     void initMiniMap();
     void initFieldBattleMap();
@@ -43,13 +45,13 @@ private:
     int str2int(const std::string&);
     void reFresh();
 private:
-    less m_l;
     std::vector<TkPrimitive*> m_TilesToShow;
     std::vector<TkCity*> m_CitiesToShow; // ninjas' , pirates', samurais' castles, villages.
     std::vector<TkPerson*> m_PersonsToShow; // ninjas , pirates, samurais.
-    std::map<TkPrimitive*, MapIndex> m_Tiles;
-    TTF_Font * m_TestFont;
+    std::vector<TkPrimitive*> m_Tiles;
     TkPoint m_TopLftPnt; // top left point of screen
     TkRect m_ScreenRect;
+    TkPoint m_OrigTopLftPnt;
+    boost::mutex m_Mutex;
 };
 
