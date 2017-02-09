@@ -28,7 +28,7 @@ bool Game::loadGame(){
     initAudio();            //init audio effective
     //
     generateScenes();
-    m_Scene =  m_SceneRepo[TkType::InGiantMap];
+    m_Scene =  m_SceneRepo[TkType::InHouse];
     return true;
 }
 void Game::generateScenes(){
@@ -80,8 +80,6 @@ void  Game::processEvent(SDL_Event*e){
         m_Scene->dispatch(e);
         break;
     }
-    SDL_Flip(m_Display);
-
     //m_Scene->dispatch(&e, &ev);
     //processEvent(status, &ev);
     //switch(status){
@@ -125,6 +123,6 @@ void Game::runGame(){
             return ;
         }
         m_Scene->run(m_Display);
-        SDL_Delay(50);  
+        SDL_Delay(5);  
     }
 }

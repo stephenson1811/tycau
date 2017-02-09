@@ -9,3 +9,8 @@
 #include "Person.h"
 
 
+TkPerson::TkPerson(){}
+TkPerson::TkPerson(std::string&){}
+TkPerson::~TkPerson(){}
+void TkPerson::move(int x, int y){}
+void TkPerson::draw(SDL_Surface* dst ){}

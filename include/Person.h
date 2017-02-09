@@ -18,6 +18,12 @@
 #include "Animation.h"
 
 class TkPerson : public TkAnimation{
+public:
+    TkPerson();
+    TkPerson(std::string&);
+    ~TkPerson();
+    void move(int x, int y);
+    void draw(SDL_Surface* dst );
 };
 
 

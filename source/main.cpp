@@ -27,15 +27,12 @@ int main(int argc, char* argv[]){
     //show game view thread 
     boost::thread thread(&Game::runGame,&game);
     //thread.start();
-    //SDL_mutex *lock = SDL_CreateMutex();
     // start a mouse/key events listening loop
     while(game.isRunning()){
         SDL_WaitEvent(&e);
         // process messages in its inner loop.
-        //SDL_mutexP(lock);
         game.processEvent(&e);
-        //SDL_mutexV(lock);
-        SDL_Delay(50);
+        //SDL_Delay(5);
     }
     // To play ending animation 
     return 0;

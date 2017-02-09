@@ -35,6 +35,7 @@ void TkSingleScene::run(SDL_Surface* d){
     if(m_Status){
         m_Status->draw(d);
     }
+
     if(m_HouseType){  
         m_HouseType->draw(d);
     }
@@ -48,6 +49,7 @@ void TkSingleScene::run(SDL_Surface* d){
     if(m_Persons){ 
         m_Persons->draw(d);
     }
+    SDL_Flip(d);
   
     // music and other audio effect.
 }

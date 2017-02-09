@@ -73,6 +73,8 @@ void TkGraphicsObject::draw(SDL_Surface* dst){
     SDL_Rect DstR;
     DstR.x = m_Point.getX();
     DstR.y = m_Point.getY();
+    DstR.w = m_SrcDvc->w;
+    DstR.h = m_SrcDvc->h;
 
     SDL_Rect SrcR;
     SrcR.x = 0;
@@ -80,7 +82,7 @@ void TkGraphicsObject::draw(SDL_Surface* dst){
     SrcR.w = m_SrcDvc->w;
     SrcR.h = m_SrcDvc->h;
 
-    SDL_BlitSurface(m_SrcDvc, &SrcR, dst, &DstR);
+    SDL_BlitSurface(m_SrcDvc, NULL, dst, &DstR);
     SDL_SetColorKey(m_SrcDvc, SDL_SRCCOLORKEY | SDL_RLEACCEL, SDL_MapRGB(m_SrcDvc->format, m_Mask.r, m_Mask.g, m_Mask.b));
 }
 void TkGraphicsObject::draw(SDL_Surface* dst, TkRect& rect ){

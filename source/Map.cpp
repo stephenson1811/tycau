@@ -24,7 +24,7 @@ TkMap::~TkMap(void){
     }
 }
 void TkMap::initMap(TkType::SceneType){
-    m_Type = mapWidget;   
+    m_Type = mapWidget;
     // screen would changed, when mouse move.
     m_TopLftPnt = TkPoint(12000,1000);
     m_ScreenRect = TkRect(m_TopLftPnt.getX(),m_TopLftPnt.getY(),800,600);
@@ -35,6 +35,10 @@ void TkMap::draw(SDL_Surface* dst ){
     //std::cout<<"enter read"<<std::endl;
     for ( std::vector<TkPrimitive* >::iterator it = m_TilesToShow.begin(); 
         it != m_TilesToShow.end(); it++ ){  
+            (*it)->draw(dst);
+    }
+    for ( std::vector<TkCity* >::iterator it = m_CitiesToShow.begin(); 
+        it != m_CitiesToShow.end(); it++ ){  
             (*it)->draw(dst);
     }
     //std::cout<<"quit read"<<std::endl<<std::endl;
@@ -60,13 +64,17 @@ void TkMap::move(int x, int y){
 
     for (std::vector<TkPrimitive*>::iterator it = m_Tiles.begin();
         it != m_Tiles.end(); it++){ //
-            (*it)->move(x,y);
+            (*it)->move(-x,-y);
             MapIndex index = (*it)->getIndex();
             if(onBoard( index)){
                 t.push_back((*it));
             }
     }
-    boost::lock_guard<boost::mutex> lock(m_Mutex);   
+    for ( std::vector<TkCity* >::iterator it = m_CitiesToShow.begin(); 
+        it != m_CitiesToShow.end(); it++ ){
+            (*it)->move(-x,-y);
+    }
+    boost::lock_guard<boost::mutex> lock(m_Mutex);
     //std::cout<<"enter write"<<std::endl;
     m_TilesToShow.swap(t);
     //std::cout<<"quit write"<<std::endl<<std::endl;
@@ -175,13 +183,22 @@ void TkMap::initGiantMap(){
     }
     // map primitives could be seen.
     for ( std::vector<TkPrimitive*>::iterator it = m_Tiles.begin();it != m_Tiles.end(); it++ ){
-        TkPrimitive* p = (*it); 
+        TkPrimitive* p = (*it);
+        p->move( -m_TopLftPnt.getX(), -m_TopLftPnt.getY() );
         MapIndex index = p->getIndex();
         if(onBoard( index)){
-            p->move( -m_TopLftPnt.getX(), -m_TopLftPnt.getY() );
             m_TilesToShow.push_back(p);
         }
     }
+    TkCity*c1 = new TkCity("D:\\data\\cities\\JmapParts_A_16-1.bmp");
+    c1->move( -m_TopLftPnt.getX(), -m_TopLftPnt.getY() );
+    m_CitiesToShow.push_back(c1); // all cities
+    TkCity*c2 = new TkCity("D:\\data\\cities\\JmapParts_A_17-1.bmp");
+    c2->move( -m_TopLftPnt.getX(), -m_TopLftPnt.getY() );
+    m_CitiesToShow.push_back(c2);
+    //std::vector<TkCity*>
+    //std::vector<TkPerson*> m_Persons; // all persons
+   
 }
 int TkMap::str2int(const std::string& str){
     return atoi(str.c_str());
@@ -208,7 +225,7 @@ bool TkMap::onXBoard(int c){
     int right = (c+1)*dx;
     int x = m_ScreenRect.getX();
     int w = m_ScreenRect.getW();
-    if (left <= x && x <= left){// left < x < right
+    if (left <= x && x <= right){// left < x < right
         return true;
     }else if (left <= x + w && x + w <= right){ // left < x + w < right
         return true;

@@ -49,9 +49,10 @@ private:
     std::vector<TkCity*> m_CitiesToShow; // ninjas' , pirates', samurais' castles, villages.
     std::vector<TkPerson*> m_PersonsToShow; // ninjas , pirates, samurais.
     std::vector<TkPrimitive*> m_Tiles;
+    std::vector<TkCity*> m_Cities; // all cities
+    std::vector<TkPerson*> m_Persons; // all persons
     TkPoint m_TopLftPnt; // top left point of screen
     TkRect m_ScreenRect;
-    TkPoint m_OrigTopLftPnt;
     boost::mutex m_Mutex;
 };
 

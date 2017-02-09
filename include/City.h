@@ -19,6 +19,12 @@
  */
 
 class TkCity: public TkGraphicsObject{
+public:
+    TkCity();
+    TkCity(const std::string&);
+    ~TkCity();
+    void move(int x, int y);
+    void draw(SDL_Surface* dst );
 };
 
 
